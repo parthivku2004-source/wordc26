@@ -2,6 +2,55 @@ import { useState, useEffect, useMemo } from 'react';
 import { Trophy, PlayCircle, X } from 'lucide-react';
 import { getCountryFlag, getCountryName } from '../utils/countryHelper.jsx';
 
+function TrophyIcon() {
+  const [imgSrc, setImgSrc] = useState(null);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/trophy.png';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      try {
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          // If white/near-white, set transparent
+          if (r > 240 && g > 240 && b > 240) {
+            data[i + 3] = 0;
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+        setImgSrc(canvas.toDataURL());
+      } catch (e) {
+        console.error("Canvas error:", e);
+        setImgSrc('/trophy.png');
+      }
+    };
+    img.onerror = () => {
+      setImgSrc('/trophy.png');
+    };
+  }, []);
+
+  if (!imgSrc) {
+    return <div className="h-10 sm:h-12 md:h-14 lg:h-16 w-8 sm:w-10 md:w-12 lg:w-14 animate-pulse bg-slate-200 dark:bg-slate-800/60 rounded-xl shrink-0" />;
+  }
+
+  return (
+    <img 
+      src={imgSrc} 
+      alt="Cup Trophy" 
+      className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain shrink-0 filter drop-shadow-[0_2px_8px_rgba(245,158,11,0.2)]"
+    />
+  );
+}
+
 export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, onMatchesCompletedClick }) {
   const [now, setNow] = useState(new Date());
   const [showScorers, setShowScorers] = useState(false);
@@ -99,8 +148,9 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
             <span>UNITED 2026: USA • CANADA • MEXICO</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-850 dark:text-slate-100 md:text-4xl lg:text-5xl">
-            GLOBAL CUP <span className="bg-gradient-to-r from-amber-600 via-yellow-500 to-emerald-550 dark:from-amber-400 dark:via-yellow-300 dark:to-emerald-400 bg-clip-text text-transparent">2026</span>
+          <h2 className="flex items-center gap-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-850 dark:text-slate-100 md:text-4xl lg:text-5xl">
+            <TrophyIcon />
+            <span>CUP <span className="bg-gradient-to-r from-amber-600 via-yellow-500 to-emerald-550 dark:from-amber-400 dark:via-yellow-300 dark:to-emerald-400 bg-clip-text text-transparent">2026</span></span>
           </h2>
           
           <p className="max-w-xl text-sm text-slate-600 dark:text-slate-400 leading-relaxed">

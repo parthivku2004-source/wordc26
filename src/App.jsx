@@ -9,8 +9,6 @@ import GoalAlert from './components/GoalAlert';
 import Footer from './components/Footer';
 import KnockoutBracket from './components/KnockoutBracket';
 import { useLiveScores } from './hooks/useLiveScores';
-import NotificationToastContainer from './components/NotificationToastContainer';
-import RealWorldNewsFeed from './components/RealWorldNewsFeed';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -602,9 +600,6 @@ export default function App() {
                     >
                       View All Fixtures & Stages
                     </button>
-
-                    {/* Real-world search & AI news highlights feed */}
-                    <RealWorldNewsFeed fixtures={fixtures} />
                   </div>
 
                 </div>
@@ -681,12 +676,6 @@ export default function App() {
       <GoalAlert
         alertsQueue={alertsQueue}
         onDismissAlert={handleDismissAlert}
-      />
-
-      {/* Global In-App Toast Notification System */}
-      <NotificationToastContainer
-        toasts={toasts}
-        onDismiss={handleDismissToast}
       />
       {/* Match Details Drawer Modal Overlay */}
       {selectedMatchId && (

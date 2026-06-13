@@ -90,7 +90,7 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
       <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
         
         {/* Left Column: Heading, Final Countdown & Stats */}
-        <div className="lg:col-span-7 space-y-8">
+        <div className="lg:col-span-5 space-y-8">
           <div className="inline-flex items-center space-x-2 rounded-full border border-amber-500/25 bg-amber-500/5 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 dark:bg-amber-400 opacity-75"></span>
@@ -99,11 +99,11 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
             <span>UNITED 2026: USA • CANADA • MEXICO</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-850 dark:text-slate-100 md:text-5xl lg:text-6xl">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-850 dark:text-slate-100 md:text-4xl lg:text-5xl">
             GLOBAL CUP <span className="bg-gradient-to-r from-amber-600 via-yellow-500 to-emerald-550 dark:from-amber-400 dark:via-yellow-300 dark:to-emerald-400 bg-clip-text text-transparent">2026</span>
           </h2>
           
-          <p className="max-w-xl text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+          <p className="max-w-xl text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
             Track fixtures, live scores, standings, and match events in real-time. Experience the expanded 48-team tournament live from your dashboard.
           </p>
 
@@ -126,42 +126,42 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
           </div>
 
           {/* Stats Cards Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4">
             <div 
               onClick={() => setShowScorers(true)}
-              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-4 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
             >
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Total Goals</p>
+              <p className="text-[9px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Total Goals</p>
               <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{totalGoals}</span>
-                <span className="text-[10px] font-bold text-emerald-605 dark:text-emerald-555">⚽ Active</span>
+                <span className="text-xl font-black text-slate-800 dark:text-slate-100">{totalGoals}</span>
+                <span className="text-[9px] font-bold text-emerald-605 dark:text-emerald-555">⚽ Active</span>
               </div>
             </div>
             <div 
               onClick={onMatchesCompletedClick}
-              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-4 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
             >
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Matches Completed</p>
+              <p className="text-[9px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Matches Completed</p>
               <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{finishedMatches}</span>
-                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-400">/ {totalMatches}</span>
+                <span className="text-xl font-black text-slate-800 dark:text-slate-100">{finishedMatches}</span>
+                <span className="text-[9px] font-bold text-slate-450 dark:text-slate-400">/ {totalMatches}</span>
               </div>
             </div>
             <div 
               onClick={onActiveLiveGamesClick}
-              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-4 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
             >
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Active Live Games</p>
+              <p className="text-[9px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Active Live Games</p>
               <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-amber-600 dark:text-amber-400 animate-pulse">{liveMatches}</span>
-                <span className="text-[10px] font-bold text-amber-600 dark:text-amber-500">🔴 Live</span>
+                <span className="text-xl font-black text-amber-600 dark:text-amber-400 animate-pulse">{liveMatches}</span>
+                <span className="text-[9px] font-bold text-amber-600 dark:text-amber-500">🔴 Live</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Next Match */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="lg:col-span-7 space-y-6">
           
           {/* Next Match(es) Card */}
           {nextMatch && (

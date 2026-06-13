@@ -1,73 +1,9 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Volume2, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
-// Web Audio API Stadium Cheer Sound Synthesizer
-const playCheerSound = () => {
-  try {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
-    // --- WHISTLE BLOW ---
-    const osc = audioCtx.createOscillator();
-    const oscGain = audioCtx.createGain();
-    
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(900, audioCtx.currentTime);
-    osc.frequency.linearRampToValueAtTime(1000, audioCtx.currentTime + 0.08);
-    osc.frequency.linearRampToValueAtTime(850, audioCtx.currentTime + 0.15);
-    osc.frequency.linearRampToValueAtTime(1100, audioCtx.currentTime + 0.25);
-    osc.frequency.linearRampToValueAtTime(900, audioCtx.currentTime + 0.35);
-    
-    oscGain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-    oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-    
-    osc.connect(oscGain);
-    oscGain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.4);
 
-    // --- CROWD CHEER (Noise + Filtering) ---
-    const bufferSize = audioCtx.sampleRate * 3; // 3 seconds
-    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-    const data = buffer.getChannelData(0);
-    
-    // Generate white noise
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = Math.random() * 2 - 1;
-    }
-
-    const noiseSource = audioCtx.createBufferSource();
-    noiseSource.buffer = buffer;
-
-    // Filter to reshape noise to sound like crowd roar
-    const lowpass = audioCtx.createBiquadFilter();
-    lowpass.type = 'lowpass';
-    lowpass.frequency.value = 650; // Muffles high hiss
-
-    const bandpass = audioCtx.createBiquadFilter();
-    bandpass.type = 'bandpass';
-    bandpass.frequency.value = 350; // Concentrates energy in rumble
-    bandpass.Q.value = 0.8;
-
-    const noiseGain = audioCtx.createGain();
-    noiseGain.gain.setValueAtTime(0.01, audioCtx.currentTime + 0.1);
-    noiseGain.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.45); // Fade in roar
-    noiseGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 1.2);  // Steady cheer
-    noiseGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 3.0); // Decay
-
-    noiseSource.connect(lowpass);
-    lowpass.connect(bandpass);
-    bandpass.connect(noiseGain);
-    noiseGain.connect(audioCtx.destination);
-
-    noiseSource.start(audioCtx.currentTime + 0.1);
-    noiseSource.stop(audioCtx.currentTime + 3.0);
-  } catch (err) {
-    console.error("Synthesizer failed:", err);
-  }
-};
-
-export default function GoalAlert({ alertsQueue, onDismissAlert, soundEnabled }) {
+export default function GoalAlert({ alertsQueue, onDismissAlert }) {
   const currentAlert = alertsQueue[0] || null;
 
   const handleClose = () => {
@@ -75,13 +11,6 @@ export default function GoalAlert({ alertsQueue, onDismissAlert, soundEnabled })
       onDismissAlert(currentAlert.alertId);
     }
   };
-
-  // Play Sound when a new alert becomes active
-  useEffect(() => {
-    if (currentAlert && soundEnabled) {
-      playCheerSound();
-    }
-  }, [currentAlert, soundEnabled]);
 
   // Handle auto-dismiss timer when a new alert becomes active
   useEffect(() => {
@@ -148,13 +77,7 @@ export default function GoalAlert({ alertsQueue, onDismissAlert, soundEnabled })
               <span className="text-xs sm:text-sm font-bold text-slate-300 truncate max-w-[80px] sm:max-w-[100px]">{currentAlert.awayTeam}</span>
             </div>
 
-            {/* Alert sound note */}
-            {soundEnabled && (
-              <div className="mt-4 flex items-center justify-center space-x-1.5 text-[10px] text-slate-500 font-bold">
-                <Volume2 className="h-3 w-3 text-slate-400" />
-                <span>Stadium audio synthesized live</span>
-              </div>
-            )}
+
           </motion.div>
           
         </div>

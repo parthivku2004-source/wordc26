@@ -15,7 +15,6 @@ import RealWorldNewsFeed from './components/RealWorldNewsFeed';
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [darkMode, setDarkMode] = useState(true);
-  const [soundEnabled, setSoundEnabled] = useState(true);
   const [selectedMatchId, setSelectedMatchId] = useState(null);
 
 
@@ -81,7 +80,8 @@ export default function App() {
       try {
         new Notification(title, {
           body: message,
-          icon: '/favicon.ico'
+          icon: '/favicon.ico',
+          silent: true
         });
       } catch (e) {
         console.warn("Native Notification failed:", e);
@@ -448,8 +448,6 @@ export default function App() {
         setActiveTab={setActiveTab}
         darkMode={darkMode}
         setDarkMode={setDarkMode}
-        soundEnabled={soundEnabled}
-        setSoundEnabled={setSoundEnabled}
         favoriteTeam={favoriteTeam}
         teams={standings}
         notificationsEnabled={notificationsEnabled}
@@ -673,7 +671,6 @@ export default function App() {
       <GoalAlert
         alertsQueue={alertsQueue}
         onDismissAlert={handleDismissAlert}
-        soundEnabled={soundEnabled}
       />
 
       {/* Global In-App Toast Notification System */}

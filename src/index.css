@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-bounce-slow: bounce 4s ease-in-out infinite;
+}
+
+/* Base custom styling */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.4);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Live blinking badge */
+@keyframes pulse-red {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-red {
+  animation: pulse-red 2s infinite;
+}
+
+/* Stadium background overlay pattern */
+.bg-stadium-pitch {
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.04), transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(245, 158, 11, 0.03), transparent 50%);
+}
+
+/* ===== RESPONSIVE / DEVICE COMPATIBILITY ===== */
+
+/* Remove tap highlight on touch devices */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure all interactive elements have minimum touch-friendly tap target */
+button, a, [role="button"], label {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Smooth momentum scrolling for iOS horizontal scroll containers */
+.touch-scroll-x {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+/* Prevent content overflow on small screens */
+img, video, iframe, table {
+  max-width: 100%;
+}
+
+/* Ensure text doesn't overflow on narrow devices */
+.text-safe {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Bracket horizontal scroll: smooth + native scrollbar on touch */
+.bracket-scroll-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  cursor: grab;
+}
+
+.bracket-scroll-container:active {
+  cursor: grabbing;
+}
+
+/* Modal backdrop prevents body scroll on mobile */
+.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Safe area support for notched phones (iPhone X+) */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Input fields: prevent iOS zoom on focus (min 16px font-size) */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+  font-size: 16px !important;
+}
+
+@media (min-width: 640px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="password"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Tablet landscape: constrain max-width so it doesn't look stretched */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-constrain {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Ensure fixture cards never get too narrow */
+@media (max-width: 380px) {
+  .fixture-card-compact {
+    padding: 0.75rem !important;
+  }
+  .fixture-card-compact .team-name {
+    max-width: 72px !important;
+    font-size: 0.65rem !important;
+  }
+}
+
+/* Fade-in animation for alerts */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}

@@ -1,0 +1,61 @@
+[
+  { "id": "MEX", "name": "Mexico", "flag": "🇲🇽", "group": "A", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "RSA", "name": "South Africa", "flag": "🇿🇦", "group": "A", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "KOR", "name": "South Korea", "flag": "🇰🇷", "group": "A", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "UEFA_D", "name": "Czechia", "flag": "🇨🇿", "group": "A", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "CAN", "name": "Canada", "flag": "🇨🇦", "group": "B", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "BIH", "name": "Bosnia and Herzegovina", "flag": "🇧🇦", "group": "B", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "QAT", "name": "Qatar", "flag": "🇶🇦", "group": "B", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "SUI", "name": "Switzerland", "flag": "🇨🇭", "group": "B", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "BRA", "name": "Brazil", "flag": "🇧🇷", "group": "C", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "MAR", "name": "Morocco", "flag": "🇲🇦", "group": "C", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "HAI", "name": "Haiti", "flag": "🇭🇹", "group": "C", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "SCO", "name": "Scotland", "flag": "🏴\u200d󠁧\u200d󠁢\u200d󠁳\u200d󠁣\u200d󠁴\u200d󠁿", "group": "C", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "USA", "name": "USA", "flag": "🇺🇸", "group": "D", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "PAR", "name": "Paraguay", "flag": "🇵🇾", "group": "D", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "AUS", "name": "Australia", "flag": "🇦🇺", "group": "D", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "UEFA_C", "name": "Turkey", "flag": "🇹🇷", "group": "D", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "GER", "name": "Germany", "flag": "🇩🇪", "group": "E", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "CUW", "name": "Curaçao", "flag": "🇨🇼", "group": "E", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "CIV", "name": "Ivory Coast", "flag": "🇨🇮", "group": "E", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "ECU", "name": "Ecuador", "flag": "🇪🇨", "group": "E", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "NED", "name": "Netherlands", "flag": "🇳🇱", "group": "F", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "JPN", "name": "Japan", "flag": "🇯🇵", "group": "F", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "UEFA_B", "name": "Sweden", "flag": "🇸🇪", "group": "F", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "TUN", "name": "Tunisia", "flag": "🇹🇳", "group": "F", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "BEL", "name": "Belgium", "flag": "🇧🇪", "group": "G", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "EGY", "name": "Egypt", "flag": "🇪🇬", "group": "G", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "IRN", "name": "Iran", "flag": "🇮🇷", "group": "G", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "NZL", "name": "New Zealand", "flag": "🇳🇿", "group": "G", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "ESP", "name": "Spain", "flag": "🇪🇸", "group": "H", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "CPV", "name": "Cape Verde", "flag": "🇨🇻", "group": "H", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "KSA", "name": "Saudi Arabia", "flag": "🇸🇦", "group": "H", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "URU", "name": "Uruguay", "flag": "🇺🇾", "group": "H", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "FRA", "name": "France", "flag": "🇫🇷", "group": "I", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "SEN", "name": "Senegal", "flag": "🇸🇳", "group": "I", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "IC_2", "name": "Iraq", "flag": "🇮🇶", "group": "I", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "NOR", "name": "Norway", "flag": "🇳🇴", "group": "I", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "ARG", "name": "Argentina", "flag": "🇦🇷", "group": "J", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "ALG", "name": "Algeria", "flag": "🇩🇿", "group": "J", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "AUT", "name": "Austria", "flag": "🇦🇹", "group": "J", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "JOR", "name": "Jordan", "flag": "🇯🇴", "group": "J", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "POR", "name": "Portugal", "flag": "🇵🇹", "group": "K", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "IC_1", "name": "DR Congo", "flag": "🇨🇩", "group": "K", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "UZB", "name": "Uzbekistan", "flag": "🇺🇿", "group": "K", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "COL", "name": "Colombia", "flag": "🇨🇴", "group": "K", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+
+  { "id": "ENG", "name": "England", "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "group": "L", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "CRO", "name": "Croatia", "flag": "🇭🇷", "group": "L", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "GHA", "name": "Ghana", "flag": "🇬🇭", "group": "L", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 },
+  { "id": "PAN", "name": "Panama", "flag": "🇵🇦", "group": "L", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0 }
+]

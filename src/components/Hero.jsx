@@ -1,0 +1,287 @@
+import { useState, useEffect, useMemo } from 'react';
+import { Trophy, PlayCircle, X } from 'lucide-react';
+import { getCountryFlag, getCountryName } from '../utils/countryHelper.jsx';
+
+export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, onMatchesCompletedClick }) {
+  const [now, setNow] = useState(new Date());
+  const [showScorers, setShowScorers] = useState(false);
+
+  // Compute top scorers
+  const scorers = useMemo(() => {
+    const counts = {};
+    fixtures.forEach(match => {
+      if (match.events) {
+        match.events.forEach(event => {
+          if (event.type === 'goal' && event.player) {
+            const key = `${event.player.replace(/^(GK|DF|MF|FW):\s*/, '')} (${event.teamId})`;
+            counts[key] = (counts[key] || 0) + 1;
+          }
+        });
+      }
+    });
+    return Object.entries(counts)
+      .map(([playerWithTeam, goals]) => {
+        const match = playerWithTeam.match(/(.+) \((.+)\)/);
+        const name = match ? match[1] : playerWithTeam;
+        const teamId = match ? match[2] : '';
+        return { name, teamId, goals };
+      })
+      .sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
+  }, [fixtures]);
+  
+  // Update local clock every second for countdowns
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Calculate stats
+  const totalMatches = fixtures.length;
+  const finishedMatches = fixtures.filter(m => m.status === 'Finished').length;
+  const liveMatches = fixtures.filter(m => m.status === 'LIVE' || m.status === 'Half Time' || m.status === 'Extra Time' || m.status === 'Penalties').length;
+  const totalGoals = fixtures.reduce((acc, m) => acc + (m.homeScore || 0) + (m.awayScore || 0), 0);
+
+  // Find next upcoming match
+  const upcomingMatches = fixtures
+    .filter(m => m.status === 'Upcoming')
+    .map(m => ({ ...m, dateObj: new Date(m.dateTimeISO) }))
+    .filter(m => m.dateObj > now)
+    .sort((a, b) => a.dateObj - b.dateObj);
+
+  const nextMatch = upcomingMatches[0] || null;
+
+  // Countdown to next match
+  const getNextMatchCountdown = () => {
+    if (!nextMatch) return null;
+    const diff = nextMatch.dateObj - now;
+    if (diff <= 0) return null;
+
+    const hrs = Math.floor(diff / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return { hrs, mins, secs };
+  };
+
+  const nextMatchTimeLeft = getNextMatchCountdown();
+
+  // Countdown to Final (July 19, 2026 23:30:00 IST)
+  const finalDate = new Date("2026-07-19T23:30:00+05:30");
+  const getFinalCountdown = () => {
+    const diff = finalDate - now;
+    if (diff <= 0) return { days: 0, hrs: 0, mins: 0, secs: 0 };
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hrs = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return { days, hrs, mins, secs };
+  };
+
+  const finalTimeLeft = getFinalCountdown();
+
+  return (
+    <section className="relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-200/10 bg-white dark:bg-slate-950 px-4 py-6 shadow-xl dark:shadow-2xl sm:px-8 sm:py-10 md:px-12 md:py-16">
+      
+      {/* Stadium-inspired background grid & radial glow */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_bottom,rgba(241,245,249,0.3),rgba(255,255,255,0.95))] dark:bg-[linear-gradient(to_bottom,rgba(15,23,42,0.3),rgba(2,6,23,0.95))]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.15),transparent_60%)]"></div>
+        <div className="absolute -left-1/4 -top-1/4 h-96 w-96 rounded-full bg-emerald-500/5 dark:bg-emerald-500/10 blur-[100px]"></div>
+        <div className="absolute -right-1/4 -bottom-1/4 h-96 w-96 rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[100px]"></div>
+      </div>
+
+      <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 items-center">
+        
+        {/* Left Column: Heading & Final Countdown */}
+        <div className="lg:col-span-7 space-y-6">
+          <div className="inline-flex items-center space-x-2 rounded-full border border-amber-500/25 bg-amber-500/5 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 dark:bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-600 dark:bg-amber-500"></span>
+            </span>
+            <span>UNITED 2026: USA • CANADA • MEXICO</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-850 dark:text-slate-100 md:text-5xl lg:text-6xl">
+            GLOBAL CUP <span className="bg-gradient-to-r from-amber-600 via-yellow-500 to-emerald-550 dark:from-amber-400 dark:via-yellow-300 dark:to-emerald-400 bg-clip-text text-transparent">2026</span>
+          </h2>
+          
+          <p className="max-w-xl text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            Track fixtures, live scores, standings, and match events in real-time. Experience the expanded 48-team tournament live from your dashboard.
+          </p>
+
+          {/* Final Countdown Widget */}
+          <div className="pt-2">
+            <p className="text-xs font-bold tracking-widest text-slate-450 dark:text-slate-500 uppercase mb-2">Countdown to the Final</p>
+            <div className="flex space-x-2.5 sm:space-x-4">
+              {[
+                { label: 'Days', value: finalTimeLeft.days },
+                { label: 'Hours', value: finalTimeLeft.hrs },
+                { label: 'Mins', value: finalTimeLeft.mins },
+                { label: 'Secs', value: finalTimeLeft.secs },
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center justify-center h-16 w-16 sm:h-20 sm:w-20 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 backdrop-blur-md shadow-sm dark:shadow-lg">
+                  <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-slate-100">{String(item.value).padStart(2, '0')}</span>
+                  <span className="text-[9px] sm:text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase mt-0.5">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Next Match & Stats */}
+        <div className="lg:col-span-5 space-y-6">
+          
+          {/* Next Match Card */}
+          {nextMatch && (
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 p-5 backdrop-blur-md shadow-md dark:shadow-xl hover:border-slate-300 dark:hover:border-slate-700/50 transition duration-300">
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-[10px] font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase flex items-center space-x-1">
+                  <PlayCircle className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400 fill-current animate-pulse" />
+                  <span>Next Match Countdown</span>
+                </span>
+                <span className="text-[10px] text-slate-450 dark:text-slate-400 font-semibold">Match #{nextMatch.matchId} • Group {nextMatch.group}</span>
+              </div>
+              
+              <div className="flex items-center justify-between py-2 text-slate-800 dark:text-slate-100">
+                <div className="flex items-center space-x-2">
+                  {getCountryFlag(nextMatch.homeTeamId, "w-8 h-5.5 shadow-md")}
+                  <span className="text-xs sm:text-sm font-bold truncate max-w-[80px] sm:max-w-[120px]">{nextMatch.homeTeam}</span>
+                </div>
+                <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase px-2">VS</span>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs sm:text-sm font-bold truncate max-w-[80px] sm:max-w-[120px]">{nextMatch.awayTeam}</span>
+                  {getCountryFlag(nextMatch.awayTeamId, "w-8 h-5.5 shadow-md")}
+                </div>
+              </div>
+
+              {nextMatchTimeLeft ? (
+                <div className="flex justify-center space-x-3 mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800/60">
+                  <div className="text-center">
+                    <span className="text-sm font-black text-slate-700 dark:text-slate-200">{String(nextMatchTimeLeft.hrs).padStart(2, '0')}h</span>
+                  </div>
+                  <span className="text-slate-350 dark:text-slate-605">:</span>
+                  <div className="text-center">
+                    <span className="text-sm font-black text-slate-700 dark:text-slate-200">{String(nextMatchTimeLeft.mins).padStart(2, '0')}m</span>
+                  </div>
+                  <span className="text-slate-350 dark:text-slate-605">:</span>
+                  <div className="text-center">
+                    <span className="text-sm font-black text-slate-700 dark:text-slate-200">{String(nextMatchTimeLeft.secs).padStart(2, '0')}s</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center mt-3 pt-3 border-t border-slate-200/80 dark:border-slate-800/60 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                  Kicking Off Now!
+                </div>
+              )}
+              <div className="mt-3 flex justify-center">
+                <button 
+                  onClick={() => onViewMatch(nextMatch.matchId)}
+                  className="w-full text-center py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-750 dark:text-slate-200 transition"
+                >
+                  View Details
+                </button>
+              </div>            </div>
+          )}
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            <div 
+              onClick={() => setShowScorers(true)}
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+            >
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Total Goals</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{totalGoals}</span>
+                <span className="text-[10px] font-bold text-emerald-605 dark:text-emerald-555">⚽ Active</span>
+              </div>
+            </div>
+            <div 
+              onClick={onMatchesCompletedClick}
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+            >
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Matches Completed</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{finishedMatches}</span>
+                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-400">/ {totalMatches}</span>
+              </div>
+            </div>
+            <div 
+              onClick={onActiveLiveGamesClick}
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+            >
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Active Live Games</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-amber-600 dark:text-amber-400 animate-pulse">{liveMatches}</span>
+                <span className="text-[10px] font-bold text-amber-600 dark:text-amber-500">🔴 Live</span>
+              </div>
+            </div>
+            <div className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 dark:bg-slate-900/30 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md">
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Host Cities</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-slate-850 dark:text-slate-100">16</span>
+                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-400">Venues</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      {/* Golden Boot / Top Scorers Modal Overlay */}
+      {showScorers && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-sm">
+          <div className="w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl relative space-y-4 max-h-[85vh] overflow-hidden flex flex-col">
+            {/* Close button */}
+            <button 
+              onClick={() => setShowScorers(false)}
+              className="absolute top-4 right-4 p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-405 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-805 dark:hover:text-slate-100 transition"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="flex items-center space-x-2.5 pb-2 border-b border-slate-200 dark:border-slate-800">
+              <Trophy className="h-5 w-5 text-amber-550 dark:text-amber-400" />
+              <div>
+                <h3 className="text-sm font-black text-slate-850 dark:text-slate-100 uppercase tracking-widest">Tournament Top Scorers</h3>
+                <p className="text-[10px] text-slate-450 dark:text-slate-400 font-bold uppercase -mt-0.5">Golden Boot Race</p>
+              </div>
+            </div>
+
+            {/* List of Scorers */}
+            <div className="flex-1 overflow-y-auto max-h-72 sm:max-h-80 pr-1 space-y-2.5">
+              {scorers.length > 0 ? (
+                scorers.map((scorer, idx) => (
+                  <div key={idx} className="flex justify-between items-center p-2.5 rounded-xl border border-slate-200/50 dark:border-slate-800/40 bg-slate-50/50 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-950/80 transition duration-200 text-slate-800 dark:text-slate-200 animate-fade-in">
+                    <div className="flex items-center space-x-2.5">
+                      <span className="text-[10px] font-bold text-slate-450 dark:text-slate-500 w-4">{idx + 1}.</span>
+                      <span className="text-sm">{getCountryFlag(scorer.teamId, "w-5 h-3.5 shadow-sm")}</span>
+                      <div>
+                        <div className="text-xs font-black text-slate-800 dark:text-slate-200">{scorer.name}</div>
+                        <div className="text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase">{getCountryName(scorer.teamId)}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-sm font-black text-amber-600 dark:text-amber-400">{scorer.goals}</span>
+                      <span className="text-[10px] text-slate-500 font-bold">⚽</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8 text-xs text-slate-500 font-semibold">
+                  No goals have been scored yet in the tournament.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}

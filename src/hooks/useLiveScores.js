@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { getFixtures, calculateStandings, saveFixtures } from '../api/footballApi';
+import { getFixtures, calculateStandings, saveFixtures, getTeams } from '../api/footballApi';
 import playersData from '../data/players.json';
 
 const realWorldEvents = {
@@ -91,6 +91,30 @@ const generateMockCardsAndSubs = (m) => {
   return eventsList;
 };
 
+const getApiGameForFixture = (fixture, apiGames, teams) => {
+  if (!apiGames || apiGames.length === 0) return null;
+
+  // 1. Check if the fixture has fully resolved team codes (e.g., "MEX", "BRA", "USA" etc.)
+  const isHomeResolved = teams.some(t => t.id === fixture.homeTeamId);
+  const isAwayResolved = teams.some(t => t.id === fixture.awayTeamId);
+
+  if (isHomeResolved && isAwayResolved) {
+    // Both team IDs are resolved. Find the matching game in the API where the teams match.
+    return apiGames.find(g => {
+      const homeIndex = Number(g.home_team_id) - 1;
+      const awayIndex = Number(g.away_team_id) - 1;
+      const apiHomeTeam = teams[homeIndex];
+      const apiAwayTeam = teams[awayIndex];
+      return apiHomeTeam && apiAwayTeam && 
+             apiHomeTeam.id === fixture.homeTeamId && 
+             apiAwayTeam.id === fixture.awayTeamId;
+    });
+  }
+
+  // 2. If one or both team IDs are not yet resolved, fallback to mapping by ID
+  return apiGames.find(g => Number(g.id) === fixture.matchId);
+};
+
 export const useLiveScores = (onGoalAlert) => {
   const [fixtures, setFixtures] = useState(() => {
     try {
@@ -161,17 +185,26 @@ export const useLiveScores = (onGoalAlert) => {
   // Update check loop (API fetch / real-world tracker with time-sync fallback)
   const fetchLiveScores = useCallback(async () => {
     try {
-      const response = await fetch('https://worldcup26.ir/get/games');
-      if (!response.ok) throw new Error("Network response was not ok");
-      const data = await response.json();
+      let data;
+      try {
+        const response = await fetch('https://worldcup26.ir/get/games');
+        if (!response.ok) throw new Error("Primary API fetch failed");
+        data = await response.json();
+      } catch (primaryErr) {
+        console.warn("Primary API fetch failed. Trying CORS proxy fallback...", primaryErr);
+        const proxyResponse = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://worldcup26.ir/get/games'));
+        if (!proxyResponse.ok) throw new Error("CORS proxy fetch failed");
+        data = await proxyResponse.json();
+      }
       const apiGames = data.games || data || [];
+      const teams = getTeams() || [];
       
       const currentFixtures = getFixtures();
       let updated = false;
       const goalAlerts = [];
 
       const updatedFixtures = currentFixtures.map(match => {
-        const apiGame = apiGames.find(g => Number(g.id) === match.matchId);
+        const apiGame = getApiGameForFixture(match, apiGames, teams);
         if (!apiGame) return match;
 
         const apiHomeScore = Number(apiGame.home_score || 0);

@@ -139,7 +139,7 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
       <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
         
         {/* Left Column: Heading, Final Countdown & Stats */}
-        <div className="lg:col-span-5 space-y-8">
+        <div className="lg:col-span-5 space-y-8 order-2 lg:order-1">
           <div className="inline-flex items-center space-x-2 rounded-full border border-amber-500/25 bg-amber-500/5 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 dark:bg-amber-400 opacity-75"></span>
@@ -211,7 +211,7 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
         </div>
 
         {/* Right Column: Next Match */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
           
           {/* Next Match(es) Card */}
           {nextMatch && (

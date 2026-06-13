@@ -12,7 +12,10 @@ import { useLiveScores } from './hooks/useLiveScores';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('wc_dark_mode');
+    return saved === 'true'; // Default is false (light mode)
+  });
   const [selectedMatchId, setSelectedMatchId] = useState(null);
 
 
@@ -173,6 +176,7 @@ export default function App() {
 
   // Handle dark mode side-effects
   useEffect(() => {
+    localStorage.setItem('wc_dark_mode', String(darkMode));
     const root = window.document.documentElement;
     if (darkMode) {
       root.classList.add('dark');

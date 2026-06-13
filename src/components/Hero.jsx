@@ -7,7 +7,7 @@ function TrophyIcon() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = '/trophy.png';
+    img.src = '/trophy.jpg';
     img.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = img.width;
@@ -21,8 +21,8 @@ function TrophyIcon() {
           const r = data[i];
           const g = data[i + 1];
           const b = data[i + 2];
-          // If white/near-white, set transparent
-          if (r > 240 && g > 240 && b > 240) {
+          // If white/near-white, set transparent (threshold 225 for JPEGs)
+          if (r > 225 && g > 225 && b > 225) {
             data[i + 3] = 0;
           }
         }
@@ -30,23 +30,23 @@ function TrophyIcon() {
         setImgSrc(canvas.toDataURL());
       } catch (e) {
         console.error("Canvas error:", e);
-        setImgSrc('/trophy.png');
+        setImgSrc('/trophy.jpg');
       }
     };
     img.onerror = () => {
-      setImgSrc('/trophy.png');
+      setImgSrc('/trophy.jpg');
     };
   }, []);
 
   if (!imgSrc) {
-    return <div className="h-10 sm:h-12 md:h-14 lg:h-16 w-8 sm:w-10 md:w-12 lg:w-14 animate-pulse bg-slate-200 dark:bg-slate-800/60 rounded-xl shrink-0" />;
+    return <div className="h-16 sm:h-20 md:h-24 lg:h-28 w-12 sm:w-16 md:w-20 lg:w-24 animate-pulse bg-slate-200 dark:bg-slate-800/60 rounded-xl shrink-0" />;
   }
 
   return (
     <img 
       src={imgSrc} 
       alt="Cup Trophy" 
-      className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain shrink-0 filter drop-shadow-[0_2px_8px_rgba(245,158,11,0.2)]"
+      className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain shrink-0 filter drop-shadow-[0_4px_12px_rgba(245,158,11,0.25)]"
     />
   );
 }

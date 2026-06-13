@@ -52,20 +52,14 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
 
   const nextMatch = upcomingMatches[0] || null;
 
-  // Countdown to next match
-  const getNextMatchCountdown = () => {
-    if (!nextMatch) return null;
-    const diff = nextMatch.dateObj - now;
-    if (diff <= 0) return null;
-
-    const hrs = Math.floor(diff / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    return { hrs, mins, secs };
-  };
-
-  const nextMatchTimeLeft = getNextMatchCountdown();
+  // Next match day's full matches list in order
+  const nextDayMatches = useMemo(() => {
+    if (!nextMatch) return [];
+    return fixtures
+      .filter(m => m.dateIST === nextMatch.dateIST)
+      .map(m => ({ ...m, dateObj: new Date(m.dateTimeISO) }))
+      .sort((a, b) => a.dateObj - b.dateObj);
+  }, [fixtures, nextMatch]);
 
   // Countdown to Final (July 19, 2026 23:30:00 IST)
   const finalDate = new Date("2026-07-19T23:30:00+05:30");
@@ -135,56 +129,89 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
         {/* Right Column: Next Match & Stats */}
         <div className="lg:col-span-5 space-y-6">
           
-          {/* Next Match Card */}
+          {/* Next Match(es) Card */}
           {nextMatch && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 p-5 backdrop-blur-md shadow-md dark:shadow-xl hover:border-slate-300 dark:hover:border-slate-700/50 transition duration-300">
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-[10px] font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase flex items-center space-x-1">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 p-4 sm:p-5 backdrop-blur-md shadow-md dark:shadow-xl transition duration-300">
+              <div className="flex justify-between items-center mb-4 pb-2 border-b border-slate-200/80 dark:border-slate-800/60">
+                <span className="text-[10px] font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase flex items-center space-x-1.5">
                   <PlayCircle className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400 fill-current animate-pulse" />
-                  <span>Next Match Countdown</span>
+                  <span>Next Match Day: {nextMatch.dateIST}</span>
                 </span>
-                <span className="text-[10px] text-slate-450 dark:text-slate-400 font-semibold">Match #{nextMatch.matchId} • Group {nextMatch.group}</span>
-              </div>
-              
-              <div className="flex items-center justify-between py-2 text-slate-800 dark:text-slate-100">
-                <div className="flex items-center space-x-2">
-                  {getCountryFlag(nextMatch.homeTeamId, "w-8 h-5.5 shadow-md")}
-                  <span className="text-xs sm:text-sm font-bold truncate max-w-[80px] sm:max-w-[120px]">{nextMatch.homeTeam}</span>
-                </div>
-                <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase px-2">VS</span>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs sm:text-sm font-bold truncate max-w-[80px] sm:max-w-[120px]">{nextMatch.awayTeam}</span>
-                  {getCountryFlag(nextMatch.awayTeamId, "w-8 h-5.5 shadow-md")}
-                </div>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase bg-slate-100 dark:bg-slate-800/60 px-2.5 py-0.5 rounded-full border border-slate-200/50 dark:border-slate-700/30">
+                  {nextDayMatches.length} {nextDayMatches.length === 1 ? 'Match' : 'Matches'}
+                </span>
               </div>
 
-              {nextMatchTimeLeft ? (
-                <div className="flex justify-center space-x-3 mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800/60">
-                  <div className="text-center">
-                    <span className="text-sm font-black text-slate-700 dark:text-slate-200">{String(nextMatchTimeLeft.hrs).padStart(2, '0')}h</span>
-                  </div>
-                  <span className="text-slate-350 dark:text-slate-605">:</span>
-                  <div className="text-center">
-                    <span className="text-sm font-black text-slate-700 dark:text-slate-200">{String(nextMatchTimeLeft.mins).padStart(2, '0')}m</span>
-                  </div>
-                  <span className="text-slate-350 dark:text-slate-605">:</span>
-                  <div className="text-center">
-                    <span className="text-sm font-black text-slate-700 dark:text-slate-200">{String(nextMatchTimeLeft.secs).padStart(2, '0')}s</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center mt-3 pt-3 border-t border-slate-200/80 dark:border-slate-800/60 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                  Kicking Off Now!
-                </div>
-              )}
-              <div className="mt-3 flex justify-center">
-                <button 
-                  onClick={() => onViewMatch(nextMatch.matchId)}
-                  className="w-full text-center py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-750 dark:text-slate-200 transition"
-                >
-                  View Details
-                </button>
-              </div>            </div>
+              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1 scrollbar-none">
+                {nextDayMatches.map((match) => {
+                  // Calculate countdown for this match
+                  const diff = match.dateObj - now;
+                  let countdownStr = '';
+                  if (diff > 0) {
+                    const hrs = Math.floor(diff / (1000 * 60 * 60));
+                    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                    countdownStr = `${String(hrs).padStart(2, '0')}h : ${String(mins).padStart(2, '0')}m : ${String(secs).padStart(2, '0')}s`;
+                  }
+
+                  const isLive = match.status === 'LIVE' || match.status === 'Half Time' || match.status === 'Extra Time' || match.status === 'Penalties';
+
+                  return (
+                    <div
+                      key={match.matchId}
+                      onClick={() => onViewMatch(match.matchId)}
+                      className="group/item relative flex flex-col p-3 rounded-xl border border-slate-200/60 dark:border-slate-800/60 bg-white/40 dark:bg-slate-950/20 hover:border-amber-500/30 dark:hover:border-amber-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/40 transition duration-200 cursor-pointer"
+                    >
+                      {/* Match Header */}
+                      <div className="flex justify-between items-center text-[10px] text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider mb-2">
+                        <span>Match #{match.matchId} • {match.stage} {match.group ? `(Group ${match.group})` : ''}</span>
+                        <span className="text-amber-605 dark:text-amber-400">{match.timeIST} IST</span>
+                      </div>
+
+                      {/* Teams & Flags */}
+                      <div className="flex items-center justify-between py-1 text-slate-800 dark:text-slate-100">
+                        <div className="flex items-center space-x-2 w-[42%] min-w-0">
+                          {getCountryFlag(match.homeTeamId, "w-6.5 h-4.5 sm:w-8 sm:h-5.5 shadow-sm")}
+                          <span className="text-xs sm:text-sm font-bold truncate">{match.homeTeam}</span>
+                        </div>
+                        <span className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase px-1">VS</span>
+                        <div className="flex items-center space-x-2 justify-end w-[42%] min-w-0">
+                          <span className="text-xs sm:text-sm font-bold truncate text-right">{match.awayTeam}</span>
+                          {getCountryFlag(match.awayTeamId, "w-6.5 h-4.5 sm:w-8 sm:h-5.5 shadow-sm")}
+                        </div>
+                      </div>
+
+                      {/* Countdown / Live Indicator Row */}
+                      <div className="flex justify-between items-center mt-2 pt-2 border-t border-slate-200/40 dark:border-slate-800/30">
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase">Status</span>
+                        {match.status === 'Finished' ? (
+                          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
+                            <span className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[9px] font-black">FT</span>
+                            <span className="font-extrabold">{match.homeScore} - {match.awayScore}</span>
+                          </span>
+                        ) : isLive ? (
+                          <span className="text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase flex items-center space-x-1 animate-pulse">
+                            <span className="relative flex h-1.5 w-1.5">
+                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-450 opacity-75"></span>
+                              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-rose-600"></span>
+                            </span>
+                            <span>{match.status === 'LIVE' ? `${match.minute}' LIVE` : match.status} ({match.homeScore} - {match.awayScore})</span>
+                          </span>
+                        ) : countdownStr ? (
+                          <span className="text-xs font-black text-slate-700 dark:text-slate-200 font-mono tracking-wider">
+                            {countdownStr}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase">
+                            Starting soon
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           )}
 
           {/* Stats Grid */}

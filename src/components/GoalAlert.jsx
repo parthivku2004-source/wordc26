@@ -23,6 +23,8 @@ export default function GoalAlert({ alertsQueue, onDismissAlert }) {
     }
   }, [currentAlert, onDismissAlert]);
 
+  const isFinished = currentAlert?.type === 'finished';
+
   return (
     <AnimatePresence>
       {currentAlert && (
@@ -33,7 +35,9 @@ export default function GoalAlert({ alertsQueue, onDismissAlert }) {
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.8, y: -50, opacity: 0 }}
             transition={{ type: 'spring', damping: 15, stiffness: 100 }}
-            className="relative w-full max-w-md mx-auto overflow-hidden rounded-3xl border border-amber-500 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.95),rgba(2,6,23,0.98))] p-5 sm:p-8 shadow-2xl text-center"
+            className={`relative w-full max-w-md mx-auto overflow-hidden rounded-3xl border ${
+              isFinished ? 'border-indigo-500' : 'border-amber-500'
+            } bg-[linear-gradient(to_bottom,rgba(15,23,42,0.95),rgba(2,6,23,0.98))] p-5 sm:p-8 shadow-2xl text-center`}
           >
             {/* Close Button */}
             <button
@@ -44,25 +48,71 @@ export default function GoalAlert({ alertsQueue, onDismissAlert }) {
               <X className="h-4 w-4" />
             </button>
 
-            {/* Flashing Green Laser Line Effect */}
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-500 animate-pulse"></div>
+            {/* Flashing Laser Line Effect */}
+            <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${
+              isFinished ? 'from-indigo-500 via-purple-500 to-pink-500' : 'from-emerald-500 via-amber-500 to-rose-500'
+            } animate-pulse`}></div>
 
-            {/* Goal Title */}
-            <motion.h3 
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 1 }}
-              className="text-3xl sm:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400 uppercase drop-shadow-md"
-            >
-              GOOOAL! ⚽
-            </motion.h3>
+            {isFinished ? (
+              <>
+                {/* Match Finished Title */}
+                <motion.h3 
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                  className="text-2xl sm:text-3xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 uppercase drop-shadow-md"
+                >
+                  MATCH FINISHED 🏁
+                </motion.h3>
 
-            {/* Goal Info */}
-            <p className="mt-3 sm:mt-4 text-base sm:text-xl font-bold text-slate-100">
-              Goal for {currentAlert.teamName}!
-            </p>
-            <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mt-1">
-              Minute {currentAlert.minute}'
-            </p>
+                {/* Winner Info */}
+                <p className="mt-3 sm:mt-4 text-base sm:text-xl font-bold text-slate-100">
+                  {currentAlert.homeScore === currentAlert.awayScore && currentAlert.homePenalties === undefined ? (
+                    "It's a Draw!"
+                  ) : (
+                    <>
+                      {currentAlert.homeScore > currentAlert.awayScore || (currentAlert.homePenalties !== undefined && currentAlert.homePenalties > currentAlert.awayPenalties) ? (
+                        <span>🎉 {currentAlert.homeTeam} Wins!</span>
+                      ) : (
+                        <span>🎉 {currentAlert.awayTeam} Wins!</span>
+                      )}
+                    </>
+                  )}
+                </p>
+                {currentAlert.homePenalties !== undefined ? (
+                  <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mt-1">
+                    Won on Penalties ({currentAlert.homePenalties} - {currentAlert.awayPenalties})
+                  </p>
+                ) : (
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
+                    Full Time Result
+                  </p>
+                )}
+              </>
+            ) : (
+              <>
+                {/* Goal Title */}
+                <motion.h3 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ repeat: Infinity, duration: 1 }}
+                  className="text-3xl sm:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400 uppercase drop-shadow-md"
+                >
+                  GOOOAL! ⚽
+                </motion.h3>
+
+                {/* Goal Info */}
+                <p className="mt-3 sm:mt-4 text-base sm:text-xl font-bold text-slate-100">
+                  Goal for {currentAlert.teamName}!
+                </p>
+                {currentAlert.player && (
+                  <p className="text-sm font-semibold text-slate-300 mt-1">
+                    {currentAlert.player}{currentAlert.assist ? ` (Assist: ${currentAlert.assist})` : ''}
+                  </p>
+                )}
+                <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mt-1">
+                  Minute {currentAlert.minute}'
+                </p>
+              </>
+            )}
 
             {/* Match Teams Row */}
             <div className="flex items-center justify-center space-x-2 sm:space-x-4 mt-4 sm:mt-6 py-2.5 sm:py-3 px-3 sm:px-4 rounded-2xl bg-slate-900/50 border border-slate-800">
@@ -76,7 +126,6 @@ export default function GoalAlert({ alertsQueue, onDismissAlert }) {
               
               <span className="text-xs sm:text-sm font-bold text-slate-300 truncate max-w-[80px] sm:max-w-[100px]">{currentAlert.awayTeam}</span>
             </div>
-
 
           </motion.div>
           

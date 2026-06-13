@@ -59,6 +59,33 @@ export default function App() {
   });
   const [toasts, setToasts] = useState([]);
 
+  // Date and notification scoping state variables
+  const [dateFilter, setDateFilter] = useState(() => new Date().toLocaleDateString('en-CA'));
+  const [systemToday, setSystemToday] = useState(() => new Date().toLocaleDateString('en-CA'));
+
+  // Auto-update date filter if system day changes (e.g. across midnight)
+  useEffect(() => {
+    const checkDateInterval = setInterval(() => {
+      const currentToday = new Date().toLocaleDateString('en-CA');
+      if (currentToday !== systemToday) {
+        setSystemToday(currentToday);
+        setDateFilter(currentToday);
+      }
+    }, 30000); // Check every 30 seconds
+    return () => clearInterval(checkDateInterval);
+  }, [systemToday]);
+
+  // Shared helper function to determine if a match is in scope for notifications/alerts
+  const isMatchInScope = useCallback((m) => {
+    if (!notificationsEnabled) return false;
+    if (m.dateIST !== systemToday) return false; // Only show notifications for the current day's matches
+    if (notificationScope === 'all') return true;
+    if (notificationScope === 'favorites') {
+      return favoriteTeam && (m.homeTeamId === favoriteTeam || m.awayTeamId === favoriteTeam);
+    }
+    return false;
+  }, [notificationsEnabled, systemToday, notificationScope, favoriteTeam]);
+
   // Sync settings to localStorage
   useEffect(() => {
     localStorage.setItem('wc_notifications_enabled', String(notificationsEnabled));
@@ -109,16 +136,7 @@ export default function App() {
       return updated;
     });
 
-    // Check if notifications are enabled and match is in scope
     const match = fixtures?.find(m => m.matchId === alert.matchId);
-    const isMatchInScope = (m) => {
-      if (!notificationsEnabled) return false;
-      if (notificationScope === 'all') return true;
-      if (notificationScope === 'favorites') {
-        return favoriteTeam && (m.homeTeamId === favoriteTeam || m.awayTeamId === favoriteTeam);
-      }
-      return false;
-    };
 
     if (match && isMatchInScope(match)) {
       triggerNotification({
@@ -128,15 +146,15 @@ export default function App() {
         type: 'goal',
         match
       });
-    }
 
-    // Always add to overlay alert queue if sound is enabled for animation
-    setAlertsQueue(prev => {
-      const uniqueAlertId = `${alert.matchId}-${alert.minute}-${alert.teamId}`;
-      if (prev.some(a => a.alertId === uniqueAlertId)) return prev;
-      return [...prev, { ...alert, alertId: uniqueAlertId }];
-    });
-  }, [fixtures, notificationsEnabled, notificationScope, favoriteTeam, triggerNotification, alertedGoalIds]);
+      // Overlay popup shown only when notification is on and match is in scope
+      setAlertsQueue(prev => {
+        const uniqueAlertId = `${alert.matchId}-${alert.minute}-${alert.teamId}`;
+        if (prev.some(a => a.alertId === uniqueAlertId)) return prev;
+        return [...prev, { ...alert, alertId: uniqueAlertId, type: 'goal' }];
+      });
+    }
+  }, [fixtures, isMatchInScope, triggerNotification, alertedGoalIds]);
 
   // Keep the ref updated with the latest callback
   useEffect(() => {
@@ -209,15 +227,6 @@ export default function App() {
         const prevMatch = prevFixturesRef.current.find(m => m.matchId === match.matchId);
         if (!prevMatch) return;
 
-        const isMatchInScope = (m) => {
-          if (!notificationsEnabled) return false;
-          if (notificationScope === 'all') return true;
-          if (notificationScope === 'favorites') {
-            return favoriteTeam && (m.homeTeamId === favoriteTeam || m.awayTeamId === favoriteTeam);
-          }
-          return false;
-        };
-
         // 1. Kickoff Transition (Upcoming -> LIVE)
         if (prevMatch.status === 'Upcoming' && match.status === 'LIVE') {
           if (isMatchInScope(match)) {
@@ -246,13 +255,31 @@ export default function App() {
               type: 'finished',
               match
             });
+
+            // Add final result to alertsQueue to show the big overlay popup
+            setAlertsQueue(prev => {
+              const uniqueAlertId = `finished-${match.matchId}`;
+              if (prev.some(a => a.alertId === uniqueAlertId)) return prev;
+              return [...prev, {
+                type: 'finished',
+                alertId: uniqueAlertId,
+                matchId: match.matchId,
+                homeTeam: match.homeTeam,
+                awayTeam: match.awayTeam,
+                homeScore: match.homeScore,
+                awayScore: match.awayScore,
+                homePenalties: match.homePenalties,
+                awayPenalties: match.awayPenalties,
+                winner: match.winner
+              }];
+            });
           }
         }
       });
     }
 
     prevFixturesRef.current = fixtures;
-  }, [fixtures, notificationsEnabled, notificationScope, favoriteTeam, triggerNotification]);
+  }, [fixtures, isMatchInScope, triggerNotification]);
 
   // Real-time background clock checker for upcoming matches starting in <= 2 minutes
   useEffect(() => {
@@ -262,14 +289,6 @@ export default function App() {
       const now = Date.now();
       fixtures.forEach(match => {
         if (match.status !== 'Upcoming') return;
-
-        const isMatchInScope = (m) => {
-          if (notificationScope === 'all') return true;
-          if (notificationScope === 'favorites') {
-            return favoriteTeam && (m.homeTeamId === favoriteTeam || m.awayTeamId === favoriteTeam);
-          }
-          return false;
-        };
 
         if (!isMatchInScope(match)) return;
 
@@ -294,29 +313,15 @@ export default function App() {
     }, 15000); // Check every 15 seconds
 
     return () => clearInterval(interval);
-  }, [fixtures, notificationsEnabled, notificationScope, favoriteTeam, triggerNotification]);
+  }, [fixtures, notificationsEnabled, isMatchInScope, triggerNotification]);
 
   // Filters State for Fixtures page
   const [searchQuery, setSearchQuery] = useState('');
   const [stageFilter, setStageFilter] = useState('');
   const [groupFilter, setGroupFilter] = useState('');
-  const [dateFilter, setDateFilter] = useState(() => new Date().toLocaleDateString('en-CA'));
   const [showLiveOnly, setShowLiveOnly] = useState(false);
   const [showTodayOnly, setShowTodayOnly] = useState(false);
   const [showUpcomingOnly, setShowUpcomingOnly] = useState(true);
-
-  // Auto-update date filter if system day changes (e.g. across midnight)
-  const [systemToday, setSystemToday] = useState(() => new Date().toLocaleDateString('en-CA'));
-  useEffect(() => {
-    const checkDateInterval = setInterval(() => {
-      const currentToday = new Date().toLocaleDateString('en-CA');
-      if (currentToday !== systemToday) {
-        setSystemToday(currentToday);
-        setDateFilter(currentToday);
-      }
-    }, 30000); // Check every 30 seconds
-    return () => clearInterval(checkDateInterval);
-  }, [systemToday]);
 
   // Dynamic SEO JSON-LD Schema injection for Google Search crawler automation
   useEffect(() => {

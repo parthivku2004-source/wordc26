@@ -87,10 +87,10 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
         <div className="absolute -right-1/4 -bottom-1/4 h-96 w-96 rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[100px]"></div>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 items-center">
+      <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
         
-        {/* Left Column: Heading & Final Countdown */}
-        <div className="lg:col-span-7 space-y-6">
+        {/* Left Column: Heading, Final Countdown & Stats */}
+        <div className="lg:col-span-7 space-y-8">
           <div className="inline-flex items-center space-x-2 rounded-full border border-amber-500/25 bg-amber-500/5 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 dark:bg-amber-400 opacity-75"></span>
@@ -109,40 +109,74 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
 
           {/* Final Countdown Widget */}
           <div className="pt-2">
-            <p className="text-xs font-bold tracking-widest text-slate-450 dark:text-slate-500 uppercase mb-2">Countdown to the Final</p>
-            <div className="flex space-x-2.5 sm:space-x-4">
+            <p className="text-xs sm:text-sm font-extrabold tracking-widest text-slate-450 dark:text-slate-500 uppercase mb-3">Countdown to the Final</p>
+            <div className="flex space-x-3 sm:space-x-5">
               {[
                 { label: 'Days', value: finalTimeLeft.days },
                 { label: 'Hours', value: finalTimeLeft.hrs },
                 { label: 'Mins', value: finalTimeLeft.mins },
                 { label: 'Secs', value: finalTimeLeft.secs },
               ].map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center justify-center h-16 w-16 sm:h-20 sm:w-20 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 backdrop-blur-md shadow-sm dark:shadow-lg">
-                  <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-slate-100">{String(item.value).padStart(2, '0')}</span>
-                  <span className="text-[9px] sm:text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase mt-0.5">{item.label}</span>
+                <div key={idx} className="flex flex-col items-center justify-center h-20 w-20 sm:h-24 sm:w-24 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 backdrop-blur-md shadow-sm dark:shadow-lg">
+                  <span className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-slate-100">{String(item.value).padStart(2, '0')}</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-slate-450 dark:text-slate-500 uppercase mt-0.5">{item.label}</span>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Stats Cards Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div 
+              onClick={() => setShowScorers(true)}
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-4 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+            >
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Total Goals</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{totalGoals}</span>
+                <span className="text-[10px] font-bold text-emerald-605 dark:text-emerald-555">⚽ Active</span>
+              </div>
+            </div>
+            <div 
+              onClick={onMatchesCompletedClick}
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-4 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+            >
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Matches Completed</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{finishedMatches}</span>
+                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-400">/ {totalMatches}</span>
+              </div>
+            </div>
+            <div 
+              onClick={onActiveLiveGamesClick}
+              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-4 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
+            >
+              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Active Live Games</p>
+              <div className="flex items-baseline space-x-1.5 mt-1">
+                <span className="text-2xl font-black text-amber-600 dark:text-amber-400 animate-pulse">{liveMatches}</span>
+                <span className="text-[10px] font-bold text-amber-600 dark:text-amber-500">🔴 Live</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Right Column: Next Match & Stats */}
+        {/* Right Column: Next Match */}
         <div className="lg:col-span-5 space-y-6">
           
           {/* Next Match(es) Card */}
           {nextMatch && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 p-4 sm:p-5 backdrop-blur-md shadow-md dark:shadow-xl transition duration-300">
-              <div className="flex justify-between items-center mb-4 pb-2 border-b border-slate-200/80 dark:border-slate-800/60">
-                <span className="text-[10px] font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase flex items-center space-x-1.5">
-                  <PlayCircle className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400 fill-current animate-pulse" />
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/60 p-5 sm:p-6 backdrop-blur-lg shadow-lg dark:shadow-2xl transition duration-300">
+              <div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-200/80 dark:border-slate-800/60">
+                <span className="text-xs sm:text-sm font-extrabold tracking-widest text-amber-600 dark:text-amber-400 uppercase flex items-center space-x-2">
+                  <PlayCircle className="h-4.5 w-4.5 text-amber-500 dark:text-amber-400 fill-current animate-pulse" />
                   <span>Next Match Day: {nextMatch.dateIST}</span>
                 </span>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase bg-slate-100 dark:bg-slate-800/60 px-2.5 py-0.5 rounded-full border border-slate-200/50 dark:border-slate-700/30">
+                <span className="text-xs text-slate-550 dark:text-slate-400 font-extrabold uppercase bg-slate-100 dark:bg-slate-800/80 px-3 py-1 rounded-full border border-slate-200/55 dark:border-slate-700/50">
                   {nextDayMatches.length} {nextDayMatches.length === 1 ? 'Match' : 'Matches'}
                 </span>
               </div>
 
-              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1 scrollbar-none">
+              <div className="space-y-4 max-h-[420px] overflow-y-auto pr-1 scrollbar-none">
                 {nextDayMatches.map((match) => {
                   // Calculate countdown for this match
                   const diff = match.dateObj - now;
@@ -160,37 +194,37 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
                     <div
                       key={match.matchId}
                       onClick={() => onViewMatch(match.matchId)}
-                      className="group/item relative flex flex-col p-3 rounded-xl border border-slate-200/60 dark:border-slate-800/60 bg-white/40 dark:bg-slate-950/20 hover:border-amber-500/30 dark:hover:border-amber-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/40 transition duration-200 cursor-pointer"
+                      className="group/item relative flex flex-col p-4 sm:p-5 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/40 dark:bg-slate-950/20 hover:border-amber-500/30 dark:hover:border-amber-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/40 transition duration-200 cursor-pointer"
                     >
                       {/* Match Header */}
-                      <div className="flex justify-between items-center text-[10px] text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider mb-2">
+                      <div className="flex justify-between items-center text-[11px] sm:text-xs text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider mb-3">
                         <span>Match #{match.matchId} • {match.stage} {match.group ? `(Group ${match.group})` : ''}</span>
-                        <span className="text-amber-605 dark:text-amber-400">{match.timeIST} IST</span>
+                        <span className="text-amber-600 dark:text-amber-400 font-extrabold">{match.timeIST} IST</span>
                       </div>
 
                       {/* Teams & Flags */}
-                      <div className="flex items-center justify-between py-1 text-slate-800 dark:text-slate-100">
-                        <div className="flex items-center space-x-2 w-[42%] min-w-0">
-                          {getCountryFlag(match.homeTeamId, "w-6.5 h-4.5 sm:w-8 sm:h-5.5 shadow-sm")}
-                          <span className="text-xs sm:text-sm font-bold truncate">{match.homeTeam}</span>
+                      <div className="flex items-center justify-between py-2 text-slate-805 dark:text-slate-100">
+                        <div className="flex items-center space-x-3 w-[42%] min-w-0">
+                          {getCountryFlag(match.homeTeamId, "w-8 h-5.5 sm:w-10 sm:h-7 shadow-sm")}
+                          <span className="text-xs sm:text-sm md:text-base font-extrabold truncate">{match.homeTeam}</span>
                         </div>
-                        <span className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase px-1">VS</span>
-                        <div className="flex items-center space-x-2 justify-end w-[42%] min-w-0">
-                          <span className="text-xs sm:text-sm font-bold truncate text-right">{match.awayTeam}</span>
-                          {getCountryFlag(match.awayTeamId, "w-6.5 h-4.5 sm:w-8 sm:h-5.5 shadow-sm")}
+                        <span className="text-[10px] sm:text-xs font-extrabold text-slate-400 dark:text-slate-600 uppercase px-1">VS</span>
+                        <div className="flex items-center space-x-3 justify-end w-[42%] min-w-0">
+                          <span className="text-xs sm:text-sm md:text-base font-extrabold truncate text-right">{match.awayTeam}</span>
+                          {getCountryFlag(match.awayTeamId, "w-8 h-5.5 sm:w-10 sm:h-7 shadow-sm")}
                         </div>
                       </div>
 
                       {/* Countdown / Live Indicator Row */}
-                      <div className="flex justify-between items-center mt-2 pt-2 border-t border-slate-200/40 dark:border-slate-800/30">
-                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase">Status</span>
+                      <div className="flex justify-between items-center mt-3 pt-3 border-t border-slate-200/40 dark:border-slate-800/30">
+                        <span className="text-xs text-slate-450 dark:text-slate-500 font-bold uppercase">Status</span>
                         {match.status === 'Finished' ? (
-                          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
-                            <span className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[9px] font-black">FT</span>
+                          <span className="text-sm font-black text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
+                            <span className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px] font-black">FT</span>
                             <span className="font-extrabold">{match.homeScore} - {match.awayScore}</span>
                           </span>
                         ) : isLive ? (
-                          <span className="text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase flex items-center space-x-1 animate-pulse">
+                          <span className="text-xs font-black text-rose-600 dark:text-rose-400 uppercase flex items-center space-x-1 animate-pulse">
                             <span className="relative flex h-1.5 w-1.5">
                               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-450 opacity-75"></span>
                               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-rose-600"></span>
@@ -198,11 +232,11 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
                             <span>{match.status === 'LIVE' ? `${match.minute}' LIVE` : match.status} ({match.homeScore} - {match.awayScore})</span>
                           </span>
                         ) : countdownStr ? (
-                          <span className="text-xs font-black text-slate-700 dark:text-slate-200 font-mono tracking-wider">
+                          <span className="text-sm sm:text-base font-black text-slate-700 dark:text-slate-200 font-mono tracking-wider">
                             {countdownStr}
                           </span>
                         ) : (
-                          <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase">
+                          <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase">
                             Starting soon
                           </span>
                         )}
@@ -213,53 +247,8 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
               </div>
             </div>
           )}
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            <div 
-              onClick={() => setShowScorers(true)}
-              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
-            >
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Total Goals</p>
-              <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{totalGoals}</span>
-                <span className="text-[10px] font-bold text-emerald-605 dark:text-emerald-555">⚽ Active</span>
-              </div>
-            </div>
-            <div 
-              onClick={onMatchesCompletedClick}
-              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
-            >
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Matches Completed</p>
-              <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{finishedMatches}</span>
-                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-400">/ {totalMatches}</span>
-              </div>
-            </div>
-            <div 
-              onClick={onActiveLiveGamesClick}
-              className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 hover:bg-white dark:bg-slate-900/30 dark:hover:bg-slate-900/50 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md cursor-pointer hover:border-amber-500/30 hover:shadow-md transition duration-200"
-            >
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Active Live Games</p>
-              <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-amber-600 dark:text-amber-400 animate-pulse">{liveMatches}</span>
-                <span className="text-[10px] font-bold text-amber-600 dark:text-amber-500">🔴 Live</span>
-              </div>
-            </div>
-            <div className="rounded-xl border border-slate-200 dark:border-slate-900 bg-white/70 dark:bg-slate-900/30 p-3.5 backdrop-blur-md shadow-sm dark:shadow-md">
-              <p className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider">Host Cities</p>
-              <div className="flex items-baseline space-x-1.5 mt-1">
-                <span className="text-2xl font-black text-slate-850 dark:text-slate-100">16</span>
-                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-400">Venues</span>
-              </div>
-            </div>
-          </div>
-
         </div>
-
       </div>
-
-
 
       {/* Golden Boot / Top Scorers Modal Overlay */}
       {showScorers && (

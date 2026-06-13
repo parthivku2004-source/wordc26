@@ -147,12 +147,15 @@ export default function App() {
         match
       });
 
-      // Overlay popup shown only when notification is on and match is in scope
-      setAlertsQueue(prev => {
-        const uniqueAlertId = `${alert.matchId}-${alert.minute}-${alert.teamId}`;
-        if (prev.some(a => a.alertId === uniqueAlertId)) return prev;
-        return [...prev, { ...alert, alertId: uniqueAlertId, type: 'goal' }];
-      });
+      // Overlay popup shown only when notification is on, match is in scope, and match is live
+      const isLive = match.status === 'LIVE' || match.status === 'Half Time' || match.status === 'Extra Time' || match.status === 'Penalties';
+      if (isLive) {
+        setAlertsQueue(prev => {
+          const uniqueAlertId = `${alert.matchId}-${alert.minute}-${alert.teamId}`;
+          if (prev.some(a => a.alertId === uniqueAlertId)) return prev;
+          return [...prev, { ...alert, alertId: uniqueAlertId, type: 'goal' }];
+        });
+      }
     }
   }, [fixtures, isMatchInScope, triggerNotification, alertedGoalIds]);
 
@@ -266,6 +269,8 @@ export default function App() {
                 matchId: match.matchId,
                 homeTeam: match.homeTeam,
                 awayTeam: match.awayTeam,
+                homeTeamId: match.homeTeamId,
+                awayTeamId: match.awayTeamId,
                 homeScore: match.homeScore,
                 awayScore: match.awayScore,
                 homePenalties: match.homePenalties,

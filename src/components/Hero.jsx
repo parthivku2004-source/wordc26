@@ -251,14 +251,25 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
                         <span>Match #{match.matchId} • {match.stage} {match.group ? `(Group ${match.group})` : ''}</span>
                         <span className="text-amber-600 dark:text-amber-400 font-extrabold">{match.timeIST} IST</span>
                       </div>
-
-                      {/* Teams & Flags */}
+                                         {/* Teams & Flags */}
                       <div className="flex items-center justify-between py-2 text-slate-805 dark:text-slate-100">
                         <div className="flex items-center space-x-3 w-[42%] min-w-0">
                           {getCountryFlag(match.homeTeamId, "w-8 h-5.5 sm:w-10 sm:h-7 shadow-sm")}
                           <span className="text-xs sm:text-sm md:text-base font-extrabold truncate">{match.homeTeam}</span>
                         </div>
-                        <span className="text-[10px] sm:text-xs font-extrabold text-slate-400 dark:text-slate-600 uppercase px-1">VS</span>
+                        
+                        {(isLive || match.status === 'Finished') ? (
+                          <span className={`text-sm sm:text-base md:text-lg font-black px-2.5 py-0.5 rounded-xl border shadow-sm ${
+                            isLive 
+                              ? 'text-rose-600 dark:text-rose-400 bg-rose-500/10 border-rose-500/25 animate-pulse' 
+                              : 'text-slate-655 dark:text-slate-350 bg-slate-100 dark:bg-slate-805 border-slate-200 dark:border-slate-700/50'
+                          }`}>
+                            {match.homeScore} - {match.awayScore}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] sm:text-xs font-extrabold text-slate-400 dark:text-slate-600 uppercase px-1">VS</span>
+                        )}
+
                         <div className="flex items-center space-x-3 justify-end w-[42%] min-w-0">
                           <span className="text-xs sm:text-sm md:text-base font-extrabold truncate text-right">{match.awayTeam}</span>
                           {getCountryFlag(match.awayTeamId, "w-8 h-5.5 sm:w-10 sm:h-7 shadow-sm")}
@@ -269,9 +280,8 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
                       <div className="flex justify-between items-center mt-3 pt-3 border-t border-slate-200/40 dark:border-slate-800/30">
                         <span className="text-xs text-slate-450 dark:text-slate-500 font-bold uppercase">Status</span>
                         {match.status === 'Finished' ? (
-                          <span className="text-sm font-black text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
-                            <span className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px] font-black">FT</span>
-                            <span className="font-extrabold">{match.homeScore} - {match.awayScore}</span>
+                          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
+                            FT
                           </span>
                         ) : isLive ? (
                           <span className="text-xs font-black text-rose-600 dark:text-rose-400 uppercase flex items-center space-x-1 animate-pulse">
@@ -279,7 +289,7 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
                               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-450 opacity-75"></span>
                               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-rose-600"></span>
                             </span>
-                            <span>{match.status === 'LIVE' ? `${match.minute}' LIVE` : match.status} ({match.homeScore} - {match.awayScore})</span>
+                            <span>{match.status === 'LIVE' ? `${match.minute}' LIVE` : match.status}</span>
                           </span>
                         ) : countdownStr ? (
                           <span className="text-sm sm:text-base font-black text-slate-700 dark:text-slate-200 font-mono tracking-wider">

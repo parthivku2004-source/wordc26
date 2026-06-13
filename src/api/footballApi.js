@@ -159,8 +159,8 @@ export const syncFixturesWithCurrentTime = (fixtures) => {
   const now = Date.now();
 
   return fixtures.map(match => {
-    // If the match is already Finished or LIVE or in any other active state (e.g. from the API or admin panel), preserve it.
-    if (match.status === 'Finished' || match.status === 'LIVE' || match.status === 'Half Time' || match.status === 'Extra Time' || match.status === 'Penalties') {
+    // If the match is already Finished, preserve it.
+    if (match.status === 'Finished') {
       return match;
     }
 

@@ -106,9 +106,42 @@ export const getTeamFormationAndLineup = (teamId, roster) => {
 
 // Generate realistic match outcome deterministically based on matchId (including cards and substitutions)
 export const generateDeterministicResult = (match) => {
-  const seed = match.matchId;
-  const homeScore = (seed * 7 + 2) % 4; // 0, 1, 2, 3
-  const awayScore = (seed * 13 + 5) % 3; // 0, 1, 2
+  const events = [];
+  
+  // Real world events for historical matches 1 and 2
+  const realWorldEvents = {
+    1: [
+      { type: 'red', minute: 49, teamId: 'RSA', player: 'Sphephelo Sithole', detail: 'Straight Red Card (Professional foul)' },
+      { type: 'red', minute: 84, teamId: 'RSA', player: 'Themba Zwane', detail: 'Red Card (Violent conduct)' },
+      { type: 'red', minute: 90, teamId: 'MEX', player: 'César Montes', detail: 'Red Card (Late tackle)' },
+      { type: 'sub', minute: 75, teamId: 'MEX', player: 'Brian Gutierrez (Out) / Gilberto Mora (In)', detail: 'Tactical replacement' }
+    ],
+    2: [
+      { type: 'yellow', minute: 96, teamId: 'KOR', player: 'Lee Gi-Hyuk', detail: 'Tactical foul' },
+      { type: 'sub', minute: 62, teamId: 'KOR', player: 'Lee Jae-Sung (Out) / Hwang Hee-Chan (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Pavel Sulc (Out) / Adam Hlozek (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Patrik Schick (Out) / Tomás Chory (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Lukás Provod (Out) / Michal Sadílek (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 69, teamId: 'KOR', player: 'Lee Tae-Seok (Out) / Eom Ji-Sung (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 69, teamId: 'KOR', player: 'Son Heung-Min (Out) / Oh Hyeon-Gyu (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 84, teamId: 'UEFA_D', player: 'Alexandr Sojka (Out) / Mojmír Chytil (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 84, teamId: 'KOR', player: 'Hwang In-Beom (Out) / Kim Jin-Gyu (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 84, teamId: 'KOR', player: 'Paik Seung-Ho (Out) / Park Jin-Seob (In)', detail: 'Tactical replacement' }
+    ]
+  };
+
+  if (realWorldEvents[match.matchId]) {
+    events.push(...realWorldEvents[match.matchId]);
+  }
+
+  let homeScore = 0;
+  let awayScore = 0;
+  events.forEach(e => {
+    if (e.type === 'goal') {
+      if (e.teamId === match.homeTeamId) homeScore++;
+      else if (e.teamId === match.awayTeamId) awayScore++;
+    }
+  });
 
   let winner = null;
   if (homeScore > awayScore) {
@@ -116,102 +149,6 @@ export const generateDeterministicResult = (match) => {
   } else if (awayScore > homeScore) {
     winner = match.awayTeamId;
   }
-
-  const events = [];
-  const homeRoster = playersData[match.homeTeamId] || [];
-  const awayRoster = playersData[match.awayTeamId] || [];
-
-  // 1. Home Goals
-  for (let i = 0; i < homeScore; i++) {
-    const minute = 10 + (i * 25) + (seed % 15);
-    const outfieldPlayers = homeRoster.filter(p => p.position !== 'GK');
-    const scorer = outfieldPlayers.length > 0 ? outfieldPlayers[(seed + i) % outfieldPlayers.length].name : "Player H";
-    const assister = outfieldPlayers.length > 0 ? outfieldPlayers[(seed + i + 3) % outfieldPlayers.length].name : "Player H2";
-    const detail = assister !== scorer && (seed + i) % 2 === 0 ? `Assist by ${assister}` : 'Solo effort';
-    events.push({
-      type: 'goal',
-      minute,
-      teamId: match.homeTeamId,
-      player: scorer,
-      assist: assister !== scorer && (seed + i) % 2 === 0 ? assister : null,
-      detail
-    });
-  }
-
-  // 2. Away Goals
-  for (let i = 0; i < awayScore; i++) {
-    const minute = 12 + (i * 28) + (seed % 17);
-    const outfieldPlayers = awayRoster.filter(p => p.position !== 'GK');
-    const scorer = outfieldPlayers.length > 0 ? outfieldPlayers[(seed + i * 2) % outfieldPlayers.length].name : "Player A";
-    const assister = outfieldPlayers.length > 0 ? outfieldPlayers[(seed + i * 2 + 1) % outfieldPlayers.length].name : "Player A2";
-    const detail = assister !== scorer && (seed + i) % 2 === 0 ? `Assist by ${assister}` : 'Solo effort';
-    events.push({
-      type: 'goal',
-      minute,
-      teamId: match.awayTeamId,
-      player: scorer,
-      assist: assister !== scorer && (seed + i) % 2 === 0 ? assister : null,
-      detail
-    });
-  }
-
-  // 3. Generate Yellow Cards
-  const yellowCount = (seed * 3 + 1) % 5; // 0 to 4 yellows
-  for (let i = 0; i < yellowCount; i++) {
-    const isHome = (seed + i) % 2 === 0;
-    const roster = isHome ? homeRoster : awayRoster;
-    const teamId = isHome ? match.homeTeamId : match.awayTeamId;
-    if (roster.length > 0) {
-      const player = roster[(seed + i * 2) % roster.length].name;
-      events.push({
-        type: 'yellow',
-        minute: 10 + ((i * 18) % 80),
-        teamId,
-        player,
-        detail: 'Booked for a late challenge'
-      });
-    }
-  }
-
-  // 4. Generate Red Card
-  const hasRed = (seed * 7) % 10 === 0; // 10% chance
-  if (hasRed && homeRoster.length > 0 && awayRoster.length > 0) {
-    const isHome = seed % 2 === 0;
-    const roster = isHome ? homeRoster : awayRoster;
-    const teamId = isHome ? match.homeTeamId : match.awayTeamId;
-    const player = roster[(seed * 3) % roster.length].name;
-    events.push({
-      type: 'red',
-      minute: 70 + (seed % 20),
-      teamId,
-      player,
-      detail: 'Sent off for violent conduct'
-    });
-  }
-
-  // 5. Generate Substitutions
-  const subCount = 3 + (seed % 3); // 3 to 5 subs
-  for (let i = 0; i < subCount; i++) {
-    const isHome = (seed + i * 3) % 2 === 0;
-    const roster = isHome ? homeRoster : awayRoster;
-    const teamId = isHome ? match.homeTeamId : match.awayTeamId;
-    
-    const { starters, subs: bench } = getTeamFormationAndLineup(teamId, roster);
-    
-    if (starters.length > 0 && bench.length > 0) {
-      const playerOut = starters[(seed + i) % starters.length].name;
-      const playerIn = bench[(seed + i * 2) % bench.length].name;
-      events.push({
-        type: 'sub',
-        minute: 55 + i * 7,
-        teamId,
-        player: `${playerOut} (Out) / ${playerIn} (In)`,
-        detail: 'Tactical substitution'
-      });
-    }
-  }
-
-  events.sort((a, b) => a.minute - b.minute);
 
   return { homeScore, awayScore, winner, events };
 };
@@ -360,22 +297,11 @@ export const syncFixturesWithCurrentTime = (fixtures) => {
       }
     }
 
-    // Proportional stats fluctuation
-    const progressFactor = Math.min(1, matchMin / 90);
-    const homePoss = 40 + (seed % 21);
-    const awayPoss = 100 - homePoss;
-    const homeShots = Math.round((5 + (seed % 10)) * progressFactor);
-    const awayShots = Math.round((4 + ((seed + 3) % 10)) * progressFactor);
-    const homeSOT = Math.round(Math.max(0, homeShots * 0.4));
-    const awaySOT = Math.round(Math.max(0, awayShots * 0.45));
-    const homeFouls = Math.round((8 + (seed % 8)) * progressFactor);
-    const awayFouls = Math.round((7 + ((seed + 2) % 8)) * progressFactor);
-
     const stats = {
-      possession: [homePoss, awayPoss],
-      shots: [homeShots, awayShots],
-      shotsOnTarget: [homeSOT, awaySOT],
-      fouls: [homeFouls, awayFouls]
+      possession: [50, 50],
+      shots: [0, 0],
+      shotsOnTarget: [0, 0],
+      fouls: [0, 0]
     };
 
     return {
@@ -396,11 +322,11 @@ export const syncFixturesWithCurrentTime = (fixtures) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v9') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v10') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v9', 'true');
+    localStorage.setItem('wc_db_clean_start_v10', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

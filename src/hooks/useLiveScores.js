@@ -23,73 +23,6 @@ const realWorldEvents = {
   ]
 };
 
-const generateMockCardsAndSubs = (m) => {
-  const eventsList = [];
-  const seed = m.matchId;
-  
-  const yellowCount = (seed * 3 + 1) % 5; // 0 to 4 yellows
-  const hasRed = (seed * 7) % 10 === 0; // 10% chance of red
-  const subCount = 3 + (seed % 3); // 3 to 5 subs
-  
-  const homePlayers = playersData[m.homeTeamId] || [];
-  const awayPlayers = playersData[m.awayTeamId] || [];
-  
-  // Generate Yellow Cards
-  for (let i = 0; i < yellowCount; i++) {
-    const isHome = (seed + i) % 2 === 0;
-    const roster = isHome ? homePlayers : awayPlayers;
-    const teamId = isHome ? m.homeTeamId : m.awayTeamId;
-    if (roster.length > 0) {
-      const player = roster[(seed + i * 2) % roster.length].name;
-      eventsList.push({
-        type: 'yellow',
-        minute: 10 + ((i * 18) % 80),
-        teamId,
-        player,
-        detail: 'Booked for a late challenge'
-      });
-    }
-  }
-  
-  // Generate Red Card
-  if (hasRed && homePlayers.length > 0 && awayPlayers.length > 0) {
-    const isHome = seed % 2 === 0;
-    const roster = isHome ? homePlayers : awayPlayers;
-    const teamId = isHome ? m.homeTeamId : m.awayTeamId;
-    const player = roster[(seed * 3) % roster.length].name;
-    eventsList.push({
-      type: 'red',
-      minute: 70 + (seed % 20),
-      teamId,
-      player,
-      detail: 'Sent off for violent conduct'
-    });
-  }
-  
-  // Generate Substitutions
-  for (let i = 0; i < subCount; i++) {
-    const isHome = (seed + i * 3) % 2 === 0;
-    const roster = isHome ? homePlayers : awayPlayers;
-    const teamId = isHome ? m.homeTeamId : m.awayTeamId;
-    
-    const starters = roster.slice(0, 11);
-    const bench = roster.slice(11);
-    
-    if (starters.length > 0 && bench.length > 0) {
-      const playerOut = starters[(seed + i) % starters.length].name;
-      const playerIn = bench[(seed + i * 2) % bench.length].name;
-      eventsList.push({
-        type: 'sub',
-        minute: 55 + i * 7,
-        teamId,
-        player: `${playerOut} (Out) / ${playerIn} (In)`,
-        detail: 'Tactical substitution'
-      });
-    }
-  }
-  
-  return eventsList;
-};
 
 const getApiGameForFixture = (fixture, apiGames, teams) => {
   if (!apiGames || apiGames.length === 0) return null;
@@ -255,11 +188,9 @@ export const useLiveScores = (onGoalAlert) => {
           detail: 'Goal'
         }));
 
-        // Inject cards & substitutions
+        // Inject cards & substitutions (only real-world events if defined)
         if (realWorldEvents[match.matchId]) {
           events.push(...realWorldEvents[match.matchId]);
-        } else if (apiStatus !== 'Upcoming') {
-          events.push(...generateMockCardsAndSubs(match));
         }
 
         events.sort((a, b) => a.minute - b.minute);

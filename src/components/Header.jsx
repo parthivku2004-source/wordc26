@@ -129,19 +129,19 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors duration-300 border-slate-200/80 dark:border-slate-800/50 bg-white/80 dark:bg-slate-950/80">
-      <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-40 w-full border-b backdrop-blur-md transition-all duration-300 border-slate-200/80 dark:border-slate-800/50 bg-white/80 dark:bg-slate-950/80 shadow-sm">
+      <div className="mx-auto flex max-w-7xl h-12 sm:h-14 md:h-16 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300">
         
         {/* Logo */}
         <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setActiveTab('home')}>
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 shadow-md">
-            <Trophy className="h-5 w-5 animate-pulse" />
+          <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 shadow-md transition-all duration-300">
+            <Trophy className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 animate-pulse" />
           </div>
           <div>
-            <h1 className="text-md font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase sm:text-lg">
+            <h1 className="text-xs sm:text-sm md:text-md lg:text-lg font-bold tracking-wider text-slate-800 dark:text-slate-100 uppercase transition-all duration-300">
               Global Cup <span className="text-amber-600 dark:text-amber-400">2026</span>
             </h1>
-            <p className="text-[10px] tracking-widest text-slate-500 dark:text-slate-400 font-semibold uppercase -mt-1">
+            <p className="hidden sm:block text-[9px] tracking-widest text-slate-500 dark:text-slate-400 font-semibold uppercase -mt-1 transition-all duration-300">
               Live Tracker & Stats
             </p>
           </div>
@@ -231,7 +231,7 @@ export default function Header({
       </div>
 
       {/* Mobile Navigation Tabs (visible only on mobile, always persistent) */}
-      <nav className="flex md:hidden border-t border-slate-150 dark:border-slate-800/60 bg-white/95 dark:bg-slate-950/95 py-2.5 px-4 justify-around">
+      <nav className="flex md:hidden border-t border-slate-150 dark:border-slate-800/60 bg-white/95 dark:bg-slate-950/95 py-1.5 px-3 justify-around shadow-sm">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -239,7 +239,7 @@ export default function Header({
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex items-center justify-center space-x-1.5 py-1.5 px-3 rounded-xl text-xs font-bold transition-all duration-200 ${
+              className={`flex items-center justify-center space-x-1 py-1 px-2.5 rounded-lg text-xs font-bold transition-all duration-200 ${
                 isActive 
                   ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30' 
                   : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/40'

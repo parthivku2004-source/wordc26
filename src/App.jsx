@@ -469,7 +469,7 @@ export default function App() {
       />
 
       {/* Main Core Container */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8">
+      <main className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pb-4 sm:pb-8 pt-[112px] sm:pt-[120px] md:pt-[96px] space-y-6 sm:space-y-8 transition-all duration-300">
         
         {/* API Failure/Offline warnings */}
         {error && (

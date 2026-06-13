@@ -269,32 +269,8 @@ export const syncFixturesWithCurrentTime = (fixtures) => {
     let homePenalties = undefined;
     let awayPenalties = undefined;
 
-    if (isKnockout && fullOutcome.homeScore === fullOutcome.awayScore) {
-      const homePenScore = 3 + (seed % 3); // 3, 4, or 5
-      const awayPenScore = homePenScore === 5 ? 4 : 5; // Deterministic winner
-      const homeWinner = homePenScore > awayPenScore;
-      const winnerId = homeWinner ? match.homeTeamId : match.awayTeamId;
-      const winnerName = homeWinner ? match.homeTeam : match.awayTeam;
-
-      if (elapsedMins >= 145) {
-        homePenalties = homePenScore;
-        awayPenalties = awayPenScore;
-        activeEvents.push({
-          type: 'penalty_shootout',
-          minute: 120,
-          teamId: winnerId,
-          player: 'Penalty Shootout',
-          detail: `Penalties: ${match.homeTeam} ${homePenScore} - ${awayPenScore} ${match.awayTeam}. Winner: ${winnerName}!`
-        });
-
-        if (status === 'Finished') {
-          winner = winnerId;
-        }
-      }
-    } else {
-      if (status === 'Finished') {
-        winner = fullOutcome.winner;
-      }
+    if (status === 'Finished') {
+      winner = fullOutcome.winner;
     }
 
     const stats = {
@@ -322,11 +298,11 @@ export const syncFixturesWithCurrentTime = (fixtures) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v10') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v11') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v10', 'true');
+    localStorage.setItem('wc_db_clean_start_v11', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

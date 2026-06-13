@@ -424,34 +424,19 @@ export default function MatchDetailsModal({
 
   // Generate stats or retrieve live simulated ones
   const getMatchStats = () => {
-    if (match.stats) {
-      return [
-        { name: 'Possession %', home: match.stats.possession[0], away: match.stats.possession[1] },
-        { name: 'Total Shots', home: match.stats.shots[0], away: match.stats.shots[1] },
-        { name: 'Shots on Target', home: match.stats.shotsOnTarget[0], away: match.stats.shotsOnTarget[1] },
-        { name: 'Fouls Committed', home: match.stats.fouls[0], away: match.stats.fouls[1] },
-        { name: 'Yellow Cards', home: match.events.filter(e => e.type === 'yellow' && e.teamId === match.homeTeamId).length, away: match.events.filter(e => e.type === 'yellow' && e.teamId === match.awayTeamId).length },
-        { name: 'Red Cards', home: match.events.filter(e => e.type === 'red' && e.teamId === match.homeTeamId).length, away: match.events.filter(e => e.type === 'red' && e.teamId === match.awayTeamId).length }
-      ];
-    }
+    const statsPossession = match.stats?.possession || [50, 50];
+    const statsShots = match.stats?.shots || [0, 0];
+    const statsShotsOnTarget = match.stats?.shotsOnTarget || [0, 0];
+    const statsFouls = match.stats?.fouls || [0, 0];
+    const matchEvents = match.events || [];
 
-    const seed = match.matchId;
-    const homePossession = 40 + (seed % 21); // 40% to 60%
-    const awayPossession = 100 - homePossession;
-    const homeShots = 5 + (seed % 10);
-    const awayShots = 4 + ((seed + 3) % 10);
-    const homeShotsOnTarget = Math.max(1, Math.floor(homeShots * 0.4));
-    const awayShotsOnTarget = Math.max(1, Math.floor(awayShots * 0.45));
-    const homeFouls = 8 + (seed % 8);
-    const awayFouls = 7 + ((seed + 2) % 8);
-    
     return [
-      { name: 'Possession %', home: homePossession, away: awayPossession },
-      { name: 'Total Shots', home: homeShots, away: awayShots },
-      { name: 'Shots on Target', home: homeShotsOnTarget, away: awayShotsOnTarget },
-      { name: 'Fouls Committed', home: homeFouls, away: awayFouls },
-      { name: 'Yellow Cards', home: match.events.filter(e => e.type === 'yellow' && e.teamId === match.homeTeamId).length, away: match.events.filter(e => e.type === 'yellow' && e.teamId === match.awayTeamId).length },
-      { name: 'Red Cards', home: match.events.filter(e => e.type === 'red' && e.teamId === match.homeTeamId).length, away: match.events.filter(e => e.type === 'red' && e.teamId === match.awayTeamId).length }
+      { name: 'Possession %', home: statsPossession[0], away: statsPossession[1] },
+      { name: 'Total Shots', home: statsShots[0], away: statsShots[1] },
+      { name: 'Shots on Target', home: statsShotsOnTarget[0], away: statsShotsOnTarget[1] },
+      { name: 'Fouls Committed', home: statsFouls[0], away: statsFouls[1] },
+      { name: 'Yellow Cards', home: matchEvents.filter(e => e.type === 'yellow' && e.teamId === match.homeTeamId).length, away: matchEvents.filter(e => e.type === 'yellow' && e.teamId === match.awayTeamId).length },
+      { name: 'Red Cards', home: matchEvents.filter(e => e.type === 'red' && e.teamId === match.homeTeamId).length, away: matchEvents.filter(e => e.type === 'red' && e.teamId === match.awayTeamId).length }
     ];
   };
 

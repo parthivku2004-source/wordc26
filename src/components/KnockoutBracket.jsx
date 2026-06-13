@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { Trophy, Calendar } from 'lucide-react';
 import { getCountryFlag, getCountryName, countries } from '../utils/countryHelper.jsx';
 
@@ -9,6 +10,119 @@ const yFinal = 340;
 const yThird = 660;
 
 export default function KnockoutBracket({ fixtures = [] }) {
+  const containerRef = useRef(null);
+  const [scale, setScale] = useState(0.65);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
+  // Auto-fit scale on mount or resize
+  useEffect(() => {
+    if (containerRef.current) {
+      const width = containerRef.current.clientWidth;
+      const fitScale = Math.max(0.2, Math.min(0.9, (width - 24) / BOARD_WIDTH));
+      setScale(fitScale);
+    }
+  }, []);
+
+  // Handle zoom with mouse wheel
+  useEffect(() => {
+    const handleWheel = (e) => {
+      // Only zoom if pointer is inside viewport
+      if (!containerRef.current) return;
+      e.preventDefault();
+      const zoomIntensity = 0.05;
+      if (e.deltaY < 0) {
+        setScale(prev => Math.min(prev + zoomIntensity, 2.0));
+      } else {
+        setScale(prev => Math.max(prev - zoomIntensity, 0.2));
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false });
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
+
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return; // Left click only
+    setIsDragging(true);
+    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+  };
+
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 1) {
+      setIsDragging(true);
+      const touch = e.touches[0];
+      setDragStart({ x: touch.clientX - position.x, y: touch.clientY - position.y });
+    }
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMouseMove = (e) => {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        setPosition({
+          x: touch.clientX - dragStart.x,
+          y: touch.clientY - dragStart.y
+        });
+      }
+    };
+
+    const handleTouchEnd = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isDragging, dragStart]);
+
+  const handleZoomIn = () => {
+    setScale(prev => Math.min(prev + 0.1, 2.0));
+  };
+
+  const handleZoomOut = () => {
+    setScale(prev => Math.max(prev - 0.1, 0.2));
+  };
+
+  const handleReset = () => {
+    if (containerRef.current) {
+      const width = containerRef.current.clientWidth;
+      const fitScale = Math.max(0.2, Math.min(0.9, (width - 24) / BOARD_WIDTH));
+      setScale(fitScale);
+    } else {
+      setScale(0.65);
+    }
+    setPosition({ x: 0, y: 0 });
+  };
   const getFlag = (teamId, customClass = "w-5 h-3.5 shadow-sm rounded-sm") => {
     if (!teamId || teamId === 'TBD' || teamId.startsWith('W') || teamId.startsWith('L') || /^\d/.test(teamId)) {
       return <span className="text-[10px] filter grayscale opacity-45">🏳️</span>;
@@ -444,7 +558,7 @@ export default function KnockoutBracket({ fixtures = [] }) {
     <div className="w-full rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 p-3 sm:p-6 backdrop-blur-md shadow-xl overflow-hidden">
       
       {/* Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2.5 pb-4 border-b border-slate-200 dark:border-slate-800/60 mb-4 sm:mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800/60 mb-4 sm:mb-6 gap-2">
         <div className="flex items-center space-x-2.5">
           <Trophy className="h-5 w-5 text-amber-500 dark:text-amber-400 animate-bounce-slow flex-shrink-0" />
           <div>
@@ -454,15 +568,35 @@ export default function KnockoutBracket({ fixtures = [] }) {
             </p>
           </div>
         </div>
-        {/* Mobile swipe instruction badge */}
-        <div className="sm:hidden flex items-center space-x-1 px-2 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 w-fit ml-7">
-          <span className="text-[9px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest">Swipe bracket →</span>
+        {/* Interaction badge */}
+        <div className="flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 w-fit text-amber-600 dark:text-amber-400">
+          <span className="text-[9px] font-bold uppercase tracking-widest">Drag to pan • Scroll/Pinch to zoom</span>
         </div>
       </div>
 
-      {/* Bracket Tree Container - Scrollable horizontally */}
-      <div className="bracket-scroll-container pb-4 -mx-1 px-1 overflow-x-auto">
-        <div className="relative mx-auto select-none rounded-2xl" style={{ width: `${BOARD_WIDTH}px`, height: `${BOARD_HEIGHT}px` }}>
+      {/* Bracket Tree Container - Zoomable & Draggable Viewport */}
+      <div className="relative w-full h-[520px] sm:h-[600px] md:h-[680px] rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-800/80 bg-slate-950 select-none shadow-inner"
+        ref={containerRef}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+        style={{
+          cursor: isDragging ? 'grabbing' : 'grab',
+          backgroundImage: 'radial-gradient(rgba(245, 158, 11, 0.08) 1.5px, transparent 1.5px), radial-gradient(rgba(14, 165, 233, 0.05) 1.5px, transparent 1.5px)',
+          backgroundSize: '24px 24px',
+          backgroundPosition: '0 0, 12px 12px'
+        }}
+      >
+        {/* Canvas Board */}
+        <div 
+          className={`absolute origin-center ${isDragging ? 'transition-none' : 'transition-transform duration-200 ease-out'}`}
+          style={{
+            width: `${BOARD_WIDTH}px`,
+            height: `${BOARD_HEIGHT}px`,
+            left: `calc(50% - ${BOARD_WIDTH / 2}px)`,
+            top: `calc(50% - ${BOARD_HEIGHT / 2}px)`,
+            transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+          }}
+        >
           
           {/* SVG Connector Lines */}
           <svg className="absolute inset-0 pointer-events-none w-full h-full text-slate-200 dark:text-slate-800/30">
@@ -596,15 +730,45 @@ export default function KnockoutBracket({ fixtures = [] }) {
           </div>
 
         </div>
+
+        {/* Zoom / Pan Controls Overlay */}
+        <div className="absolute bottom-4 right-4 z-20 flex items-center space-x-1.5 p-1.5 rounded-xl bg-white/95 dark:bg-slate-900/95 shadow-lg border border-slate-200 dark:border-slate-800/80 backdrop-blur-md">
+          <button 
+            onClick={handleZoomOut}
+            className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-655 dark:text-slate-400 font-black text-sm cursor-pointer select-none h-7 w-7 flex items-center justify-center border border-slate-200/50 dark:border-slate-800/50"
+            title="Zoom Out"
+          >
+            -
+          </button>
+          <span className="text-[10px] font-black text-slate-655 dark:text-slate-350 min-w-[36px] text-center select-none tracking-wider">
+            {Math.round(scale * 100)}%
+          </span>
+          <button 
+            onClick={handleZoomIn}
+            className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-655 dark:text-slate-400 font-black text-sm cursor-pointer select-none h-7 w-7 flex items-center justify-center border border-slate-200/50 dark:border-slate-800/50"
+            title="Zoom In"
+          >
+            +
+          </button>
+          <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-800/60" />
+          <button 
+            onClick={handleReset}
+            className="px-2 py-1 text-[9px] font-black uppercase tracking-wider rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer select-none h-7 flex items-center justify-center border border-amber-550/20"
+            title="Fit Screen"
+          >
+            Fit
+          </button>
+        </div>
+
       </div>
 
-      {/* Scroll hint for mobile/tablet */}
-      <div className="mt-3 flex items-center justify-center space-x-2 lg:hidden">
-        <Calendar className="h-3 w-3 text-slate-400 dark:text-slate-600" />
-        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest animate-pulse">
-          Swipe to explore full bracket
+      {/* Screen swipe/zoom info text */}
+      <div className="mt-3 flex items-center justify-center space-x-2 text-slate-400 dark:text-slate-600">
+        <Calendar className="h-3 w-3" />
+        <span className="text-[10px] font-bold uppercase tracking-widest animate-pulse">
+          Use mouse wheel / gestures to zoom, drag to pan
         </span>
-        <Calendar className="h-3 w-3 text-slate-400 dark:text-slate-600" />
+        <Calendar className="h-3 w-3" />
       </div>
 
     </div>

@@ -105,7 +105,7 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
   const nextDayMatches = useMemo(() => {
     if (!nextMatch) return [];
     return fixtures
-      .filter(m => m.dateIST === nextMatch.dateIST)
+      .filter(m => m.dateIST === nextMatch.dateIST && m.status !== 'Finished')
       .map(m => ({ ...m, dateObj: new Date(m.dateTimeISO) }))
       .sort((a, b) => a.dateObj - b.dateObj);
   }, [fixtures, nextMatch]);

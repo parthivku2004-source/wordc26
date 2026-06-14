@@ -323,12 +323,19 @@ export default function KnockoutBracket({ fixtures = [] }) {
           )}
         </div>
 
-        {/* Live Indicator overlay */}
-        {isLive && (
-          <div className="pt-1 border-t border-slate-100 dark:border-slate-900/60 flex items-center justify-between text-[7px] font-black text-rose-500 uppercase tracking-wider animate-pulse">
-            <span>{matchData.status === 'LIVE' ? `LIVE • ${matchData.minute || 0}'` : matchData.status.toUpperCase()} 🔴</span>
-          </div>
-        )}
+        {/* Status overlay */}
+        <div className="pt-1 border-t border-slate-100 dark:border-slate-900/60 flex items-center justify-between text-[7px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          {isLive ? (
+            <span className="text-rose-500 animate-pulse flex items-center gap-0.5">
+              <span>{matchData.status === 'LIVE' ? `LIVE • ${matchData.minute || 0}'` : matchData.status.toUpperCase()}</span>
+              <span>🔴</span>
+            </span>
+          ) : isFinished ? (
+            <span>Finished</span>
+          ) : (
+            <span>Upcoming</span>
+          )}
+        </div>
       </div>
     );
   };

@@ -222,6 +222,30 @@ export default function MatchDetailsModal({
 
   if (!match) return null;
 
+  const getFormationCounts = (formationStr) => {
+    const defaultCounts = { df: 4, mf: 3, fw: 3 };
+    if (!formationStr) return defaultCounts;
+    const parts = formationStr.split('-').map(Number);
+    if (parts.length === 3) {
+      return { df: parts[0], mf: parts[1], fw: parts[2] };
+    } else if (parts.length === 4) {
+      return { df: parts[0], mf: parts[1] + parts[2], fw: parts[3] };
+    }
+    return defaultCounts;
+  };
+
+  const homeCounts = getFormationCounts(homeFormation);
+  const homeGK = activeHomeStarters.slice(0, 1);
+  const homeDF = activeHomeStarters.slice(1, 1 + homeCounts.df);
+  const homeMF = activeHomeStarters.slice(1 + homeCounts.df, 1 + homeCounts.df + homeCounts.mf);
+  const homeFW = activeHomeStarters.slice(1 + homeCounts.df + homeCounts.mf, 1 + homeCounts.df + homeCounts.mf + homeCounts.fw);
+
+  const awayCounts = getFormationCounts(awayFormation);
+  const awayGK = activeAwayStarters.slice(0, 1);
+  const awayDF = activeAwayStarters.slice(1, 1 + awayCounts.df);
+  const awayMF = activeAwayStarters.slice(1 + awayCounts.df, 1 + awayCounts.df + awayCounts.mf);
+  const awayFW = activeAwayStarters.slice(1 + awayCounts.df + awayCounts.mf, 1 + awayCounts.df + awayCounts.mf + awayCounts.fw);
+
   // Parse match events into a fast lookup map for overlays on the pitch
   const playerEventsMap = {};
   if (match.events) {
@@ -301,7 +325,7 @@ export default function MatchDetailsModal({
     return (
       <div key={player.number} className="relative flex flex-col items-center select-none">
         {/* Player Circle/Jersey */}
-        <div className={`relative h-9 w-9 rounded-full flex items-center justify-center text-[10px] font-black border-2 shadow-lg transition transform hover:scale-110 cursor-pointer ${colorClass}`}>
+        <div className={`relative h-7.5 w-7.5 sm:h-9 sm:w-9 rounded-full flex items-center justify-center text-[9px] sm:text-[10px] font-black border-2 shadow-lg transition transform hover:scale-110 cursor-pointer ${colorClass}`}>
           {player.number}
 
           {/* Card Overlays */}
@@ -330,7 +354,7 @@ export default function MatchDetailsModal({
         </div>
 
         {/* Player Name Pill */}
-        <span className="mt-1.5 px-2 py-0.5 rounded bg-slate-950/70 border border-slate-800/40 text-[9px] font-black text-slate-100 tracking-wider truncate max-w-[72px] text-center shadow-md">
+        <span className="mt-1 sm:mt-1.5 px-1 sm:px-2 py-0.5 rounded bg-slate-950/70 border border-slate-800/40 text-[8px] sm:text-[9px] font-black text-slate-100 tracking-wider truncate max-w-[56px] sm:max-w-[72px] text-center shadow-md">
           {name}
         </span>
       </div>
@@ -611,7 +635,7 @@ export default function MatchDetailsModal({
                 <>
                   {/* Pitch Visual Grid - scrollable on mobile */}
                   <div className="overflow-x-auto -mx-1">
-                  <div className="relative rounded-2xl border border-emerald-500/20 bg-[repeating-linear-gradient(to_bottom,#0e291b,#0e291b_20px,#133724_20px,#133724_40px)] p-2 sm:p-4 h-[400px] sm:h-[510px] overflow-hidden flex flex-col justify-between shadow-2xl min-w-[300px]">
+                  <div className="relative rounded-2xl border border-emerald-500/20 bg-[repeating-linear-gradient(to_bottom,#0e291b,#0e291b_20px,#133724_20px,#133724_40px)] p-2 sm:p-4 h-[300px] sm:h-[510px] overflow-hidden flex flex-col justify-between shadow-2xl min-w-[300px]">
                     {/* Pitch lines */}
                     <div className="absolute inset-x-0 top-1/2 h-0.5 bg-white/10 -translate-y-1/2"></div>
                     <div className="absolute top-1/2 left-1/2 h-20 w-20 rounded-full border border-white/10 -translate-x-1/2 -translate-y-1/2"></div>
@@ -622,22 +646,22 @@ export default function MatchDetailsModal({
                     <div className="relative z-10 flex flex-col h-1/2 justify-between pb-1">
                       {/* Goalkeeper row */}
                       <div className="flex justify-center">
-                        {activeHomeStarters.filter(p => p.position === 'GK').map(p => renderPlayerNode(p, 'home'))}
+                        {homeGK.map(p => renderPlayerNode(p, 'home'))}
                       </div>
                       
                       {/* Defender row */}
                       <div className="flex justify-around px-2">
-                        {activeHomeStarters.filter(p => p.position === 'DF').map(p => renderPlayerNode(p, 'home'))}
+                        {homeDF.map(p => renderPlayerNode(p, 'home'))}
                       </div>
                       
                       {/* Midfield row */}
                       <div className="flex justify-around px-8">
-                        {activeHomeStarters.filter(p => p.position === 'MF').map(p => renderPlayerNode(p, 'home'))}
+                        {homeMF.map(p => renderPlayerNode(p, 'home'))}
                       </div>
                       
                       {/* Forward row */}
                       <div className="flex justify-around px-16">
-                        {activeHomeStarters.filter(p => p.position === 'FW').map(p => renderPlayerNode(p, 'home'))}
+                        {homeFW.map(p => renderPlayerNode(p, 'home'))}
                       </div>
                     </div>
 
@@ -645,22 +669,22 @@ export default function MatchDetailsModal({
                     <div className="relative z-10 flex flex-col h-1/2 justify-between pt-1">
                       {/* Forward row */}
                       <div className="flex justify-around px-16">
-                        {activeAwayStarters.filter(p => p.position === 'FW').map(p => renderPlayerNode(p, 'away'))}
+                        {awayFW.map(p => renderPlayerNode(p, 'away'))}
                       </div>
 
                       {/* Midfield row */}
                       <div className="flex justify-around px-8">
-                        {activeAwayStarters.filter(p => p.position === 'MF').map(p => renderPlayerNode(p, 'away'))}
+                        {awayMF.map(p => renderPlayerNode(p, 'away'))}
                       </div>
 
                       {/* Defender row */}
                       <div className="flex justify-around px-2">
-                        {activeAwayStarters.filter(p => p.position === 'DF').map(p => renderPlayerNode(p, 'away'))}
+                        {awayDF.map(p => renderPlayerNode(p, 'away'))}
                       </div>
 
                       {/* Goalkeeper row */}
                       <div className="flex justify-center">
-                        {activeAwayStarters.filter(p => p.position === 'GK').map(p => renderPlayerNode(p, 'away'))}
+                        {awayGK.map(p => renderPlayerNode(p, 'away'))}
                       </div>
                     </div>
                   </div>

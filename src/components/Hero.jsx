@@ -101,14 +101,14 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
 
   const nextMatch = upcomingMatches[0] || null;
 
-  // Next match day's full matches list in order
+  // Next 8 matches in order (including live and upcoming matches)
   const nextDayMatches = useMemo(() => {
-    if (!nextMatch) return [];
     return fixtures
-      .filter(m => m.dateIST === nextMatch.dateIST && m.status !== 'Finished')
+      .filter(m => m.status !== 'Finished')
       .map(m => ({ ...m, dateObj: new Date(m.dateTimeISO) }))
-      .sort((a, b) => a.dateObj - b.dateObj);
-  }, [fixtures, nextMatch]);
+      .sort((a, b) => a.dateObj - b.dateObj)
+      .slice(0, 8);
+  }, [fixtures]);
 
   // Countdown to Final (July 19, 2026 23:30:00 IST)
   const finalDate = new Date("2026-07-19T23:30:00+05:30");
@@ -212,14 +212,13 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
 
         {/* Right Column: Next Match */}
         <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
-          
-          {/* Next Match(es) Card */}
-          {nextMatch && (
+            {/* Next Match(es) Card */}
+          {nextDayMatches.length > 0 && (
             <div className="rounded-3xl border border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/60 p-5 sm:p-6 backdrop-blur-lg shadow-lg dark:shadow-2xl transition duration-300">
               <div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-200/80 dark:border-slate-800/60">
                 <span className="text-xs sm:text-sm font-extrabold tracking-widest text-amber-600 dark:text-amber-400 uppercase flex items-center space-x-2">
                   <PlayCircle className="h-4.5 w-4.5 text-amber-500 dark:text-amber-400 fill-current animate-pulse" />
-                  <span>Next Match Day: {nextMatch.dateIST}</span>
+                  <span>Next Upcoming Matches</span>
                 </span>
                 <span className="text-xs text-slate-550 dark:text-slate-400 font-extrabold uppercase bg-slate-100 dark:bg-slate-800/80 px-3 py-1 rounded-full border border-slate-200/55 dark:border-slate-700/50">
                   {nextDayMatches.length} {nextDayMatches.length === 1 ? 'Match' : 'Matches'}
@@ -249,7 +248,7 @@ export default function Hero({ fixtures, onViewMatch, onActiveLiveGamesClick, on
                       {/* Match Header */}
                       <div className="flex justify-between items-center text-[11px] sm:text-xs text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider mb-3">
                         <span>Match #{match.matchId} • {match.stage} {match.group ? `(Group ${match.group})` : ''}</span>
-                        <span className="text-amber-600 dark:text-amber-400 font-extrabold">{match.timeIST} IST</span>
+                        <span className="text-amber-600 dark:text-amber-400 font-extrabold">{match.dateIST} • {match.timeIST} IST</span>
                       </div>
                                          {/* Teams & Flags */}
                       <div className="flex items-center justify-between py-2 text-slate-805 dark:text-slate-100">

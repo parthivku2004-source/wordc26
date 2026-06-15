@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { getFixtures, calculateStandings, saveFixtures, getTeams } from '../api/footballApi';
-import playersData from '../data/players.json';
 
 const realWorldEvents = {
   1: [
@@ -27,7 +26,12 @@ const realWorldEvents = {
 const getApiGameForFixture = (fixture, apiGames, teams) => {
   if (!apiGames || apiGames.length === 0) return null;
 
-  // 1. Check if the fixture has fully resolved team codes (e.g., "MEX", "BRA", "USA" etc.)
+  // 1. For knockout stage matches, always match by ID directly
+  if (fixture.stage !== 'Group Stage') {
+    return apiGames.find(g => Number(g.id) === fixture.matchId);
+  }
+
+  // 2. For group stage matches, check if the fixture has fully resolved team codes (e.g., "MEX", "BRA", "USA" etc.)
   const isHomeResolved = teams.some(t => t.id === fixture.homeTeamId);
   const isAwayResolved = teams.some(t => t.id === fixture.awayTeamId);
 
@@ -44,7 +48,7 @@ const getApiGameForFixture = (fixture, apiGames, teams) => {
     });
   }
 
-  // 2. If one or both team IDs are not yet resolved, fallback to mapping by ID
+  // 3. Fallback to mapping by ID if teams are not resolved
   return apiGames.find(g => Number(g.id) === fixture.matchId);
 };
 
@@ -126,7 +130,7 @@ export const useLiveScores = (onGoalAlert) => {
       } catch (primaryErr) {
         console.warn("Primary API fetch failed. Trying CORS proxy fallback...", primaryErr);
         const proxyResponse = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://worldcup26.ir/get/games'));
-        if (!proxyResponse.ok) throw new Error("CORS proxy fetch failed");
+        if (!proxyResponse.ok) throw new Error("CORS proxy fetch failed", { cause: primaryErr });
         data = await proxyResponse.json();
       }
       const apiGames = data.games || data || [];
@@ -134,7 +138,6 @@ export const useLiveScores = (onGoalAlert) => {
       
       const currentFixtures = getFixtures();
       let updated = false;
-      const goalAlerts = [];
 
       const updatedFixtures = currentFixtures.map(match => {
         const apiGame = getApiGameForFixture(match, apiGames, teams);
@@ -152,7 +155,8 @@ export const useLiveScores = (onGoalAlert) => {
 
         const scoreChanged = match.homeScore !== apiHomeScore || match.awayScore !== apiAwayScore;
         const statusChanged = match.status !== apiStatus;
-        const prevEventsLength = match.events?.length || 0;
+        const apiMinute = apiStatus === 'LIVE' ? (Number(apiGame.time_elapsed) || 45) : (apiStatus === 'Finished' ? 90 : null);
+        const minuteChanged = match.minute !== apiMinute;
 
         // Parse goals to see if there are any new goal alerts we should trigger!
         const parseScorers = (scorersStr, teamId, teamName) => {
@@ -195,28 +199,9 @@ export const useLiveScores = (onGoalAlert) => {
 
         events.sort((a, b) => a.minute - b.minute);
 
-        // Check for new goals for alerts
-        allApiGoals.forEach(g => {
-          const alreadyLogged = match.events?.some(e => e.type === 'goal' && e.minute === g.minute && e.teamId === g.teamId);
-          if (!alreadyLogged) {
-            goalAlerts.push({
-              matchId: match.matchId,
-              teamId: g.teamId,
-              teamName: g.teamName,
-              player: g.player,
-              assist: null,
-              minute: g.minute,
-              homeScore: apiHomeScore,
-              awayScore: apiAwayScore,
-              homeTeam: match.homeTeam,
-              awayTeam: match.awayTeam,
-              homeTeamId: match.homeTeamId,
-              awayTeamId: match.awayTeamId
-            });
-          }
-        });
+        const eventsChanged = JSON.stringify(match.events || []) !== JSON.stringify(events || []);
 
-        if (scoreChanged || statusChanged || events.length !== prevEventsLength) {
+        if (scoreChanged || statusChanged || eventsChanged || minuteChanged) {
           updated = true;
         }
 
@@ -230,11 +215,12 @@ export const useLiveScores = (onGoalAlert) => {
         return {
           ...match,
           status: apiStatus,
-          minute: apiStatus === 'LIVE' ? (Number(apiGame.time_elapsed) || 45) : (apiStatus === 'Finished' ? 90 : null),
+          minute: apiMinute,
           homeScore: apiHomeScore,
           awayScore: apiAwayScore,
           events,
-          winner
+          winner,
+          apiSynced: true
         };
       });
 
@@ -245,25 +231,18 @@ export const useLiveScores = (onGoalAlert) => {
           return updatedFixtures;
         });
         setStandings(calculateStandings());
-
-        // Trigger goal alerts
-        if (goalAlerts.length > 0 && onGoalAlertRef.current) {
-          goalAlerts.forEach(alert => {
-            onGoalAlertRef.current(alert);
-          });
-        }
       }
       setError(null);
     } catch (err) {
       console.warn("API offline / fetch failed. Auto-simulating fixtures based on current system time.", err);
       // Fallback: update fixtures and standings based on local system time-sync!
-      const currentFixtures = getFixtures(); // Automatically time-synced
+      const currentFixtures = getFixtures(true); // Automatically time-synced
       
       setFixtures(prev => {
         detectNewGoalsAndAlert(prev, currentFixtures);
         return currentFixtures;
       });
-      setStandings(calculateStandings());
+      setStandings(calculateStandings(true));
     }
   }, [detectNewGoalsAndAlert]);
 

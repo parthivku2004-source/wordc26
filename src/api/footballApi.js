@@ -1,6 +1,5 @@
 import initialFixtures from '../data/fixtures.json';
 import initialTeams from '../data/teams.json';
-import playersData from '../data/players.json';
 
 // Resolve a team's formation, starting 11, and substitutes dynamically & deterministically
 export const getTeamFormationAndLineup = (teamId, roster) => {
@@ -154,13 +153,18 @@ export const generateDeterministicResult = (match) => {
 };
 
 // Automatically update match statuses based on current time (automated for match time itself)
-export const syncFixturesWithCurrentTime = (fixtures) => {
+export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
   if (!fixtures) return [];
   const now = Date.now();
 
   return fixtures.map(match => {
     // If the match is already Finished, preserve it.
     if (match.status === 'Finished') {
+      return match;
+    }
+
+    // If the match is synced from the API and we are not forcing simulation sync, preserve it.
+    if (match.apiSynced && !forceSync) {
       return match;
     }
 
@@ -189,7 +193,6 @@ export const syncFixturesWithCurrentTime = (fixtures) => {
     const elapsedMins = Math.floor(elapsedMs / 60000);
 
     const isKnockout = match.stage !== 'Group Stage';
-    const seed = match.matchId;
 
     let status = 'Finished';
     let matchMin = 90;
@@ -472,10 +475,10 @@ export const resolveDynamicKnockoutTeams = (fixtures, standings) => {
 };
 
 // Retrieve data
-export const getFixtures = () => {
+export const getFixtures = (forceSync = false) => {
   initDatabase();
   const raw = JSON.parse(localStorage.getItem('wc_fixtures')) || [];
-  const synced = syncFixturesWithCurrentTime(raw);
+  const synced = syncFixturesWithCurrentTime(raw, forceSync);
   const standings = calculateStandingsFromRaw(synced, getTeams());
   const resolved = resolveDynamicKnockoutTeams(synced, standings);
   return resolved;
@@ -554,10 +557,10 @@ export const calculateStandingsFromRaw = (fixtures, teams) => {
 };
 
 // Calculate Standings dynamically based on raw fixtures
-export const calculateStandings = () => {
+export const calculateStandings = (forceSync = false) => {
   const teams = getTeams();
   const rawFixtures = JSON.parse(localStorage.getItem('wc_fixtures')) || [];
-  const synced = syncFixturesWithCurrentTime(rawFixtures);
+  const synced = syncFixturesWithCurrentTime(rawFixtures, forceSync);
   return calculateStandingsFromRaw(synced, teams);
 };
 

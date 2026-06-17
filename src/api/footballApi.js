@@ -114,18 +114,18 @@ export const generateDeterministicResult = (match) => {
     1: [
       { type: 'red', minute: 49, teamId: 'RSA', player: 'Sphephelo Sithole', detail: 'Straight Red Card (Professional foul)' },
       { type: 'red', minute: 84, teamId: 'RSA', player: 'Themba Zwane', detail: 'Red Card (Violent conduct)' },
-      { type: 'red', minute: 90, teamId: 'MEX', player: 'César Montes', detail: 'Red Card (Late tackle)' },
+      { type: 'red', minute: 90, teamId: 'MEX', player: 'Cesar Montes', detail: 'Red Card (Late tackle)' },
       { type: 'sub', minute: 75, teamId: 'MEX', player: 'Brian Gutierrez (Out) / Gilberto Mora (In)', detail: 'Tactical replacement' }
     ],
     2: [
       { type: 'yellow', minute: 96, teamId: 'KOR', player: 'Lee Gi-Hyuk', detail: 'Tactical foul' },
       { type: 'sub', minute: 62, teamId: 'KOR', player: 'Lee Jae-Sung (Out) / Hwang Hee-Chan (In)', detail: 'Tactical replacement' },
       { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Pavel Sulc (Out) / Adam Hlozek (In)', detail: 'Tactical replacement' },
-      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Patrik Schick (Out) / Tomás Chory (In)', detail: 'Tactical replacement' },
-      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Lukás Provod (Out) / Michal Sadílek (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Patrik Schick (Out) / Tomas Chory (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Lukas Provod (Out) / Michal Sadilek (In)', detail: 'Tactical replacement' },
       { type: 'sub', minute: 69, teamId: 'KOR', player: 'Lee Tae-Seok (Out) / Eom Ji-Sung (In)', detail: 'Tactical replacement' },
       { type: 'sub', minute: 69, teamId: 'KOR', player: 'Son Heung-Min (Out) / Oh Hyeon-Gyu (In)', detail: 'Tactical replacement' },
-      { type: 'sub', minute: 84, teamId: 'UEFA_D', player: 'Alexandr Sojka (Out) / Mojmír Chytil (In)', detail: 'Tactical replacement' },
+      { type: 'sub', minute: 84, teamId: 'UEFA_D', player: 'Alexandr Sojka (Out) / Mojmir Chytil (In)', detail: 'Tactical replacement' },
       { type: 'sub', minute: 84, teamId: 'KOR', player: 'Hwang In-Beom (Out) / Kim Jin-Gyu (In)', detail: 'Tactical replacement' },
       { type: 'sub', minute: 84, teamId: 'KOR', player: 'Paik Seung-Ho (Out) / Park Jin-Seob (In)', detail: 'Tactical replacement' }
     ]
@@ -137,15 +137,15 @@ export const generateDeterministicResult = (match) => {
       homeScore: 2,
       awayScore: 0,
       events: [
-        { type: 'goal', minute: 9, teamId: 'MEX', player: 'J. Quiñones', detail: 'Goal' },
-        { type: 'goal', minute: 67, teamId: 'MEX', player: 'R. Jiménez', detail: 'Goal' }
+        { type: 'goal', minute: 9, teamId: 'MEX', player: 'J. Quinones', detail: 'Goal' },
+        { type: 'goal', minute: 67, teamId: 'MEX', player: 'R. Jimenez', detail: 'Goal' }
       ]
     },
     2: {
       homeScore: 2,
       awayScore: 1,
       events: [
-        { type: 'goal', minute: 59, teamId: 'UEFA_D', player: 'L. Krejčí', detail: 'Goal' },
+        { type: 'goal', minute: 59, teamId: 'UEFA_D', player: 'L. Krejci', detail: 'Goal' },
         { type: 'goal', minute: 67, teamId: 'KOR', player: 'Hwang In-Beom', detail: 'Goal' },
         { type: 'goal', minute: 80, teamId: 'KOR', player: 'Oh Hyeon-Gyu', detail: 'Goal' }
       ]
@@ -155,7 +155,7 @@ export const generateDeterministicResult = (match) => {
       awayScore: 1,
       events: [
         { type: 'goal', minute: 11, teamId: 'CAN', player: 'C. Larin', detail: 'Goal' },
-        { type: 'goal', minute: 21, teamId: 'BIH', player: 'Jovo Lukić', detail: 'Goal' }
+        { type: 'goal', minute: 21, teamId: 'BIH', player: 'Jovo Lukic', detail: 'Goal' }
       ]
     },
     4: {
@@ -165,7 +165,7 @@ export const generateDeterministicResult = (match) => {
         { type: 'goal', minute: 7, teamId: 'USA', player: 'D. Bobadilla', detail: 'Own Goal' },
         { type: 'goal', minute: 31, teamId: 'USA', player: 'F. Balogun', detail: 'Goal' },
         { type: 'goal', minute: 50, teamId: 'USA', player: 'F. Balogun', detail: 'Goal' },
-        { type: 'goal', minute: 73, teamId: 'PAR', player: 'Maurício', detail: 'Goal' },
+        { type: 'goal', minute: 73, teamId: 'PAR', player: 'Mauricio', detail: 'Goal' },
         { type: 'goal', minute: 98, teamId: 'USA', player: 'G. Reyna', detail: 'Goal' }
       ]
     },
@@ -189,7 +189,7 @@ export const generateDeterministicResult = (match) => {
       awayScore: 1,
       events: [
         { type: 'goal', minute: 21, teamId: 'MAR', player: 'Ismael Saibari', detail: 'Goal' },
-        { type: 'goal', minute: 32, teamId: 'BRA', player: 'Vinícius Júnior', detail: 'Goal' }
+        { type: 'goal', minute: 32, teamId: 'BRA', player: 'Vinicius Junior', detail: 'Goal' }
       ]
     },
     8: {
@@ -238,7 +238,7 @@ export const generateDeterministicResult = (match) => {
         { type: 'goal', minute: 7, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' },
         { type: 'goal', minute: 30, teamId: 'UEFA_B', player: 'Alexander Isak', detail: 'Goal' },
         { type: 'goal', minute: 43, teamId: 'TUN', player: 'O. Rekik', detail: 'Goal' },
-        { type: 'goal', minute: 59, teamId: 'UEFA_B', player: 'Viktor Gyökeres', detail: 'Goal' },
+        { type: 'goal', minute: 59, teamId: 'UEFA_B', player: 'Viktor Gyokeres', detail: 'Goal' },
         { type: 'goal', minute: 84, teamId: 'UEFA_B', player: 'Mattias Svanberg', detail: 'Goal' },
         { type: 'goal', minute: 96, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' }
       ]
@@ -271,17 +271,17 @@ export const generateDeterministicResult = (match) => {
       awayScore: 1,
       events: [
         { type: 'goal', minute: 41, teamId: 'KSA', player: 'Abdulelah Al-Amri', detail: 'Goal' },
-        { type: 'goal', minute: 80, teamId: 'URU', player: 'M. Araújo', detail: 'Goal' }
+        { type: 'goal', minute: 80, teamId: 'URU', player: 'M. Araujo', detail: 'Goal' }
       ]
     },
     17: {
       homeScore: 3,
       awayScore: 1,
       events: [
-        { type: 'goal', minute: 66, teamId: 'FRA', player: 'Kylian Mbappé', detail: 'Goal' },
+        { type: 'goal', minute: 66, teamId: 'FRA', player: 'Kylian Mbappe', detail: 'Goal' },
         { type: 'goal', minute: 82, teamId: 'FRA', player: 'Bradley Barcola', detail: 'Goal' },
         { type: 'goal', minute: 95, teamId: 'SEN', player: 'I. Mbaye', detail: 'Goal' },
-        { type: 'goal', minute: 96, teamId: 'FRA', player: 'Kylian Mbappé', detail: 'Goal' }
+        { type: 'goal', minute: 96, teamId: 'FRA', player: 'Kylian Mbappe', detail: 'Goal' }
       ]
     },
     18: {
@@ -291,7 +291,7 @@ export const generateDeterministicResult = (match) => {
         { type: 'goal', minute: 29, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
         { type: 'goal', minute: 39, teamId: 'IC_2', player: 'Aymen Hussein', detail: 'Goal' },
         { type: 'goal', minute: 43, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
-        { type: 'goal', minute: 76, teamId: 'NOR', player: 'Leo Østigård', detail: 'Goal' },
+        { type: 'goal', minute: 76, teamId: 'NOR', player: 'Leo Ostigard', detail: 'Goal' },
         { type: 'goal', minute: 97, teamId: 'NOR', player: 'Aymen Hussein', detail: 'Goal' }
       ]
     },
@@ -563,11 +563,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v12') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v13') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v12', 'true');
+    localStorage.setItem('wc_db_clean_start_v13', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

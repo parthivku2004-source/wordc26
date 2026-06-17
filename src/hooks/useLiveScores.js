@@ -5,18 +5,18 @@ const realWorldEvents = {
   1: [
     { type: 'red', minute: 49, teamId: 'RSA', player: 'Sphephelo Sithole', detail: 'Straight Red Card (Professional foul)' },
     { type: 'red', minute: 84, teamId: 'RSA', player: 'Themba Zwane', detail: 'Red Card (Violent conduct)' },
-    { type: 'red', minute: 90, teamId: 'MEX', player: 'César Montes', detail: 'Red Card (Late tackle)' },
+    { type: 'red', minute: 90, teamId: 'MEX', player: 'Cesar Montes', detail: 'Red Card (Late tackle)' },
     { type: 'sub', minute: 75, teamId: 'MEX', player: 'Brian Gutierrez (Out) / Gilberto Mora (In)', detail: 'Tactical replacement' }
   ],
   2: [
     { type: 'yellow', minute: 96, teamId: 'KOR', player: 'Lee Gi-Hyuk', detail: 'Tactical foul' },
     { type: 'sub', minute: 62, teamId: 'KOR', player: 'Lee Jae-Sung (Out) / Hwang Hee-Chan (In)', detail: 'Tactical replacement' },
     { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Pavel Sulc (Out) / Adam Hlozek (In)', detail: 'Tactical replacement' },
-    { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Patrik Schick (Out) / Tomás Chory (In)', detail: 'Tactical replacement' },
-    { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Lukás Provod (Out) / Michal Sadílek (In)', detail: 'Tactical replacement' },
+    { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Patrik Schick (Out) / Tomas Chory (In)', detail: 'Tactical replacement' },
+    { type: 'sub', minute: 64, teamId: 'UEFA_D', player: 'Lukas Provod (Out) / Michal Sadilek (In)', detail: 'Tactical replacement' },
     { type: 'sub', minute: 69, teamId: 'KOR', player: 'Lee Tae-Seok (Out) / Eom Ji-Sung (In)', detail: 'Tactical replacement' },
     { type: 'sub', minute: 69, teamId: 'KOR', player: 'Son Heung-Min (Out) / Oh Hyeon-Gyu (In)', detail: 'Tactical replacement' },
-    { type: 'sub', minute: 84, teamId: 'UEFA_D', player: 'Alexandr Sojka (Out) / Mojmír Chytil (In)', detail: 'Tactical replacement' },
+    { type: 'sub', minute: 84, teamId: 'UEFA_D', player: 'Alexandr Sojka (Out) / Mojmir Chytil (In)', detail: 'Tactical replacement' },
     { type: 'sub', minute: 84, teamId: 'KOR', player: 'Hwang In-Beom (Out) / Kim Jin-Gyu (In)', detail: 'Tactical replacement' },
     { type: 'sub', minute: 84, teamId: 'KOR', player: 'Paik Seung-Ho (Out) / Park Jin-Seob (In)', detail: 'Tactical replacement' }
   ]

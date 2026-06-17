@@ -1,12 +1,12 @@
 {
   "MEX": [
     {
-      "name": "GK: L. Malagón",
+      "name": "GK: L. Malagon",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "DF: J. Sánchez",
+      "name": "DF: J. Sanchez",
       "number": 2,
       "position": "DF"
     },
@@ -16,7 +16,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: J. Vásquez",
+      "name": "DF: J. Vasquez",
       "number": 4,
       "position": "DF"
     },
@@ -31,17 +31,17 @@
       "position": "DF"
     },
     {
-      "name": "MF: L. Chávez",
+      "name": "MF: L. Chavez",
       "number": 7,
       "position": "MF"
     },
     {
-      "name": "MF: E. Álvarez",
+      "name": "MF: E. Alvarez",
       "number": 8,
       "position": "MF"
     },
     {
-      "name": "MF: E. Sánchez",
+      "name": "MF: E. Sanchez",
       "number": 10,
       "position": "MF"
     },
@@ -61,7 +61,7 @@
       "position": "MF"
     },
     {
-      "name": "FW: S. Giménez",
+      "name": "FW: S. Gimenez",
       "number": 9,
       "position": "FW"
     },
@@ -71,12 +71,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: J. Quiñones",
+      "name": "FW: J. Quinones",
       "number": 17,
       "position": "FW"
     },
     {
-      "name": "FW: R. Jiménez",
+      "name": "FW: R. Jimenez",
       "number": 19,
       "position": "FW"
     },
@@ -292,12 +292,12 @@
   ],
   "UEFA_D": [
     {
-      "name": "GK: J. Staněk",
+      "name": "GK: J. Stanek",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "GK: M. Kovář",
+      "name": "GK: M. Kovar",
       "number": 16,
       "position": "GK"
     },
@@ -307,22 +307,22 @@
       "position": "DF"
     },
     {
-      "name": "DF: T. Holeš",
+      "name": "DF: T. Holes",
       "number": 3,
       "position": "DF"
     },
     {
-      "name": "DF: R. Hranáč",
+      "name": "DF: R. Hranac",
       "number": 4,
       "position": "DF"
     },
     {
-      "name": "DF: L. Krejčí",
+      "name": "DF: L. Krejci",
       "number": 18,
       "position": "DF"
     },
     {
-      "name": "DF: D. Douděra",
+      "name": "DF: D. Doudera",
       "number": 15,
       "position": "DF"
     },
@@ -332,7 +332,7 @@
       "position": "DF"
     },
     {
-      "name": "MF: T. Souček",
+      "name": "MF: T. Soucek",
       "number": 22,
       "position": "MF"
     },
@@ -342,12 +342,12 @@
       "position": "MF"
     },
     {
-      "name": "MF: A. Barák",
+      "name": "MF: A. Barak",
       "number": 7,
       "position": "MF"
     },
     {
-      "name": "MF: P. Šulc",
+      "name": "MF: P. Sulc",
       "number": 20,
       "position": "MF"
     },
@@ -357,7 +357,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: M. Sadílek",
+      "name": "MF: M. Sadilek",
       "number": 17,
       "position": "MF"
     },
@@ -377,12 +377,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: A. Hložek",
+      "name": "FW: A. Hlozek",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: T. Chorý",
+      "name": "FW: T. Chory",
       "number": 19,
       "position": "FW"
     },
@@ -394,7 +394,7 @@
   ],
   "CAN": [
     {
-      "name": "GK: M. Crépeau",
+      "name": "GK: M. Crepeau",
       "number": 1,
       "position": "GK"
     },
@@ -434,12 +434,12 @@
       "position": "DF"
     },
     {
-      "name": "MF: S. Eustáquio",
+      "name": "MF: S. Eustaquio",
       "number": 7,
       "position": "MF"
     },
     {
-      "name": "MF: I. Koné",
+      "name": "MF: I. Kone",
       "number": 8,
       "position": "MF"
     },
@@ -454,7 +454,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: M. Choinière",
+      "name": "MF: M. Choiniere",
       "number": 21,
       "position": "MF"
     },
@@ -486,77 +486,77 @@
       "position": "GK"
     },
     {
-      "name": "GK: K. Pirić",
+      "name": "GK: K. Piric",
       "number": 12,
       "position": "GK"
     },
     {
-      "name": "DF: A. Ahmedhodžić",
+      "name": "DF: A. Ahmedhodzic",
       "number": 16,
       "position": "DF"
     },
     {
-      "name": "DF: S. Kolašinac",
+      "name": "DF: S. Kolasinac",
       "number": 3,
       "position": "DF"
     },
     {
-      "name": "DF: E. Bičakčić",
+      "name": "DF: E. Bicakcic",
       "number": 4,
       "position": "DF"
     },
     {
-      "name": "DF: J. Gazibegović",
+      "name": "DF: J. Gazibegovic",
       "number": 2,
       "position": "DF"
     },
     {
-      "name": "DF: N. Mujakić",
+      "name": "DF: N. Mujakic",
       "number": 5,
       "position": "DF"
     },
     {
-      "name": "DF: D. Hadžikadić",
+      "name": "DF: D. Hadzikadic",
       "number": 18,
       "position": "DF"
     },
     {
-      "name": "MF: R. Krunić",
+      "name": "MF: R. Krunic",
       "number": 8,
       "position": "MF"
     },
     {
-      "name": "MF: B. Tahirović",
+      "name": "MF: B. Tahirovic",
       "number": 6,
       "position": "MF"
     },
     {
-      "name": "MF: H. Hajradinović",
+      "name": "MF: H. Hajradinovic",
       "number": 10,
       "position": "MF"
     },
     {
-      "name": "MF: D. Huseinbašić",
+      "name": "MF: D. Huseinbasic",
       "number": 20,
       "position": "MF"
     },
     {
-      "name": "MF: A. Gigović",
+      "name": "MF: A. Gigovic",
       "number": 14,
       "position": "MF"
     },
     {
-      "name": "FW: E. Džeko",
+      "name": "FW: E. Dzeko",
       "number": 11,
       "position": "FW"
     },
     {
-      "name": "FW: E. Demirović",
+      "name": "FW: E. Demirovic",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: H. Tabaković",
+      "name": "FW: H. Tabakovic",
       "number": 17,
       "position": "FW"
     }
@@ -670,12 +670,12 @@
       "position": "GK"
     },
     {
-      "name": "GK: R. Morínigo",
+      "name": "GK: R. Morinigo",
       "number": 12,
       "position": "GK"
     },
     {
-      "name": "DF: G. Gómez",
+      "name": "DF: G. Gomez",
       "number": 15,
       "position": "DF"
     },
@@ -695,7 +695,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: G. Velázquez",
+      "name": "DF: G. Velazquez",
       "number": 2,
       "position": "DF"
     },
@@ -715,12 +715,12 @@
       "position": "MF"
     },
     {
-      "name": "MF: R. Sánchez",
+      "name": "MF: R. Sanchez",
       "number": 10,
       "position": "MF"
     },
     {
-      "name": "MF: D. Gómez",
+      "name": "MF: D. Gomez",
       "number": 16,
       "position": "MF"
     },
@@ -730,7 +730,7 @@
       "position": "MF"
     },
     {
-      "name": "FW: M. Almirón",
+      "name": "FW: M. Almiron",
       "number": 11,
       "position": "FW"
     },
@@ -755,7 +755,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: D. González",
+      "name": "FW: D. Gonzalez",
       "number": 17,
       "position": "FW"
     }
@@ -854,7 +854,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: F. Schär",
+      "name": "DF: F. Schar",
       "number": 22,
       "position": "DF"
     },
@@ -946,12 +946,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: G. Magalhães",
+      "name": "DF: G. Magalhaes",
       "number": 14,
       "position": "DF"
     },
     {
-      "name": "DF: É. Militão",
+      "name": "DF: E. Militao",
       "number": 3,
       "position": "DF"
     },
@@ -976,7 +976,7 @@
       "position": "DF"
     },
     {
-      "name": "MF: Bruno Guimarães",
+      "name": "MF: Bruno Guimaraes",
       "number": 5,
       "position": "MF"
     },
@@ -986,7 +986,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Lucas Paquetá",
+      "name": "MF: Lucas Paqueta",
       "number": 10,
       "position": "MF"
     },
@@ -996,7 +996,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: João Gomes",
+      "name": "MF: Joao Gomes",
       "number": 15,
       "position": "MF"
     },
@@ -1006,7 +1006,7 @@
       "position": "MF"
     },
     {
-      "name": "FW: Vinícius Júnior",
+      "name": "FW: Vinicius Junior",
       "number": 7,
       "position": "FW"
     },
@@ -1058,7 +1058,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: R. Saïss",
+      "name": "DF: R. Saiss",
       "number": 6,
       "position": "DF"
     },
@@ -1123,7 +1123,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Brahim Díaz",
+      "name": "FW: Brahim Diaz",
       "number": 10,
       "position": "FW"
     }
@@ -1145,7 +1145,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Ricardo Adé",
+      "name": "DF: Ricardo Ade",
       "number": 4,
       "position": "DF"
     },
@@ -1386,12 +1386,12 @@
   ],
   "UEFA_C": [
     {
-      "name": "GK: Mert Günok",
+      "name": "GK: Mert Gunok",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "GK: Altay Bayındır",
+      "name": "GK: Altay Bayindir",
       "number": 12,
       "position": "GK"
     },
@@ -1401,17 +1401,17 @@
       "position": "DF"
     },
     {
-      "name": "DF: A. Bardakcı",
+      "name": "DF: A. Bardakci",
       "number": 14,
       "position": "DF"
     },
     {
-      "name": "DF: Zeki Çelik",
+      "name": "DF: Zeki Celik",
       "number": 2,
       "position": "DF"
     },
     {
-      "name": "DF: Ferdi Kadıoğlu",
+      "name": "DF: Ferdi Kadioglu",
       "number": 18,
       "position": "DF"
     },
@@ -1421,12 +1421,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: Mert Müldür",
+      "name": "DF: Mert Muldur",
       "number": 22,
       "position": "DF"
     },
     {
-      "name": "MF: Hakan Çalhanoğlu",
+      "name": "MF: Hakan Calhanoglu",
       "number": 10,
       "position": "MF"
     },
@@ -1436,27 +1436,27 @@
       "position": "MF"
     },
     {
-      "name": "MF: Salih Özcan",
+      "name": "MF: Salih Ozcan",
       "number": 15,
       "position": "MF"
     },
     {
-      "name": "MF: Orkun Kökçü",
+      "name": "MF: Orkun Kokcu",
       "number": 6,
       "position": "MF"
     },
     {
-      "name": "MF: Arda Güler",
+      "name": "MF: Arda Guler",
       "number": 8,
       "position": "MF"
     },
     {
-      "name": "FW: Kenan Yıldız",
+      "name": "FW: Kenan Yildiz",
       "number": 19,
       "position": "FW"
     },
     {
-      "name": "FW: B. Alper Yılmaz",
+      "name": "FW: B. Alper Yilmaz",
       "number": 21,
       "position": "FW"
     },
@@ -1466,12 +1466,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: Kerem Aktürkoğlu",
+      "name": "FW: Kerem Akturkoglu",
       "number": 7,
       "position": "FW"
     },
     {
-      "name": "FW: Semih Kılıçsoy",
+      "name": "FW: Semih Kilicsoy",
       "number": 24,
       "position": "FW"
     }
@@ -1488,7 +1488,7 @@
       "position": "GK"
     },
     {
-      "name": "DF: Antonio Rüdiger",
+      "name": "DF: Antonio Rudiger",
       "number": 2,
       "position": "DF"
     },
@@ -1518,7 +1518,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: M. Mittelstädt",
+      "name": "DF: M. Mittelstadt",
       "number": 20,
       "position": "DF"
     },
@@ -1528,7 +1528,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: İlkay Gündoğan",
+      "name": "MF: Ilkay Gundogan",
       "number": 21,
       "position": "MF"
     },
@@ -1538,7 +1538,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Pascal Groß",
+      "name": "MF: Pascal Gross",
       "number": 5,
       "position": "MF"
     },
@@ -1553,7 +1553,7 @@
       "position": "MF"
     },
     {
-      "name": "FW: Thomas Müller",
+      "name": "FW: Thomas Muller",
       "number": 13,
       "position": "FW"
     },
@@ -1563,12 +1563,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: Niclas Füllkrug",
+      "name": "FW: Niclas Fullkrug",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: Leroy Sané",
+      "name": "FW: Leroy Sane",
       "number": 19,
       "position": "FW"
     },
@@ -1630,7 +1630,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Kenji Gorré",
+      "name": "FW: Kenji Gorre",
       "number": 17,
       "position": "FW"
     },
@@ -1652,7 +1652,7 @@
       "position": "GK"
     },
     {
-      "name": "GK: Badra Ali Sangaré",
+      "name": "GK: Badra Ali Sangare",
       "number": 16,
       "position": "GK"
     },
@@ -1687,7 +1687,7 @@
       "position": "DF"
     },
     {
-      "name": "MF: Franck Kessié",
+      "name": "MF: Franck Kessie",
       "number": 8,
       "position": "MF"
     },
@@ -1697,7 +1697,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Ibrahim Sangaré",
+      "name": "MF: Ibrahim Sangare",
       "number": 18,
       "position": "MF"
     },
@@ -1707,7 +1707,7 @@
       "position": "MF"
     },
     {
-      "name": "FW: Sébastien Haller",
+      "name": "FW: Sebastien Haller",
       "number": 22,
       "position": "FW"
     },
@@ -1717,34 +1717,34 @@
       "position": "FW"
     },
     {
-      "name": "FW: Oumar Diakité",
+      "name": "FW: Oumar Diakite",
       "number": 14,
       "position": "FW"
     },
     {
-      "name": "FW: Nicolas Pépé",
+      "name": "FW: Nicolas Pepe",
       "number": 19,
       "position": "FW"
     },
     {
-      "name": "FW: Karim Konaté",
+      "name": "FW: Karim Konate",
       "number": 9,
       "position": "FW"
     }
   ],
   "ECU": [
     {
-      "name": "GK: A. Domínguez",
+      "name": "GK: A. Dominguez",
       "number": 22,
       "position": "GK"
     },
     {
-      "name": "GK: Hernán Galíndez",
+      "name": "GK: Hernan Galindez",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "DF: Piero Hincapié",
+      "name": "DF: Piero Hincapie",
       "number": 3,
       "position": "DF"
     },
@@ -1754,7 +1754,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Félix Torres",
+      "name": "DF: Felix Torres",
       "number": 2,
       "position": "DF"
     },
@@ -1764,7 +1764,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Joel Ordóñez",
+      "name": "DF: Joel Ordonez",
       "number": 4,
       "position": "DF"
     },
@@ -1774,7 +1774,7 @@
       "position": "DF"
     },
     {
-      "name": "MF: Moisés Caicedo",
+      "name": "MF: Moises Caicedo",
       "number": 23,
       "position": "MF"
     },
@@ -1789,7 +1789,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Kendry Páez",
+      "name": "MF: Kendry Paez",
       "number": 10,
       "position": "MF"
     },
@@ -1819,7 +1819,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Kevin Rodríguez",
+      "name": "FW: Kevin Rodriguez",
       "number": 19,
       "position": "FW"
     }
@@ -1841,7 +1841,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Nathan Aké",
+      "name": "DF: Nathan Ake",
       "number": 5,
       "position": "DF"
     },
@@ -2045,7 +2045,7 @@
       "position": "GK"
     },
     {
-      "name": "DF: Victor Lindelöf",
+      "name": "DF: Victor Lindelof",
       "number": 3,
       "position": "DF"
     },
@@ -2110,7 +2110,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Viktor Gyökeres",
+      "name": "FW: Viktor Gyokeres",
       "number": 17,
       "position": "FW"
     },
@@ -2127,7 +2127,7 @@
   ],
   "TUN": [
     {
-      "name": "GK: Bechir Ben Saïd",
+      "name": "GK: Bechir Ben Said",
       "number": 22,
       "position": "GK"
     },
@@ -2172,7 +2172,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Aïssa Laïdouni",
+      "name": "MF: Aissa Laidouni",
       "number": 14,
       "position": "MF"
     },
@@ -2197,7 +2197,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Naïm Sliti",
+      "name": "FW: Naim Sliti",
       "number": 23,
       "position": "FW"
     },
@@ -2289,7 +2289,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Jérémy Doku",
+      "name": "FW: Jeremy Doku",
       "number": 11,
       "position": "FW"
     },
@@ -2567,7 +2567,7 @@
   ],
   "ESP": [
     {
-      "name": "GK: Unai Simón",
+      "name": "GK: Unai Simon",
       "number": 23,
       "position": "GK"
     },
@@ -2617,7 +2617,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Fabián Ruiz",
+      "name": "MF: Fabian Ruiz",
       "number": 8,
       "position": "MF"
     },
@@ -2637,7 +2637,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Fermín López",
+      "name": "MF: Fermin Lopez",
       "number": 25,
       "position": "MF"
     },
@@ -2657,7 +2657,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Álvaro Morata",
+      "name": "FW: Alvaro Morata",
       "number": 7,
       "position": "FW"
     },
@@ -2677,7 +2677,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Ayoze Pérez",
+      "name": "FW: Ayoze Perez",
       "number": 26,
       "position": "FW"
     }
@@ -2759,7 +2759,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Bebé",
+      "name": "FW: Bebe",
       "number": 9,
       "position": "FW"
     },
@@ -2873,32 +2873,32 @@
       "position": "GK"
     },
     {
-      "name": "DF: Ronald Araújo",
+      "name": "DF: Ronald Araujo",
       "number": 4,
       "position": "DF"
     },
     {
-      "name": "DF: Jose María Giménez",
+      "name": "DF: Jose Maria Gimenez",
       "number": 2,
       "position": "DF"
     },
     {
-      "name": "DF: Mathías Olivera",
+      "name": "DF: Mathias Olivera",
       "number": 16,
       "position": "DF"
     },
     {
-      "name": "DF: Sebastián Cáceres",
+      "name": "DF: Sebastian Caceres",
       "number": 3,
       "position": "DF"
     },
     {
-      "name": "DF: Matías Viña",
+      "name": "DF: Matias Vina",
       "number": 17,
       "position": "DF"
     },
     {
-      "name": "DF: Nahitan Nández",
+      "name": "DF: Nahitan Nandez",
       "number": 8,
       "position": "DF"
     },
@@ -2923,7 +2923,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Nicolás de la Cruz",
+      "name": "MF: Nicolas de la Cruz",
       "number": 7,
       "position": "MF"
     },
@@ -2933,12 +2933,12 @@
       "position": "MF"
     },
     {
-      "name": "MF: Brian Rodríguez",
+      "name": "MF: Brian Rodriguez",
       "number": 18,
       "position": "MF"
     },
     {
-      "name": "FW: Darwin Núñez",
+      "name": "FW: Darwin Nunez",
       "number": 19,
       "position": "FW"
     },
@@ -2948,7 +2948,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Luis Suárez",
+      "name": "FW: Luis Suarez",
       "number": 9,
       "position": "FW"
     },
@@ -2958,7 +2958,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: M. Araújo",
+      "name": "FW: M. Araujo",
       "number": 20,
       "position": "FW"
     }
@@ -2985,7 +2985,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Jules Koundé",
+      "name": "DF: Jules Kounde",
       "number": 5,
       "position": "DF"
     },
@@ -2995,7 +2995,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Ibrahima Konaté",
+      "name": "DF: Ibrahima Konate",
       "number": 24,
       "position": "DF"
     },
@@ -3010,12 +3010,12 @@
       "position": "DF"
     },
     {
-      "name": "MF: N'Golo Kanté",
+      "name": "MF: N'Golo Kante",
       "number": 13,
       "position": "MF"
     },
     {
-      "name": "MF: A. Tchouaméni",
+      "name": "MF: A. Tchouameni",
       "number": 8,
       "position": "MF"
     },
@@ -3035,7 +3035,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: W. Zaïre-Emery",
+      "name": "MF: W. Zaire-Emery",
       "number": 18,
       "position": "MF"
     },
@@ -3045,12 +3045,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: Kylian Mbappé",
+      "name": "FW: Kylian Mbappe",
       "number": 10,
       "position": "FW"
     },
     {
-      "name": "FW: Ousmane Dembélé",
+      "name": "FW: Ousmane Dembele",
       "number": 11,
       "position": "FW"
     },
@@ -3082,7 +3082,7 @@
   ],
   "SEN": [
     {
-      "name": "GK: Édouard Mendy",
+      "name": "GK: Edouard Mendy",
       "number": 16,
       "position": "GK"
     },
@@ -3102,7 +3102,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Moussa Niakhaté",
+      "name": "DF: Moussa Niakhate",
       "number": 19,
       "position": "DF"
     },
@@ -3142,17 +3142,17 @@
       "position": "MF"
     },
     {
-      "name": "MF: Cheikhou Kouyaté",
+      "name": "MF: Cheikhou Kouyate",
       "number": 8,
       "position": "MF"
     },
     {
-      "name": "FW: Sadio Mané",
+      "name": "FW: Sadio Mane",
       "number": 10,
       "position": "FW"
     },
     {
-      "name": "FW: Ismaïla Sarr",
+      "name": "FW: Ismaila Sarr",
       "number": 18,
       "position": "FW"
     },
@@ -3261,7 +3261,7 @@
   ],
   "NOR": [
     {
-      "name": "GK: Ørjan Nyland",
+      "name": "GK: Orjan Nyland",
       "number": 1,
       "position": "GK"
     },
@@ -3271,7 +3271,7 @@
       "position": "GK"
     },
     {
-      "name": "DF: Leo Østigård",
+      "name": "DF: Leo Ostigard",
       "number": 4,
       "position": "DF"
     },
@@ -3291,7 +3291,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: David Møller Wolfe",
+      "name": "DF: David Moller Wolfe",
       "number": 5,
       "position": "DF"
     },
@@ -3301,7 +3301,7 @@
       "position": "DF"
     },
     {
-      "name": "MF: Martin Ødegaard",
+      "name": "MF: Martin Odegaard",
       "number": 10,
       "position": "MF"
     },
@@ -3326,7 +3326,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Aron Dønnum",
+      "name": "MF: Aron Donnum",
       "number": 11,
       "position": "MF"
     },
@@ -3336,7 +3336,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Alexander Sørloth",
+      "name": "FW: Alexander Sorloth",
       "number": 23,
       "position": "FW"
     },
@@ -3353,12 +3353,12 @@
   ],
   "ARG": [
     {
-      "name": "GK: Emiliano Martínez",
+      "name": "GK: Emiliano Martinez",
       "number": 23,
       "position": "GK"
     },
     {
-      "name": "GK: Gerónimo Rulli",
+      "name": "GK: Geronimo Rulli",
       "number": 1,
       "position": "GK"
     },
@@ -3368,12 +3368,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: Nicolás Otamendi",
+      "name": "DF: Nicolas Otamendi",
       "number": 19,
       "position": "DF"
     },
     {
-      "name": "DF: Lisandro Martínez",
+      "name": "DF: Lisandro Martinez",
       "number": 25,
       "position": "DF"
     },
@@ -3383,7 +3383,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Nicolás Tagliafico",
+      "name": "DF: Nicolas Tagliafico",
       "number": 3,
       "position": "DF"
     },
@@ -3393,12 +3393,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: Marcos Acuña",
+      "name": "DF: Marcos Acuna",
       "number": 8,
       "position": "DF"
     },
     {
-      "name": "DF: Germán Pezzella",
+      "name": "DF: German Pezzella",
       "number": 6,
       "position": "DF"
     },
@@ -3408,7 +3408,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Enzo Fernández",
+      "name": "MF: Enzo Fernandez",
       "number": 24,
       "position": "MF"
     },
@@ -3438,22 +3438,22 @@
       "position": "FW"
     },
     {
-      "name": "FW: Lautaro Martínez",
+      "name": "FW: Lautaro Martinez",
       "number": 22,
       "position": "FW"
     },
     {
-      "name": "FW: Julián Álvarez",
+      "name": "FW: Julian Alvarez",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: Ángel Di María",
+      "name": "FW: Angel Di Maria",
       "number": 11,
       "position": "FW"
     },
     {
-      "name": "FW: Nicolás González",
+      "name": "FW: Nicolas Gonzalez",
       "number": 15,
       "position": "FW"
     },
@@ -3480,12 +3480,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: Aïssa Mandi",
+      "name": "DF: Aissa Mandi",
       "number": 3,
       "position": "DF"
     },
     {
-      "name": "DF: Rayan Aït-Nouri",
+      "name": "DF: Rayan Ait-Nouri",
       "number": 15,
       "position": "DF"
     },
@@ -3500,12 +3500,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: Zineddine Belaïd",
+      "name": "DF: Zineddine Belaid",
       "number": 5,
       "position": "DF"
     },
     {
-      "name": "MF: Ismaël Bennacer",
+      "name": "MF: Ismael Bennacer",
       "number": 22,
       "position": "MF"
     },
@@ -3555,7 +3555,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Farès Chaïbi",
+      "name": "FW: Fares Chaibi",
       "number": 8,
       "position": "FW"
     }
@@ -3577,7 +3577,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Maximilian Wöber",
+      "name": "DF: Maximilian Wober",
       "number": 2,
       "position": "DF"
     },
@@ -3637,7 +3637,7 @@
       "position": "MF"
     },
     {
-      "name": "FW: Marko Arnautović",
+      "name": "FW: Marko Arnautovic",
       "number": 7,
       "position": "FW"
     },
@@ -3751,12 +3751,12 @@
       "position": "GK"
     },
     {
-      "name": "GK: Rui Patrício",
+      "name": "GK: Rui Patricio",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "DF: Rúben Dias",
+      "name": "DF: Ruben Dias",
       "number": 4,
       "position": "DF"
     },
@@ -3766,17 +3766,17 @@
       "position": "DF"
     },
     {
-      "name": "DF: António Silva",
+      "name": "DF: Antonio Silva",
       "number": 24,
       "position": "DF"
     },
     {
-      "name": "DF: Gonçalo Inácio",
+      "name": "DF: Goncalo Inacio",
       "number": 14,
       "position": "DF"
     },
     {
-      "name": "DF: João Cancelo",
+      "name": "DF: Joao Cancelo",
       "number": 20,
       "position": "DF"
     },
@@ -3791,17 +3791,17 @@
       "position": "DF"
     },
     {
-      "name": "DF: Nélson Semedo",
+      "name": "DF: Nelson Semedo",
       "number": 2,
       "position": "DF"
     },
     {
-      "name": "MF: João Palhinha",
+      "name": "MF: Joao Palhinha",
       "number": 6,
       "position": "MF"
     },
     {
-      "name": "MF: João Neves",
+      "name": "MF: Joao Neves",
       "number": 15,
       "position": "MF"
     },
@@ -3821,7 +3821,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Rúben Neves",
+      "name": "MF: Ruben Neves",
       "number": 18,
       "position": "MF"
     },
@@ -3836,12 +3836,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: Rafael Leão",
+      "name": "FW: Rafael Leao",
       "number": 17,
       "position": "FW"
     },
     {
-      "name": "FW: João Félix",
+      "name": "FW: Joao Felix",
       "number": 11,
       "position": "FW"
     },
@@ -3851,12 +3851,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: Gonçalo Ramos",
+      "name": "FW: Goncalo Ramos",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: F. Conceição",
+      "name": "FW: F. Conceicao",
       "number": 26,
       "position": "FW"
     },
@@ -3888,7 +3888,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Gédéon Kalulu",
+      "name": "DF: Gedeon Kalulu",
       "number": 24,
       "position": "DF"
     },
@@ -3918,7 +3918,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Gaël Kakuta",
+      "name": "MF: Gael Kakuta",
       "number": 14,
       "position": "MF"
     },
@@ -3938,7 +3938,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Cédric Bakambu",
+      "name": "FW: Cedric Bakambu",
       "number": 9,
       "position": "FW"
     },
@@ -4057,7 +4057,7 @@
       "position": "GK"
     },
     {
-      "name": "DF: Davinson Sánchez",
+      "name": "DF: Davinson Sanchez",
       "number": 23,
       "position": "DF"
     },
@@ -4067,12 +4067,12 @@
       "position": "DF"
     },
     {
-      "name": "DF: Jhon Lucumí",
+      "name": "DF: Jhon Lucumi",
       "number": 3,
       "position": "DF"
     },
     {
-      "name": "DF: Daniel Muñoz",
+      "name": "DF: Daniel Munoz",
       "number": 21,
       "position": "DF"
     },
@@ -4097,7 +4097,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Richard Ríos",
+      "name": "MF: Richard Rios",
       "number": 6,
       "position": "MF"
     },
@@ -4107,7 +4107,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: James Rodríguez",
+      "name": "MF: James Rodriguez",
       "number": 10,
       "position": "MF"
     },
@@ -4122,27 +4122,27 @@
       "position": "MF"
     },
     {
-      "name": "MF: Kevin Castaño",
+      "name": "MF: Kevin Castano",
       "number": 5,
       "position": "MF"
     },
     {
-      "name": "FW: Luis Díaz",
+      "name": "FW: Luis Diaz",
       "number": 7,
       "position": "FW"
     },
     {
-      "name": "FW: Jhon Durán",
+      "name": "FW: Jhon Duran",
       "number": 19,
       "position": "FW"
     },
     {
-      "name": "FW: R. Santos Borré",
+      "name": "FW: R. Santos Borre",
       "number": 18,
       "position": "FW"
     },
     {
-      "name": "FW: Jhon Córdoba",
+      "name": "FW: Jhon Cordoba",
       "number": 9,
       "position": "FW"
     },
@@ -4152,7 +4152,7 @@
       "position": "FW"
     },
     {
-      "name": "FW: Jhon Solís",
+      "name": "FW: Jhon Solis",
       "number": 22,
       "position": "FW"
     }
@@ -4179,7 +4179,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Marc Guéhi",
+      "name": "DF: Marc Guehi",
       "number": 6,
       "position": "DF"
     },
@@ -4291,27 +4291,27 @@
   ],
   "CRO": [
     {
-      "name": "GK: Dominik Livaković",
+      "name": "GK: Dominik Livakovic",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "GK: Nediljko Labrović",
+      "name": "GK: Nediljko Labrovic",
       "number": 12,
       "position": "GK"
     },
     {
-      "name": "GK: Ivica Ivušić",
+      "name": "GK: Ivica Ivusic",
       "number": 23,
       "position": "GK"
     },
     {
-      "name": "DF: Joško Gvardiol",
+      "name": "DF: Josko Gvardiol",
       "number": 4,
       "position": "DF"
     },
     {
-      "name": "DF: Josip Šutalo",
+      "name": "DF: Josip Sutalo",
       "number": 6,
       "position": "DF"
     },
@@ -4321,7 +4321,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: Josip Stanišić",
+      "name": "DF: Josip Stanisic",
       "number": 2,
       "position": "DF"
     },
@@ -4331,37 +4331,37 @@
       "position": "DF"
     },
     {
-      "name": "DF: Marin Pongračić",
+      "name": "DF: Marin Pongracic",
       "number": 5,
       "position": "DF"
     },
     {
-      "name": "DF: Josip Juranović",
+      "name": "DF: Josip Juranovic",
       "number": 22,
       "position": "DF"
     },
     {
-      "name": "DF: Martin Erlić",
+      "name": "DF: Martin Erlic",
       "number": 15,
       "position": "DF"
     },
     {
-      "name": "MF: Luka Modrić",
+      "name": "MF: Luka Modric",
       "number": 10,
       "position": "MF"
     },
     {
-      "name": "MF: Mateo Kovačić",
+      "name": "MF: Mateo Kovacic",
       "number": 8,
       "position": "MF"
     },
     {
-      "name": "MF: Marcelo Brozović",
+      "name": "MF: Marcelo Brozovic",
       "number": 11,
       "position": "MF"
     },
     {
-      "name": "MF: Mario Pašalić",
+      "name": "MF: Mario Pasalic",
       "number": 15,
       "position": "MF"
     },
@@ -4371,7 +4371,7 @@
       "position": "MF"
     },
     {
-      "name": "MF: Luka Sučić",
+      "name": "MF: Luka Sucic",
       "number": 25,
       "position": "MF"
     },
@@ -4381,22 +4381,22 @@
       "position": "MF"
     },
     {
-      "name": "MF: Nikola Vlašić",
+      "name": "MF: Nikola Vlasic",
       "number": 13,
       "position": "MF"
     },
     {
-      "name": "FW: Andrej Kramarić",
+      "name": "FW: Andrej Kramaric",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: Ivan Perišić",
+      "name": "FW: Ivan Perisic",
       "number": 14,
       "position": "FW"
     },
     {
-      "name": "FW: Bruno Petković",
+      "name": "FW: Bruno Petkovic",
       "number": 17,
       "position": "FW"
     },
@@ -4406,12 +4406,12 @@
       "position": "FW"
     },
     {
-      "name": "FW: Luka Ivanušec",
+      "name": "FW: Luka Ivanusec",
       "number": 18,
       "position": "FW"
     },
     {
-      "name": "FW: Marco Pašalić",
+      "name": "FW: Marco Pasalic",
       "number": 24,
       "position": "FW"
     },
@@ -4530,17 +4530,17 @@
       "position": "GK"
     },
     {
-      "name": "GK: César Samudio",
+      "name": "GK: Cesar Samudio",
       "number": 1,
       "position": "GK"
     },
     {
-      "name": "DF: José Córdoba",
+      "name": "DF: Jose Cordoba",
       "number": 3,
       "position": "DF"
     },
     {
-      "name": "DF: Edgardo Fariña",
+      "name": "DF: Edgardo Farina",
       "number": 24,
       "position": "DF"
     },
@@ -4555,7 +4555,7 @@
       "position": "DF"
     },
     {
-      "name": "DF: César Blackman",
+      "name": "DF: Cesar Blackman",
       "number": 4,
       "position": "DF"
     },
@@ -4575,12 +4575,12 @@
       "position": "MF"
     },
     {
-      "name": "MF: Cristian Martínez",
+      "name": "MF: Cristian Martinez",
       "number": 6,
       "position": "MF"
     },
     {
-      "name": "MF: Aníbal Godoy",
+      "name": "MF: Anibal Godoy",
       "number": 20,
       "position": "MF"
     },
@@ -4595,17 +4595,17 @@
       "position": "MF"
     },
     {
-      "name": "FW: É. Yoel Bárcenas",
+      "name": "FW: E. Yoel Barcenas",
       "number": 10,
       "position": "FW"
     },
     {
-      "name": "FW: José Fajardo",
+      "name": "FW: Jose Fajardo",
       "number": 9,
       "position": "FW"
     },
     {
-      "name": "FW: Ismael Díaz",
+      "name": "FW: Ismael Diaz",
       "number": 7,
       "position": "FW"
     },

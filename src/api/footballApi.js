@@ -1,5 +1,7 @@
 import initialFixtures from '../data/fixtures.json';
 import initialTeams from '../data/teams.json';
+import playersData from '../data/players.json';
+
 
 // Resolve a team's formation, starting 11, and substitutes dynamically & deterministically
 export const getTeamFormationAndLineup = (teamId, roster) => {
@@ -129,27 +131,290 @@ export const generateDeterministicResult = (match) => {
     ]
   };
 
+  // Hardcoded real scores and goals for Matches 1 to 20 from API
+  const realResults = {
+    1: {
+      homeScore: 2,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 9, teamId: 'MEX', player: 'J. Quiñones', detail: 'Goal' },
+        { type: 'goal', minute: 67, teamId: 'MEX', player: 'R. Jiménez', detail: 'Goal' }
+      ]
+    },
+    2: {
+      homeScore: 2,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 59, teamId: 'UEFA_D', player: 'L. Krejčí', detail: 'Goal' },
+        { type: 'goal', minute: 67, teamId: 'KOR', player: 'Hwang In-Beom', detail: 'Goal' },
+        { type: 'goal', minute: 80, teamId: 'KOR', player: 'Oh Hyeon-Gyu', detail: 'Goal' }
+      ]
+    },
+    3: {
+      homeScore: 1,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 11, teamId: 'CAN', player: 'C. Larin', detail: 'Goal' },
+        { type: 'goal', minute: 21, teamId: 'BIH', player: 'Jovo Lukić', detail: 'Goal' }
+      ]
+    },
+    4: {
+      homeScore: 4,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 7, teamId: 'USA', player: 'D. Bobadilla', detail: 'Own Goal' },
+        { type: 'goal', minute: 31, teamId: 'USA', player: 'F. Balogun', detail: 'Goal' },
+        { type: 'goal', minute: 50, teamId: 'USA', player: 'F. Balogun', detail: 'Goal' },
+        { type: 'goal', minute: 73, teamId: 'PAR', player: 'Maurício', detail: 'Goal' },
+        { type: 'goal', minute: 98, teamId: 'USA', player: 'G. Reyna', detail: 'Goal' }
+      ]
+    },
+    5: {
+      homeScore: 0,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 28, teamId: 'SCO', player: 'J. McGinn', detail: 'Goal' }
+      ]
+    },
+    6: {
+      homeScore: 2,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 27, teamId: 'AUS', player: 'Nestory Irankunda', detail: 'Goal' },
+        { type: 'goal', minute: 75, teamId: 'AUS', player: 'C. Metcalfe', detail: 'Goal' }
+      ]
+    },
+    7: {
+      homeScore: 1,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 21, teamId: 'MAR', player: 'I. Saibari', detail: 'Goal' },
+        { type: 'goal', minute: 32, teamId: 'BRA', player: 'V. Júnior', detail: 'Goal' }
+      ]
+    },
+    8: {
+      homeScore: 1,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 17, teamId: 'SUI', player: 'Breel Embolo', detail: 'Penalty Goal' },
+        { type: 'goal', minute: 95, teamId: 'QAT', player: 'B. Khoukhi', detail: 'Goal' }
+      ]
+    },
+    9: {
+      homeScore: 1,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 90, teamId: 'CIV', player: 'A. Diallo', detail: 'Goal' }
+      ]
+    },
+    10: {
+      homeScore: 7,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 7, teamId: 'GER', player: 'Felix Nmecha', detail: 'Goal' },
+        { type: 'goal', minute: 21, teamId: 'CUW', player: 'L. Comenencia', detail: 'Goal' },
+        { type: 'goal', minute: 38, teamId: 'GER', player: 'N. Schlotterbeck', detail: 'Goal' },
+        { type: 'goal', minute: 47, teamId: 'GER', player: 'J. Musiala', detail: 'Goal' },
+        { type: 'goal', minute: 50, teamId: 'GER', player: 'K. Havertz', detail: 'Penalty Goal' },
+        { type: 'goal', minute: 68, teamId: 'GER', player: 'N. Brown', detail: 'Goal' },
+        { type: 'goal', minute: 78, teamId: 'GER', player: 'D. Undav', detail: 'Goal' },
+        { type: 'goal', minute: 88, teamId: 'GER', player: 'K. Havertz', detail: 'Goal' }
+      ]
+    },
+    11: {
+      homeScore: 2,
+      awayScore: 2,
+      events: [
+        { type: 'goal', minute: 51, teamId: 'NED', player: 'Virgil van Dijk', detail: 'Goal' },
+        { type: 'goal', minute: 57, teamId: 'JPN', player: 'K. Nakamura', detail: 'Goal' },
+        { type: 'goal', minute: 64, teamId: 'NED', player: 'C. Summerville', detail: 'Goal' },
+        { type: 'goal', minute: 89, teamId: 'JPN', player: 'K. Ogawa', detail: 'Goal' }
+      ]
+    },
+    12: {
+      homeScore: 5,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 7, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' },
+        { type: 'goal', minute: 30, teamId: 'UEFA_B', player: 'A. Isak', detail: 'Goal' },
+        { type: 'goal', minute: 43, teamId: 'TUN', player: 'O. Rekik', detail: 'Goal' },
+        { type: 'goal', minute: 59, teamId: 'UEFA_B', player: 'V. Gyökeres', detail: 'Goal' },
+        { type: 'goal', minute: 84, teamId: 'UEFA_B', player: 'M. Svanberg', detail: 'Goal' },
+        { type: 'goal', minute: 96, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' }
+      ]
+    },
+    13: {
+      homeScore: 2,
+      awayScore: 2,
+      events: [
+        { type: 'goal', minute: 7, teamId: 'NZL', player: 'Elijah Just', detail: 'Goal' },
+        { type: 'goal', minute: 32, teamId: 'IRN', player: 'Ramin Rezaiian', detail: 'Goal' },
+        { type: 'goal', minute: 54, teamId: 'NZL', player: 'Elijah Just', detail: 'Goal' },
+        { type: 'goal', minute: 64, teamId: 'IRN', player: 'Mohammad Mohebi', detail: 'Goal' }
+      ]
+    },
+    14: {
+      homeScore: 0,
+      awayScore: 0,
+      events: []
+    },
+    15: {
+      homeScore: 1,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 20, teamId: 'EGY', player: 'Emam Ashour', detail: 'Goal' },
+        { type: 'goal', minute: 66, teamId: 'BEL', player: 'Mohamed Hany', detail: 'Goal' }
+      ]
+    },
+    16: {
+      homeScore: 1,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 41, teamId: 'KSA', player: 'Abdulelah Al-Amri', detail: 'Goal' },
+        { type: 'goal', minute: 80, teamId: 'URU', player: 'Maximiliano Araújo', detail: 'Goal' }
+      ]
+    },
+    17: {
+      homeScore: 3,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 66, teamId: 'FRA', player: 'K. Mbappé', detail: 'Goal' },
+        { type: 'goal', minute: 82, teamId: 'FRA', player: 'B. Barcola', detail: 'Goal' },
+        { type: 'goal', minute: 95, teamId: 'SEN', player: 'I. Mbaye', detail: 'Goal' },
+        { type: 'goal', minute: 96, teamId: 'FRA', player: 'K. Mbappé', detail: 'Goal' }
+      ]
+    },
+    18: {
+      homeScore: 1,
+      awayScore: 4,
+      events: [
+        { type: 'goal', minute: 29, teamId: 'NOR', player: 'Arling Halnd', detail: 'Goal' },
+        { type: 'goal', minute: 39, teamId: 'IC_2', player: 'Aimn Hsin', detail: 'Goal' },
+        { type: 'goal', minute: 43, teamId: 'NOR', player: 'Arling Halnd', detail: 'Goal' },
+        { type: 'goal', minute: 76, teamId: 'NOR', player: 'Liv Avstigard', detail: 'Goal' },
+        { type: 'goal', minute: 97, teamId: 'NOR', player: 'Aimn Hsin', detail: 'Goal' }
+      ]
+    },
+    19: {
+      homeScore: 3,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 17, teamId: 'ARG', player: 'Livnl Msi', detail: 'Goal' },
+        { type: 'goal', minute: 60, teamId: 'ARG', player: 'Livnl Msi', detail: 'Goal' },
+        { type: 'goal', minute: 76, teamId: 'ARG', player: 'Livnl Msi', detail: 'Goal' }
+      ]
+    },
+    20: {
+      homeScore: 1,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 20, teamId: 'AUT', player: 'Rvmanv Ashmid', detail: 'Goal' }
+      ]
+    }
+  };
+
+  if (realResults[match.matchId]) {
+    const res = realResults[match.matchId];
+    events.push(...res.events);
+    if (realWorldEvents[match.matchId]) {
+      events.push(...realWorldEvents[match.matchId]);
+    }
+    events.sort((a, b) => a.minute - b.minute);
+
+    let winner = null;
+    if (res.homeScore > res.awayScore) winner = match.homeTeamId;
+    else if (res.awayScore > res.homeScore) winner = match.awayTeamId;
+
+    return {
+      homeScore: res.homeScore,
+      awayScore: res.awayScore,
+      winner,
+      events
+    };
+  }
+
+  // Fallback: Deterministic outcome calculation for other matches
+  const seed = match.matchId;
+  const rawHomeScore = (seed * 7 + 1) % 4; // 0, 1, 2, 3
+  const rawAwayScore = (seed * 13 + 2) % 3; // 0, 1, 2
+  
+  const getScorer = (teamId) => {
+    const roster = playersData[teamId] || [];
+    if (roster.length === 0) return 'Unknown Player';
+    const attackers = roster.filter(p => p.position === 'FW' || p.position === 'MF');
+    const list = attackers.length > 0 ? attackers : roster;
+    const idx = (seed * 17) % list.length;
+    const name = list[idx].name;
+    return name.replace(/^(GK|DF|MF|FW):\s*/, '');
+  };
+
+  for (let i = 0; i < rawHomeScore; i++) {
+    const min = ((seed * 19 + i * 29) % 88) + 1;
+    events.push({
+      type: 'goal',
+      minute: min,
+      teamId: match.homeTeamId,
+      player: getScorer(match.homeTeamId),
+      detail: 'Goal'
+    });
+  }
+
+  for (let i = 0; i < rawAwayScore; i++) {
+    const min = ((seed * 23 + i * 31) % 88) + 1;
+    events.push({
+      type: 'goal',
+      minute: min,
+      teamId: match.awayTeamId,
+      player: getScorer(match.awayTeamId),
+      detail: 'Goal'
+    });
+  }
+
   if (realWorldEvents[match.matchId]) {
     events.push(...realWorldEvents[match.matchId]);
   }
 
-  let homeScore = 0;
-  let awayScore = 0;
-  events.forEach(e => {
-    if (e.type === 'goal') {
-      if (e.teamId === match.homeTeamId) homeScore++;
-      else if (e.teamId === match.awayTeamId) awayScore++;
-    }
-  });
+  events.sort((a, b) => a.minute - b.minute);
 
-  let winner = null;
-  if (homeScore > awayScore) {
-    winner = match.homeTeamId;
-  } else if (awayScore > homeScore) {
-    winner = match.awayTeamId;
+  let finalHomeScore = rawHomeScore;
+  let finalAwayScore = rawAwayScore;
+  const isKnockout = match.stage !== 'Group Stage';
+
+  if (isKnockout && finalHomeScore === finalAwayScore) {
+    const extraSeed = seed + 100;
+    if (extraSeed % 2 === 0) {
+      if (extraSeed % 4 === 0) {
+        finalHomeScore += 1;
+        events.push({
+          type: 'goal',
+          minute: 105 + (extraSeed % 15),
+          teamId: match.homeTeamId,
+          player: getScorer(match.homeTeamId),
+          detail: 'Goal'
+        });
+      } else {
+        finalAwayScore += 1;
+        events.push({
+          type: 'goal',
+          minute: 105 + (extraSeed % 15),
+          teamId: match.awayTeamId,
+          player: getScorer(match.awayTeamId),
+          detail: 'Goal'
+        });
+      }
+    }
   }
 
-  return { homeScore, awayScore, winner, events };
+  let winner = null;
+  if (finalHomeScore > finalAwayScore) {
+    winner = match.homeTeamId;
+  } else if (finalAwayScore > finalHomeScore) {
+    winner = match.awayTeamId;
+  } else if (isKnockout) {
+    winner = (seed % 2 === 0) ? match.homeTeamId : match.awayTeamId;
+  }
+
+  return { homeScore: finalHomeScore, awayScore: finalAwayScore, winner, events };
 };
 
 // Automatically update match statuses based on current time (automated for match time itself)
@@ -163,10 +428,7 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
       return match;
     }
 
-    // If the match is synced from the API and we are not forcing simulation sync, preserve it.
-    if (match.apiSynced && !forceSync) {
-      return match;
-    }
+
 
     const matchTime = new Date(match.dateTimeISO).getTime();
     
@@ -301,11 +563,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v11') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v12') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v11', 'true');
+    localStorage.setItem('wc_db_clean_start_v12', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

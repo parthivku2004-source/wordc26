@@ -173,7 +173,7 @@ export const generateDeterministicResult = (match) => {
       homeScore: 0,
       awayScore: 1,
       events: [
-        { type: 'goal', minute: 28, teamId: 'SCO', player: 'J. McGinn', detail: 'Goal' }
+        { type: 'goal', minute: 28, teamId: 'SCO', player: 'John McGinn', detail: 'Goal' }
       ]
     },
     6: {
@@ -181,23 +181,23 @@ export const generateDeterministicResult = (match) => {
       awayScore: 0,
       events: [
         { type: 'goal', minute: 27, teamId: 'AUS', player: 'Nestory Irankunda', detail: 'Goal' },
-        { type: 'goal', minute: 75, teamId: 'AUS', player: 'C. Metcalfe', detail: 'Goal' }
+        { type: 'goal', minute: 75, teamId: 'AUS', player: 'Connor Metcalfe', detail: 'Goal' }
       ]
     },
     7: {
       homeScore: 1,
       awayScore: 1,
       events: [
-        { type: 'goal', minute: 21, teamId: 'MAR', player: 'I. Saibari', detail: 'Goal' },
-        { type: 'goal', minute: 32, teamId: 'BRA', player: 'V. Júnior', detail: 'Goal' }
+        { type: 'goal', minute: 21, teamId: 'MAR', player: 'Ismael Saibari', detail: 'Goal' },
+        { type: 'goal', minute: 32, teamId: 'BRA', player: 'Vinícius Júnior', detail: 'Goal' }
       ]
     },
     8: {
       homeScore: 1,
       awayScore: 1,
       events: [
-        { type: 'goal', minute: 17, teamId: 'SUI', player: 'Breel Embolo', detail: 'Penalty Goal' },
-        { type: 'goal', minute: 95, teamId: 'QAT', player: 'B. Khoukhi', detail: 'Goal' }
+        { type: 'goal', minute: 17, teamId: 'SUI', player: 'B. Embolo', detail: 'Penalty Goal' },
+        { type: 'goal', minute: 95, teamId: 'QAT', player: 'Boualem Khoukhi', detail: 'Goal' }
       ]
     },
     9: {
@@ -213,12 +213,12 @@ export const generateDeterministicResult = (match) => {
       events: [
         { type: 'goal', minute: 7, teamId: 'GER', player: 'Felix Nmecha', detail: 'Goal' },
         { type: 'goal', minute: 21, teamId: 'CUW', player: 'L. Comenencia', detail: 'Goal' },
-        { type: 'goal', minute: 38, teamId: 'GER', player: 'N. Schlotterbeck', detail: 'Goal' },
-        { type: 'goal', minute: 47, teamId: 'GER', player: 'J. Musiala', detail: 'Goal' },
-        { type: 'goal', minute: 50, teamId: 'GER', player: 'K. Havertz', detail: 'Penalty Goal' },
+        { type: 'goal', minute: 38, teamId: 'GER', player: 'Nico Schlotterbeck', detail: 'Goal' },
+        { type: 'goal', minute: 47, teamId: 'GER', player: 'Jamal Musiala', detail: 'Goal' },
+        { type: 'goal', minute: 50, teamId: 'GER', player: 'Kai Havertz', detail: 'Penalty Goal' },
         { type: 'goal', minute: 68, teamId: 'GER', player: 'N. Brown', detail: 'Goal' },
-        { type: 'goal', minute: 78, teamId: 'GER', player: 'D. Undav', detail: 'Goal' },
-        { type: 'goal', minute: 88, teamId: 'GER', player: 'K. Havertz', detail: 'Goal' }
+        { type: 'goal', minute: 78, teamId: 'GER', player: 'Deniz Undav', detail: 'Goal' },
+        { type: 'goal', minute: 88, teamId: 'GER', player: 'Kai Havertz', detail: 'Goal' }
       ]
     },
     11: {
@@ -226,9 +226,9 @@ export const generateDeterministicResult = (match) => {
       awayScore: 2,
       events: [
         { type: 'goal', minute: 51, teamId: 'NED', player: 'Virgil van Dijk', detail: 'Goal' },
-        { type: 'goal', minute: 57, teamId: 'JPN', player: 'K. Nakamura', detail: 'Goal' },
+        { type: 'goal', minute: 57, teamId: 'JPN', player: 'Keito Nakamura', detail: 'Goal' },
         { type: 'goal', minute: 64, teamId: 'NED', player: 'C. Summerville', detail: 'Goal' },
-        { type: 'goal', minute: 89, teamId: 'JPN', player: 'K. Ogawa', detail: 'Goal' }
+        { type: 'goal', minute: 89, teamId: 'JPN', player: 'Koki Ogawa', detail: 'Goal' }
       ]
     },
     12: {
@@ -236,10 +236,10 @@ export const generateDeterministicResult = (match) => {
       awayScore: 1,
       events: [
         { type: 'goal', minute: 7, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' },
-        { type: 'goal', minute: 30, teamId: 'UEFA_B', player: 'A. Isak', detail: 'Goal' },
+        { type: 'goal', minute: 30, teamId: 'UEFA_B', player: 'Alexander Isak', detail: 'Goal' },
         { type: 'goal', minute: 43, teamId: 'TUN', player: 'O. Rekik', detail: 'Goal' },
-        { type: 'goal', minute: 59, teamId: 'UEFA_B', player: 'V. Gyökeres', detail: 'Goal' },
-        { type: 'goal', minute: 84, teamId: 'UEFA_B', player: 'M. Svanberg', detail: 'Goal' },
+        { type: 'goal', minute: 59, teamId: 'UEFA_B', player: 'Viktor Gyökeres', detail: 'Goal' },
+        { type: 'goal', minute: 84, teamId: 'UEFA_B', player: 'Mattias Svanberg', detail: 'Goal' },
         { type: 'goal', minute: 96, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' }
       ]
     },
@@ -248,7 +248,7 @@ export const generateDeterministicResult = (match) => {
       awayScore: 2,
       events: [
         { type: 'goal', minute: 7, teamId: 'NZL', player: 'Elijah Just', detail: 'Goal' },
-        { type: 'goal', minute: 32, teamId: 'IRN', player: 'Ramin Rezaiian', detail: 'Goal' },
+        { type: 'goal', minute: 32, teamId: 'IRN', player: 'Ramin Rezaeian', detail: 'Goal' },
         { type: 'goal', minute: 54, teamId: 'NZL', player: 'Elijah Just', detail: 'Goal' },
         { type: 'goal', minute: 64, teamId: 'IRN', player: 'Mohammad Mohebi', detail: 'Goal' }
       ]
@@ -271,44 +271,44 @@ export const generateDeterministicResult = (match) => {
       awayScore: 1,
       events: [
         { type: 'goal', minute: 41, teamId: 'KSA', player: 'Abdulelah Al-Amri', detail: 'Goal' },
-        { type: 'goal', minute: 80, teamId: 'URU', player: 'Maximiliano Araújo', detail: 'Goal' }
+        { type: 'goal', minute: 80, teamId: 'URU', player: 'M. Araújo', detail: 'Goal' }
       ]
     },
     17: {
       homeScore: 3,
       awayScore: 1,
       events: [
-        { type: 'goal', minute: 66, teamId: 'FRA', player: 'K. Mbappé', detail: 'Goal' },
-        { type: 'goal', minute: 82, teamId: 'FRA', player: 'B. Barcola', detail: 'Goal' },
+        { type: 'goal', minute: 66, teamId: 'FRA', player: 'Kylian Mbappé', detail: 'Goal' },
+        { type: 'goal', minute: 82, teamId: 'FRA', player: 'Bradley Barcola', detail: 'Goal' },
         { type: 'goal', minute: 95, teamId: 'SEN', player: 'I. Mbaye', detail: 'Goal' },
-        { type: 'goal', minute: 96, teamId: 'FRA', player: 'K. Mbappé', detail: 'Goal' }
+        { type: 'goal', minute: 96, teamId: 'FRA', player: 'Kylian Mbappé', detail: 'Goal' }
       ]
     },
     18: {
       homeScore: 1,
       awayScore: 4,
       events: [
-        { type: 'goal', minute: 29, teamId: 'NOR', player: 'Arling Halnd', detail: 'Goal' },
-        { type: 'goal', minute: 39, teamId: 'IC_2', player: 'Aimn Hsin', detail: 'Goal' },
-        { type: 'goal', minute: 43, teamId: 'NOR', player: 'Arling Halnd', detail: 'Goal' },
-        { type: 'goal', minute: 76, teamId: 'NOR', player: 'Liv Avstigard', detail: 'Goal' },
-        { type: 'goal', minute: 97, teamId: 'NOR', player: 'Aimn Hsin', detail: 'Goal' }
+        { type: 'goal', minute: 29, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
+        { type: 'goal', minute: 39, teamId: 'IC_2', player: 'Aymen Hussein', detail: 'Goal' },
+        { type: 'goal', minute: 43, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
+        { type: 'goal', minute: 76, teamId: 'NOR', player: 'Leo Østigård', detail: 'Goal' },
+        { type: 'goal', minute: 97, teamId: 'NOR', player: 'Aymen Hussein', detail: 'Goal' }
       ]
     },
     19: {
       homeScore: 3,
       awayScore: 0,
       events: [
-        { type: 'goal', minute: 17, teamId: 'ARG', player: 'Livnl Msi', detail: 'Goal' },
-        { type: 'goal', minute: 60, teamId: 'ARG', player: 'Livnl Msi', detail: 'Goal' },
-        { type: 'goal', minute: 76, teamId: 'ARG', player: 'Livnl Msi', detail: 'Goal' }
+        { type: 'goal', minute: 17, teamId: 'ARG', player: 'Lionel Messi', detail: 'Goal' },
+        { type: 'goal', minute: 60, teamId: 'ARG', player: 'Lionel Messi', detail: 'Goal' },
+        { type: 'goal', minute: 76, teamId: 'ARG', player: 'Lionel Messi', detail: 'Goal' }
       ]
     },
     20: {
       homeScore: 1,
       awayScore: 0,
       events: [
-        { type: 'goal', minute: 20, teamId: 'AUT', player: 'Rvmanv Ashmid', detail: 'Goal' }
+        { type: 'goal', minute: 20, teamId: 'AUT', player: 'Romano Schmid', detail: 'Goal' }
       ]
     }
   };

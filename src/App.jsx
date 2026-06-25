@@ -381,7 +381,7 @@ export default function App() {
     setSearchQuery('');
     setStageFilter('');
     setGroupFilter('');
-    setDateFilter(new Date().toLocaleDateString('en-CA'));
+    setDateFilter('');
     setShowLiveOnly(false);
     setShowTodayOnly(false);
     setShowUpcomingOnly(false);

@@ -177,7 +177,7 @@ export default function KnockoutBracket({ fixtures = [] }) {
 
     if (stage === 'R32') {
       const r32Mapping = [
-        { matchId: 73, home: '1A', away: '2B' },
+        { matchId: 73, home: '2A', away: '2B' },
         { matchId: 75, home: '1F', away: '2C' },
         { matchId: 74, home: '1E', away: '3ABCDF' },
         { matchId: 77, home: '1I', away: '3CDFGH' },
@@ -188,7 +188,7 @@ export default function KnockoutBracket({ fixtures = [] }) {
         // Right side:
         { matchId: 76, home: '1C', away: '2F' },
         { matchId: 78, home: '2E', away: '2I' },
-        { matchId: 79, home: '2A', away: '3CFHI' }, // Corrected 1A -> 2A
+        { matchId: 79, home: '1A', away: '3CEFHI' },
         { matchId: 80, home: '1L', away: '3EHIK' },
         { matchId: 86, home: '1J', away: '2H' },
         { matchId: 88, home: '2D', away: '2G' },

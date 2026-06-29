@@ -602,11 +602,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v14') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v15') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v14', 'true');
+    localStorage.setItem('wc_db_clean_start_v15', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

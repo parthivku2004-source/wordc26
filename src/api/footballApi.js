@@ -317,12 +317,14 @@ export const generateDeterministicResult = (match) => {
       ]
     },
     74: {
-      homeScore: 3,
-      awayScore: 0,
+      homeScore: 1,
+      awayScore: 1,
+      penWinner: 'PAR',
+      penHome: 4,
+      penAway: 5,
       events: [
-        { type: 'goal', minute: 12, teamId: 'GER', player: 'Jamal Musiala', detail: 'Goal' },
-        { type: 'goal', minute: 51, teamId: 'GER', player: 'Kai Havertz', detail: 'Goal' },
-        { type: 'goal', minute: 78, teamId: 'GER', player: 'Leroy Sane', detail: 'Goal' }
+        { type: 'goal', minute: 28, teamId: 'GER', player: 'Jamal Musiala', detail: 'Goal' },
+        { type: 'goal', minute: 67, teamId: 'PAR', player: 'Miguel Almiron', detail: 'Goal' }
       ]
     },
     75: {
@@ -370,14 +372,6 @@ export const generateDeterministicResult = (match) => {
         { type: 'goal', minute: 85, teamId: 'MEX', player: 'Santiago Gimenez', detail: 'Goal' }
       ]
     },
-    81: {
-      homeScore: 2,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 21, teamId: 'USA', player: 'Christian Pulisic', detail: 'Goal' },
-        { type: 'goal', minute: 66, teamId: 'USA', player: 'Folarin Balogun', detail: 'Goal' }
-      ]
-    }
   };
 
   if (realResults[match.matchId]) {
@@ -389,13 +383,21 @@ export const generateDeterministicResult = (match) => {
     events.sort((a, b) => a.minute - b.minute);
 
     let winner = null;
-    if (res.homeScore > res.awayScore) winner = match.homeTeamId;
-    else if (res.awayScore > res.homeScore) winner = match.awayTeamId;
+    if (res.homeScore > res.awayScore) {
+      winner = match.homeTeamId;
+    } else if (res.awayScore > res.homeScore) {
+      winner = match.awayTeamId;
+    } else if (res.penWinner) {
+      // Penalty shootout — penWinner is the winning team's ID (e.g. 'PAR')
+      winner = res.penWinner;
+    }
 
     return {
       homeScore: res.homeScore,
       awayScore: res.awayScore,
       winner,
+      homePenalties: res.penHome,
+      awayPenalties: res.penAway,
       events
     };
   }
@@ -674,11 +676,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v18') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v19') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v18', 'true');
+    localStorage.setItem('wc_db_clean_start_v19', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

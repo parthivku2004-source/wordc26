@@ -305,6 +305,78 @@ export const generateDeterministicResult = (match) => {
       events: [
         { type: 'goal', minute: 20, teamId: 'AUT', player: 'Romano Schmid', detail: 'Goal' }
       ]
+    },
+    // Round of 32 Results
+    73: {
+      homeScore: 1,
+      awayScore: 2,
+      events: [
+        { type: 'goal', minute: 34, teamId: 'RSA', player: 'Percy Tau', detail: 'Goal' },
+        { type: 'goal', minute: 56, teamId: 'CAN', player: 'Jonathan David', detail: 'Goal' },
+        { type: 'goal', minute: 82, teamId: 'CAN', player: 'Alphonso Davies', detail: 'Goal' }
+      ]
+    },
+    74: {
+      homeScore: 3,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 12, teamId: 'GER', player: 'Jamal Musiala', detail: 'Goal' },
+        { type: 'goal', minute: 51, teamId: 'GER', player: 'Kai Havertz', detail: 'Goal' },
+        { type: 'goal', minute: 78, teamId: 'GER', player: 'Leroy Sane', detail: 'Goal' }
+      ]
+    },
+    75: {
+      homeScore: 2,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 19, teamId: 'NED', player: 'Cody Gakpo', detail: 'Goal' },
+        { type: 'goal', minute: 44, teamId: 'MAR', player: 'Youssef En-Nesyri', detail: 'Goal' },
+        { type: 'goal', minute: 71, teamId: 'NED', player: 'Virgil van Dijk', detail: 'Goal' }
+      ]
+    },
+    76: {
+      homeScore: 3,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 22, teamId: 'BRA', player: 'Vinicius Junior', detail: 'Goal' },
+        { type: 'goal', minute: 38, teamId: 'BRA', player: 'Rodrygo', detail: 'Goal' },
+        { type: 'goal', minute: 65, teamId: 'JPN', player: 'Koki Ogawa', detail: 'Goal' },
+        { type: 'goal', minute: 87, teamId: 'BRA', player: 'Endrick', detail: 'Goal' }
+      ]
+    },
+    77: {
+      homeScore: 2,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 35, teamId: 'FRA', player: 'Kylian Mbappe', detail: 'Goal' },
+        { type: 'goal', minute: 74, teamId: 'FRA', player: 'Antoine Griezmann', detail: 'Goal' }
+      ]
+    },
+    78: {
+      homeScore: 1,
+      awayScore: 2,
+      events: [
+        { type: 'goal', minute: 28, teamId: 'CIV', player: 'Sebastien Haller', detail: 'Goal' },
+        { type: 'goal', minute: 47, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
+        { type: 'goal', minute: 79, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' }
+      ]
+    },
+    79: {
+      homeScore: 2,
+      awayScore: 1,
+      events: [
+        { type: 'goal', minute: 30, teamId: 'MEX', player: 'Hirving Lozano', detail: 'Goal' },
+        { type: 'goal', minute: 58, teamId: 'ECU', player: 'Enner Valencia', detail: 'Goal' },
+        { type: 'goal', minute: 85, teamId: 'MEX', player: 'Santiago Gimenez', detail: 'Goal' }
+      ]
+    },
+    81: {
+      homeScore: 2,
+      awayScore: 0,
+      events: [
+        { type: 'goal', minute: 21, teamId: 'USA', player: 'Christian Pulisic', detail: 'Goal' },
+        { type: 'goal', minute: 66, teamId: 'USA', player: 'Folarin Balogun', detail: 'Goal' }
+      ]
     }
   };
 
@@ -602,11 +674,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v16') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v18') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v16', 'true');
+    localStorage.setItem('wc_db_clean_start_v18', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {
@@ -772,6 +844,23 @@ export const resolveDynamicKnockoutTeams = (fixtures, standings) => {
       match.homeTeam = homeWinner.name;
       match.awayTeamId = awayWinner.id;
       match.awayTeam = awayWinner.name;
+    }
+
+    // Dynamic winner calculation for finished matches based on score/penalties
+    if (match.status === 'Finished') {
+      if (match.homeScore > match.awayScore) {
+        match.winner = match.homeTeamId;
+      } else if (match.awayScore > match.homeScore) {
+        match.winner = match.awayTeamId;
+      } else if (match.stage !== 'Group Stage') {
+        const homePen = match.homePenalties || 0;
+        const awayPen = match.awayPenalties || 0;
+        if (homePen > awayPen) {
+          match.winner = match.homeTeamId;
+        } else if (awayPen > homePen) {
+          match.winner = match.awayTeamId;
+        }
+      }
     }
 
     // Update winner and events team IDs if they match the old placeholder ID

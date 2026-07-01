@@ -602,11 +602,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v15') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v16') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v15', 'true');
+    localStorage.setItem('wc_db_clean_start_v16', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {
@@ -710,6 +710,9 @@ export const resolveDynamicKnockoutTeams = (fixtures, standings) => {
   clonedFixtures.forEach(match => {
     if (match.stage === 'Group Stage') return;
 
+    const oldHomeId = match.homeTeamId;
+    const oldAwayId = match.awayTeamId;
+
     if (match.stage === 'Round of 32') {
       const homeResolved = resolveFormulaTeam(match.homeTeamId);
       const awayResolved = resolveFormulaTeam(match.awayTeamId);
@@ -769,6 +772,25 @@ export const resolveDynamicKnockoutTeams = (fixtures, standings) => {
       match.homeTeam = homeWinner.name;
       match.awayTeamId = awayWinner.id;
       match.awayTeam = awayWinner.name;
+    }
+
+    // Update winner and events team IDs if they match the old placeholder ID
+    if (match.winner) {
+      if (match.winner === oldHomeId) {
+        match.winner = match.homeTeamId;
+      } else if (match.winner === oldAwayId) {
+        match.winner = match.awayTeamId;
+      }
+    }
+
+    if (match.events) {
+      match.events.forEach(e => {
+        if (e.teamId === oldHomeId) {
+          e.teamId = match.homeTeamId;
+        } else if (e.teamId === oldAwayId) {
+          e.teamId = match.awayTeamId;
+        }
+      });
     }
   });
 

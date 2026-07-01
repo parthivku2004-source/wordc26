@@ -177,23 +177,23 @@ export default function KnockoutBracket({ fixtures = [] }) {
 
     if (stage === 'R32') {
       const r32Mapping = [
-        { matchId: 73, home: '2A', away: '2B' },
-        { matchId: 75, home: '1F', away: '2C' },
-        { matchId: 74, home: '1E', away: '3ABCDF' },
-        { matchId: 77, home: '1I', away: '3CDFGH' },
-        { matchId: 81, home: '1D', away: '3BEFIJ' },
-        { matchId: 82, home: '1G', away: '3AEHIJ' },
-        { matchId: 83, home: '2K', away: '2L' },
-        { matchId: 84, home: '1H', away: '2J' },
+        { matchId: 73, home: 'RSA', away: 'CAN' },
+        { matchId: 75, home: 'NED', away: 'MAR' },
+        { matchId: 74, home: 'GER', away: 'PAR' },
+        { matchId: 77, home: 'FRA', away: 'UEFA_B' },
+        { matchId: 81, home: 'USA', away: 'BIH' },
+        { matchId: 82, home: 'BEL', away: 'ALG' },
+        { matchId: 83, home: 'POR', away: 'CRO' },
+        { matchId: 84, home: 'ESP', away: 'AUT' },
         // Right side:
-        { matchId: 76, home: '1C', away: '2F' },
-        { matchId: 78, home: '2E', away: '2I' },
-        { matchId: 79, home: '1A', away: '3CEFHI' },
-        { matchId: 80, home: '1L', away: '3EHIK' },
-        { matchId: 86, home: '1J', away: '2H' },
-        { matchId: 88, home: '2D', away: '2G' },
-        { matchId: 85, home: '1B', away: '3EFGIJ' },
-        { matchId: 87, home: '1K', away: '3DEIJL' }
+        { matchId: 76, home: 'BRA', away: 'JPN' },
+        { matchId: 78, home: 'CIV', away: 'NOR' },
+        { matchId: 79, home: 'MEX', away: 'ECU' },
+        { matchId: 80, home: 'ENG', away: 'IC_1' },
+        { matchId: 86, home: 'ARG', away: 'CPV' },
+        { matchId: 88, home: 'AUS', away: 'EGY' },
+        { matchId: 85, home: 'SUI', away: 'SEN' },
+        { matchId: 87, home: 'COL', away: 'GHA' }
       ];
       const mapping = r32Mapping[index];
       matchId = mapping.matchId;

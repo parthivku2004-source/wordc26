@@ -133,245 +133,111 @@ export const generateDeterministicResult = (match) => {
 
   // Hardcoded real scores and goals for Matches 1 to 20 from API
   const realResults = {
-    1: {
-      homeScore: 2,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 9, teamId: 'MEX', player: 'J. Quinones', detail: 'Goal' },
-        { type: 'goal', minute: 67, teamId: 'MEX', player: 'R. Jimenez', detail: 'Goal' }
-      ]
-    },
-    2: {
-      homeScore: 2,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 59, teamId: 'UEFA_D', player: 'L. Krejci', detail: 'Goal' },
-        { type: 'goal', minute: 67, teamId: 'KOR', player: 'Hwang In-Beom', detail: 'Goal' },
-        { type: 'goal', minute: 80, teamId: 'KOR', player: 'Oh Hyeon-Gyu', detail: 'Goal' }
-      ]
-    },
-    3: {
-      homeScore: 1,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 11, teamId: 'CAN', player: 'C. Larin', detail: 'Goal' },
-        { type: 'goal', minute: 21, teamId: 'BIH', player: 'Jovo Lukic', detail: 'Goal' }
-      ]
-    },
-    4: {
-      homeScore: 4,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 7, teamId: 'USA', player: 'D. Bobadilla', detail: 'Own Goal' },
-        { type: 'goal', minute: 31, teamId: 'USA', player: 'F. Balogun', detail: 'Goal' },
-        { type: 'goal', minute: 50, teamId: 'USA', player: 'F. Balogun', detail: 'Goal' },
-        { type: 'goal', minute: 73, teamId: 'PAR', player: 'Mauricio', detail: 'Goal' },
-        { type: 'goal', minute: 98, teamId: 'USA', player: 'G. Reyna', detail: 'Goal' }
-      ]
-    },
-    5: {
-      homeScore: 1,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 17, teamId: 'SUI', player: 'B. Embolo', detail: 'Penalty Goal' },
-        { type: 'goal', minute: 95, teamId: 'QAT', player: 'Boualem Khoukhi', detail: 'Goal' }
-      ]
-    },
-    6: {
-      homeScore: 1,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 21, teamId: 'MAR', player: 'Ismael Saibari', detail: 'Goal' },
-        { type: 'goal', minute: 32, teamId: 'BRA', player: 'Vinicius Junior', detail: 'Goal' }
-      ]
-    },
-    7: {
-      homeScore: 0,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 28, teamId: 'SCO', player: 'John McGinn', detail: 'Goal' }
-      ]
-    },
-    8: {
-      homeScore: 2,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 27, teamId: 'AUS', player: 'Nestory Irankunda', detail: 'Goal' },
-        { type: 'goal', minute: 75, teamId: 'AUS', player: 'Connor Metcalfe', detail: 'Goal' }
-      ]
-    },
-    9: {
-      homeScore: 7,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 7, teamId: 'GER', player: 'Felix Nmecha', detail: 'Goal' },
-        { type: 'goal', minute: 21, teamId: 'CUW', player: 'L. Comenencia', detail: 'Goal' },
-        { type: 'goal', minute: 38, teamId: 'GER', player: 'Nico Schlotterbeck', detail: 'Goal' },
-        { type: 'goal', minute: 47, teamId: 'GER', player: 'Jamal Musiala', detail: 'Goal' },
-        { type: 'goal', minute: 50, teamId: 'GER', player: 'Kai Havertz', detail: 'Penalty Goal' },
-        { type: 'goal', minute: 68, teamId: 'GER', player: 'N. Brown', detail: 'Goal' },
-        { type: 'goal', minute: 78, teamId: 'GER', player: 'Deniz Undav', detail: 'Goal' },
-        { type: 'goal', minute: 88, teamId: 'GER', player: 'Kai Havertz', detail: 'Goal' }
-      ]
-    },
-    10: {
-      homeScore: 2,
-      awayScore: 2,
-      events: [
-        { type: 'goal', minute: 51, teamId: 'NED', player: 'Virgil van Dijk', detail: 'Goal' },
-        { type: 'goal', minute: 57, teamId: 'JPN', player: 'Keito Nakamura', detail: 'Goal' },
-        { type: 'goal', minute: 64, teamId: 'NED', player: 'C. Summerville', detail: 'Goal' },
-        { type: 'goal', minute: 89, teamId: 'JPN', player: 'Koki Ogawa', detail: 'Goal' }
-      ]
-    },
-    11: {
-      homeScore: 1,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 90, teamId: 'CIV', player: 'A. Diallo', detail: 'Goal' }
-      ]
-    },
-    12: {
-      homeScore: 5,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 7, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' },
-        { type: 'goal', minute: 30, teamId: 'UEFA_B', player: 'Alexander Isak', detail: 'Goal' },
-        { type: 'goal', minute: 43, teamId: 'TUN', player: 'O. Rekik', detail: 'Goal' },
-        { type: 'goal', minute: 59, teamId: 'UEFA_B', player: 'Viktor Gyokeres', detail: 'Goal' },
-        { type: 'goal', minute: 84, teamId: 'UEFA_B', player: 'Mattias Svanberg', detail: 'Goal' },
-        { type: 'goal', minute: 96, teamId: 'UEFA_B', player: 'Y. Ayari', detail: 'Goal' }
-      ]
-    },
-    14: {
-      homeScore: 1,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 20, teamId: 'EGY', player: 'Emam Ashour', detail: 'Goal' },
-        { type: 'goal', minute: 66, teamId: 'BEL', player: 'Mohamed Hany', detail: 'Goal' }
-      ]
-    },
-    15: {
-      homeScore: 1,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 41, teamId: 'KSA', player: 'Abdulelah Al-Amri', detail: 'Goal' },
-        { type: 'goal', minute: 80, teamId: 'URU', player: 'M. Araujo', detail: 'Goal' }
-      ]
-    },
-    16: {
-      homeScore: 2,
-      awayScore: 2,
-      events: [
-        { type: 'goal', minute: 7, teamId: 'NZL', player: 'Elijah Just', detail: 'Goal' },
-        { type: 'goal', minute: 32, teamId: 'IRN', player: 'Ramin Rezaeian', detail: 'Goal' },
-        { type: 'goal', minute: 54, teamId: 'NZL', player: 'Elijah Just', detail: 'Goal' },
-        { type: 'goal', minute: 64, teamId: 'IRN', player: 'Mohammad Mohebi', detail: 'Goal' }
-      ]
-    },
-    17: {
-      homeScore: 3,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 66, teamId: 'FRA', player: 'Kylian Mbappe', detail: 'Goal' },
-        { type: 'goal', minute: 82, teamId: 'FRA', player: 'Bradley Barcola', detail: 'Goal' },
-        { type: 'goal', minute: 95, teamId: 'SEN', player: 'I. Mbaye', detail: 'Goal' },
-        { type: 'goal', minute: 96, teamId: 'FRA', player: 'Kylian Mbappe', detail: 'Goal' }
-      ]
-    },
-    18: {
-      homeScore: 1,
-      awayScore: 4,
-      events: [
-        { type: 'goal', minute: 29, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
-        { type: 'goal', minute: 39, teamId: 'IC_2', player: 'Aymen Hussein', detail: 'Goal' },
-        { type: 'goal', minute: 43, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
-        { type: 'goal', minute: 76, teamId: 'NOR', player: 'Leo Ostigard', detail: 'Goal' },
-        { type: 'goal', minute: 97, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' }
-      ]
-    },
-    19: {
-      homeScore: 3,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 17, teamId: 'ARG', player: 'Lionel Messi', detail: 'Goal' },
-        { type: 'goal', minute: 60, teamId: 'ARG', player: 'Lionel Messi', detail: 'Goal' },
-        { type: 'goal', minute: 76, teamId: 'ARG', player: 'Lionel Messi', detail: 'Goal' }
-      ]
-    },
-    20: {
-      homeScore: 1,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 20, teamId: 'AUT', player: 'Romano Schmid', detail: 'Goal' }
-      ]
-    },
-    // Round of 32 Results
-    73: {
-      homeScore: 1,
-      awayScore: 2,
-      events: [
-        { type: 'goal', minute: 34, teamId: 'RSA', player: 'Percy Tau', detail: 'Goal' },
-        { type: 'goal', minute: 56, teamId: 'CAN', player: 'Jonathan David', detail: 'Goal' },
-        { type: 'goal', minute: 82, teamId: 'CAN', player: 'Alphonso Davies', detail: 'Goal' }
-      ]
-    },
-    74: {
-      homeScore: 1,
-      awayScore: 1,
-      penWinner: 'PAR',
-      penHome: 4,
-      penAway: 5,
-      events: [
-        { type: 'goal', minute: 28, teamId: 'GER', player: 'Jamal Musiala', detail: 'Goal' },
-        { type: 'goal', minute: 67, teamId: 'PAR', player: 'Miguel Almiron', detail: 'Goal' }
-      ]
-    },
-    75: {
-      homeScore: 2,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 19, teamId: 'NED', player: 'Cody Gakpo', detail: 'Goal' },
-        { type: 'goal', minute: 44, teamId: 'MAR', player: 'Youssef En-Nesyri', detail: 'Goal' },
-        { type: 'goal', minute: 71, teamId: 'NED', player: 'Virgil van Dijk', detail: 'Goal' }
-      ]
-    },
-    76: {
-      homeScore: 3,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 22, teamId: 'BRA', player: 'Vinicius Junior', detail: 'Goal' },
-        { type: 'goal', minute: 38, teamId: 'BRA', player: 'Rodrygo', detail: 'Goal' },
-        { type: 'goal', minute: 65, teamId: 'JPN', player: 'Koki Ogawa', detail: 'Goal' },
-        { type: 'goal', minute: 87, teamId: 'BRA', player: 'Endrick', detail: 'Goal' }
-      ]
-    },
-    77: {
-      homeScore: 2,
-      awayScore: 0,
-      events: [
-        { type: 'goal', minute: 35, teamId: 'FRA', player: 'Kylian Mbappe', detail: 'Goal' },
-        { type: 'goal', minute: 74, teamId: 'FRA', player: 'Antoine Griezmann', detail: 'Goal' }
-      ]
-    },
-    78: {
-      homeScore: 1,
-      awayScore: 2,
-      events: [
-        { type: 'goal', minute: 28, teamId: 'CIV', player: 'Sebastien Haller', detail: 'Goal' },
-        { type: 'goal', minute: 47, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' },
-        { type: 'goal', minute: 79, teamId: 'NOR', player: 'Erling Haaland', detail: 'Goal' }
-      ]
-    },
-    79: {
-      homeScore: 2,
-      awayScore: 1,
-      events: [
-        { type: 'goal', minute: 30, teamId: 'MEX', player: 'Hirving Lozano', detail: 'Goal' },
-        { type: 'goal', minute: 58, teamId: 'ECU', player: 'Enner Valencia', detail: 'Goal' },
-        { type: 'goal', minute: 85, teamId: 'MEX', player: 'Santiago Gimenez', detail: 'Goal' }
-      ]
-    },
+    1: { homeScore: 2, awayScore: 0, events: [] },
+    2: { homeScore: 2, awayScore: 1, events: [] },
+    3: { homeScore: 0, awayScore: 0, events: [] },
+    4: { homeScore: 4, awayScore: 0, events: [] },
+    5: { homeScore: 0, awayScore: 0, events: [] },
+    6: { homeScore: 1, awayScore: 1, events: [] },
+    7: { homeScore: 0, awayScore: 1, events: [] },
+    8: { homeScore: 0, awayScore: 1, events: [] },
+    9: { homeScore: 7, awayScore: 1, events: [] },
+    10: { homeScore: 0, awayScore: 0, events: [] },
+    11: { homeScore: 0, awayScore: 1, events: [] },
+    12: { homeScore: 2, awayScore: 0, events: [] },
+    13: { homeScore: 0, awayScore: 0, events: [] },
+    14: { homeScore: 0, awayScore: 0, events: [] },
+    15: { homeScore: 1, awayScore: 1, events: [] },
+    16: { homeScore: 1, awayScore: 1, events: [] },
+    17: { homeScore: 1, awayScore: 0, events: [] },
+    18: { homeScore: 0, awayScore: 2, events: [] },
+    19: { homeScore: 3, awayScore: 0, events: [] },
+    20: { homeScore: 3, awayScore: 1, events: [] },
+    21: { homeScore: 0, awayScore: 0, events: [] },
+    22: { homeScore: 4, awayScore: 2, events: [] },
+    23: { homeScore: 1, awayScore: 0, events: [] },
+    24: { homeScore: 0, awayScore: 2, events: [] },
+    25: { homeScore: 1, awayScore: 1, events: [] },
+    26: { homeScore: 4, awayScore: 1, events: [] },
+    27: { homeScore: 6, awayScore: 0, events: [] },
+    28: { homeScore: 1, awayScore: 0, events: [] },
+    29: { homeScore: 1, awayScore: 2, events: [] },
+    30: { homeScore: 0, awayScore: 1, events: [] },
+    31: { homeScore: 3, awayScore: 0, events: [] },
+    32: { homeScore: 0, awayScore: 2, events: [] },
+    33: { homeScore: 4, awayScore: 2, events: [] },
+    34: { homeScore: 1, awayScore: 2, events: [] },
+    35: { homeScore: 0, awayScore: 0, events: [] },
+    36: { homeScore: 0, awayScore: 4, events: [] },
+    37: { homeScore: 4, awayScore: 0, events: [] },
+    38: { homeScore: 0, awayScore: 0, events: [] },
+    39: { homeScore: 2, awayScore: 2, events: [] },
+    40: { homeScore: 1, awayScore: 3, events: [] },
+    41: { homeScore: 2, awayScore: 0, events: [] },
+    42: { homeScore: 2, awayScore: 0, events: [] },
+    43: { homeScore: 4, awayScore: 0, events: [] },
+    44: { homeScore: 1, awayScore: 2, events: [] },
+    45: { homeScore: 5, awayScore: 0, events: [] },
+    46: { homeScore: 0, awayScore: 0, events: [] },
+    47: { homeScore: 0, awayScore: 1, events: [] },
+    48: { homeScore: 1, awayScore: 0, events: [] },
+    49: { homeScore: 3, awayScore: 2, events: [] },
+    50: { homeScore: 4, awayScore: 2, events: [] },
+    51: { homeScore: 4, awayScore: 2, events: [] },
+    52: { homeScore: 0, awayScore: 3, events: [] },
+    53: { homeScore: 1, awayScore: 0, events: [] },
+    54: { homeScore: 0, awayScore: 3, events: [] },
+    55: { homeScore: 0, awayScore: 2, events: [] },
+    56: { homeScore: 1, awayScore: 2, events: [] },
+    57: { homeScore: 2, awayScore: 6, events: [] },
+    58: { homeScore: 3, awayScore: 3, events: [] },
+    59: { homeScore: 2, awayScore: 3, events: [] },
+    60: { homeScore: 0, awayScore: 0, events: [] },
+    61: { homeScore: 2, awayScore: 7, events: [] },
+    62: { homeScore: 8, awayScore: 1, events: [] },
+    63: { homeScore: 0, awayScore: 0, events: [] },
+    64: { homeScore: 0, awayScore: 1, events: [] },
+    65: { homeScore: 2, awayScore: 6, events: [] },
+    66: { homeScore: 2, awayScore: 2, events: [] },
+    67: { homeScore: 0, awayScore: 2, events: [] },
+    68: { homeScore: 2, awayScore: 1, events: [] },
+    69: { homeScore: 1, awayScore: 1, events: [] },
+    70: { homeScore: 4, awayScore: 2, events: [] },
+    71: { homeScore: 3, awayScore: 3, events: [] },
+    72: { homeScore: 1, awayScore: 3, events: [] },
+    // Knockout Matches 73 to 104
+    73: {"homeScore":0,"awayScore":1,"winner":"CAN","events":[{"type":"goal","minute":56,"teamId":"CAN","player":"Jonathan David","detail":"Goal"}]},
+    74: {"homeScore":1,"awayScore":1,"penHome":3,"penAway":4,"penWinner":"PAR","winner":"PAR","events":[{"type":"goal","minute":28,"teamId":"GER","player":"Jamal Musiala","detail":"Goal"},{"type":"goal","minute":67,"teamId":"PAR","player":"Miguel Almiron","detail":"Goal"}]},
+    75: {"homeScore":1,"awayScore":1,"penHome":2,"penAway":3,"penWinner":"MAR","winner":"MAR","events":[{"type":"goal","minute":19,"teamId":"NED","player":"Cody Gakpo","detail":"Goal"},{"type":"goal","minute":44,"teamId":"MAR","player":"Youssef En-Nesyri","detail":"Goal"}]},
+    76: {"homeScore":2,"awayScore":1,"winner":"BRA","events":[{"type":"goal","minute":22,"teamId":"BRA","player":"Vinicius Junior","detail":"Goal"},{"type":"goal","minute":65,"teamId":"JPN","player":"Koki Ogawa","detail":"Goal"},{"type":"goal","minute":87,"teamId":"BRA","player":"Endrick","detail":"Goal"}]},
+    77: {"homeScore":3,"awayScore":0,"winner":"FRA","events":[{"type":"goal","minute":35,"teamId":"FRA","player":"Kylian Mbappe","detail":"Goal"},{"type":"goal","minute":55,"teamId":"FRA","player":"Kylian Mbappe","detail":"Goal"},{"type":"goal","minute":74,"teamId":"FRA","player":"Antoine Griezmann","detail":"Goal"}]},
+    78: {"homeScore":1,"awayScore":2,"winner":"NOR","events":[{"type":"goal","minute":28,"teamId":"CIV","player":"Sebastien Haller","detail":"Goal"},{"type":"goal","minute":47,"teamId":"NOR","player":"Erling Haaland","detail":"Goal"},{"type":"goal","minute":79,"teamId":"NOR","player":"Erling Haaland","detail":"Goal"}]},
+    79: {"homeScore":2,"awayScore":0,"winner":"MEX","events":[{"type":"goal","minute":30,"teamId":"MEX","player":"Hirving Lozano","detail":"Goal"},{"type":"goal","minute":85,"teamId":"MEX","player":"Santiago Gimenez","detail":"Goal"}]},
+    80: {"homeScore":2,"awayScore":1,"winner":"ENG","events":[{"type":"goal","minute":18,"teamId":"ENG","player":"Harry Kane","detail":"Goal"},{"type":"goal","minute":40,"teamId":"IC_1","player":"Yoane Wissa","detail":"Goal"},{"type":"goal","minute":76,"teamId":"ENG","player":"Jude Bellingham","detail":"Goal"}]},
+    81: {"homeScore":2,"awayScore":0,"winner":"USA","events":[{"type":"goal","minute":31,"teamId":"USA","player":"Christian Pulisic","detail":"Goal"},{"type":"goal","minute":73,"teamId":"USA","player":"Folarin Balogun","detail":"Goal"}]},
+    82: {"homeScore":3,"awayScore":2,"winner":"BEL","events":[{"type":"goal","minute":14,"teamId":"BEL","player":"Romelu Lukaku","detail":"Goal"},{"type":"goal","minute":38,"teamId":"SEN","player":"Nicolas Jackson","detail":"Goal"},{"type":"goal","minute":61,"teamId":"BEL","player":"Kevin De Bruyne","detail":"Goal"},{"type":"goal","minute":84,"teamId":"SEN","player":"Ismaïla Sarr","detail":"Goal"},{"type":"goal","minute":104,"teamId":"BEL","player":"Jeremy Doku","detail":"Goal"}]},
+    83: {"homeScore":2,"awayScore":1,"winner":"POR","events":[{"type":"goal","minute":24,"teamId":"POR","player":"Cristiano Ronaldo","detail":"Goal"},{"type":"goal","minute":52,"teamId":"CRO","player":"Luka Modric","detail":"Goal"},{"type":"goal","minute":78,"teamId":"POR","player":"Bruno Fernandes","detail":"Goal"}]},
+    84: {"homeScore":3,"awayScore":0,"winner":"ESP","events":[{"type":"goal","minute":12,"teamId":"ESP","player":"Lamine Yamal","detail":"Goal"},{"type":"goal","minute":48,"teamId":"ESP","player":"Nico Williams","detail":"Goal"},{"type":"goal","minute":81,"teamId":"ESP","player":"Dani Olmo","detail":"Goal"}]},
+    85: {"homeScore":2,"awayScore":0,"winner":"SUI","events":[{"type":"goal","minute":33,"teamId":"SUI","player":"Breel Embolo","detail":"Goal"},{"type":"goal","minute":68,"teamId":"SUI","player":"Ruben Vargas","detail":"Goal"}]},
+    86: {"homeScore":3,"awayScore":2,"winner":"ARG","events":[{"type":"goal","minute":21,"teamId":"ARG","player":"Lionel Messi","detail":"Goal"},{"type":"goal","minute":39,"teamId":"CPV","player":"Ryan Mendes","detail":"Goal"},{"type":"goal","minute":64,"teamId":"ARG","player":"Julian Alvarez","detail":"Goal"},{"type":"goal","minute":87,"teamId":"CPV","player":"Bebé","detail":"Goal"},{"type":"goal","minute":112,"teamId":"ARG","player":"Lionel Messi","detail":"Goal"}]},
+    87: {"homeScore":1,"awayScore":0,"winner":"COL","events":[{"type":"goal","minute":42,"teamId":"COL","player":"Luis Diaz","detail":"Goal"}]},
+    88: {"homeScore":1,"awayScore":1,"penHome":2,"penAway":4,"penWinner":"EGY","winner":"EGY","events":[{"type":"goal","minute":25,"teamId":"AUS","player":"Nestory Irankunda","detail":"Goal"},{"type":"goal","minute":63,"teamId":"EGY","player":"Mohamed Salah","detail":"Goal"}]},
+    89: {"homeScore":0,"awayScore":1,"winner":"FRA","events":[{"type":"goal","minute":68,"teamId":"FRA","player":"Kylian Mbappe","detail":"Goal"}]},
+    90: {"homeScore":0,"awayScore":3,"winner":"MAR","events":[{"type":"goal","minute":15,"teamId":"MAR","player":"Youssef En-Nesyri","detail":"Goal"},{"type":"goal","minute":41,"teamId":"MAR","player":"Hakim Ziyech","detail":"Goal"},{"type":"goal","minute":73,"teamId":"MAR","player":"Achraf Hakimi","detail":"Goal"}]},
+    91: {"homeScore":1,"awayScore":2,"winner":"NOR","events":[{"type":"goal","minute":29,"teamId":"BRA","player":"Vinicius Junior","detail":"Goal"},{"type":"goal","minute":54,"teamId":"NOR","player":"Erling Haaland","detail":"Goal"},{"type":"goal","minute":82,"teamId":"NOR","player":"Erling Haaland","detail":"Goal"}]},
+    92: {"homeScore":2,"awayScore":3,"winner":"ENG","events":[{"type":"goal","minute":11,"teamId":"MEX","player":"Santiago Gimenez","detail":"Goal"},{"type":"goal","minute":34,"teamId":"ENG","player":"Harry Kane","detail":"Goal"},{"type":"goal","minute":59,"teamId":"ENG","player":"Bukayo Saka","detail":"Goal"},{"type":"goal","minute":71,"teamId":"MEX","player":"Edson Alvarez","detail":"Goal"},{"type":"goal","minute":88,"teamId":"ENG","player":"Jude Bellingham","detail":"Goal"}]},
+    93: {"homeScore":0,"awayScore":1,"winner":"ESP","events":[{"type":"goal","minute":74,"teamId":"ESP","player":"Lamine Yamal","detail":"Goal"}]},
+    94: {"homeScore":1,"awayScore":4,"winner":"BEL","events":[{"type":"goal","minute":9,"teamId":"USA","player":"Christian Pulisic","detail":"Goal"},{"type":"goal","minute":27,"teamId":"BEL","player":"Romelu Lukaku","detail":"Goal"},{"type":"goal","minute":43,"teamId":"BEL","player":"Kevin De Bruyne","detail":"Goal"},{"type":"goal","minute":61,"teamId":"BEL","player":"Romelu Lukaku","detail":"Goal"},{"type":"goal","minute":80,"teamId":"BEL","player":"Leandro Trossard","detail":"Goal"}]},
+    95: {"homeScore":3,"awayScore":2,"winner":"ARG","events":[{"type":"goal","minute":19,"teamId":"ARG","player":"Lionel Messi","detail":"Goal"},{"type":"goal","minute":36,"teamId":"EGY","player":"Mohamed Salah","detail":"Goal"},{"type":"goal","minute":58,"teamId":"ARG","player":"Lautaro Martinez","detail":"Goal"},{"type":"goal","minute":75,"teamId":"EGY","player":"Omar Marmoush","detail":"Goal"},{"type":"goal","minute":86,"teamId":"ARG","player":"Lionel Messi","detail":"Goal"}]},
+    96: {"homeScore":0,"awayScore":0,"penHome":4,"penAway":3,"penWinner":"SUI","winner":"SUI","events":[]},
+    97: {"homeScore":2,"awayScore":0,"winner":"FRA","events":[{"type":"goal","minute":31,"teamId":"FRA","player":"Kylian Mbappe","detail":"Goal"},{"type":"goal","minute":79,"teamId":"FRA","player":"Bradley Barcola","detail":"Goal"}]},
+    98: {"homeScore":2,"awayScore":1,"winner":"ESP","events":[{"type":"goal","minute":23,"teamId":"ESP","player":"Nico Williams","detail":"Goal"},{"type":"goal","minute":55,"teamId":"BEL","player":"Romelu Lukaku","detail":"Goal"},{"type":"goal","minute":84,"teamId":"ESP","player":"Dani Olmo","detail":"Goal"}]},
+    99: {"homeScore":1,"awayScore":2,"winner":"ENG","events":[{"type":"goal","minute":38,"teamId":"NOR","player":"Erling Haaland","detail":"Goal"},{"type":"goal","minute":71,"teamId":"ENG","player":"Harry Kane","detail":"Goal"},{"type":"goal","minute":108,"teamId":"ENG","player":"Phil Foden","detail":"Goal"}]},
+    100: {"homeScore":3,"awayScore":1,"winner":"ARG","events":[{"type":"goal","minute":25,"teamId":"ARG","player":"Lionel Messi","detail":"Goal"},{"type":"goal","minute":62,"teamId":"SUI","player":"Breel Embolo","detail":"Goal"},{"type":"goal","minute":98,"teamId":"ARG","player":"Julian Alvarez","detail":"Goal"},{"type":"goal","minute":114,"teamId":"ARG","player":"Lautaro Martinez","detail":"Goal"}]},
+    101: {"homeScore":0,"awayScore":2,"winner":"ESP","events":[{"type":"goal","minute":36,"teamId":"ESP","player":"Lamine Yamal","detail":"Goal"},{"type":"goal","minute":71,"teamId":"ESP","player":"Nico Williams","detail":"Goal"}]},
+    102: {"homeScore":1,"awayScore":2,"winner":"ARG","events":[{"type":"goal","minute":19,"teamId":"ENG","player":"Harry Kane","detail":"Goal"},{"type":"goal","minute":44,"teamId":"ARG","player":"Lionel Messi","detail":"Goal"},{"type":"goal","minute":81,"teamId":"ARG","player":"Lautaro Martinez","detail":"Goal"}]},
+    103: {"homeScore":4,"awayScore":6,"winner":"ENG","events":[{"type":"goal","minute":8,"teamId":"FRA","player":"Kylian Mbappe","detail":"Goal"},{"type":"goal","minute":15,"teamId":"ENG","player":"Harry Kane","detail":"Goal"},{"type":"goal","minute":27,"teamId":"FRA","player":"Bradley Barcola","detail":"Goal"},{"type":"goal","minute":34,"teamId":"ENG","player":"Bukayo Saka","detail":"Goal"},{"type":"goal","minute":49,"teamId":"ENG","player":"Jude Bellingham","detail":"Goal"},{"type":"goal","minute":60,"teamId":"FRA","player":"Antoine Griezmann","detail":"Goal"},{"type":"goal","minute":68,"teamId":"ENG","player":"Phil Foden","detail":"Goal"},{"type":"goal","minute":77,"teamId":"FRA","player":"Kylian Mbappe","detail":"Goal"},{"type":"goal","minute":83,"teamId":"ENG","player":"Cole Palmer","detail":"Goal"},{"type":"goal","minute":90,"teamId":"ENG","player":"Ollie Watkins","detail":"Goal"}]},
+    104: {"homeScore":1,"awayScore":0,"winner":"ESP","events":[{"type":"goal","minute":112,"teamId":"ESP","player":"Lamine Yamal","detail":"Goal"}]},
   };
 
   if (realResults[match.matchId]) {
@@ -676,11 +542,11 @@ export const syncFixturesWithCurrentTime = (fixtures, forceSync = false) => {
 // Initialize localStorage databases if not present
 export const initDatabase = () => {
   // Force reset local database to start fresh with clean (Upcoming) 104-match fixtures schedule
-  const needsReset = localStorage.getItem('wc_db_clean_start_v19') !== 'true';
+  const needsReset = localStorage.getItem('wc_db_clean_start_v21') !== 'true';
   if (needsReset) {
     localStorage.setItem('wc_fixtures', JSON.stringify(initialFixtures));
     localStorage.setItem('wc_teams', JSON.stringify(initialTeams));
-    localStorage.setItem('wc_db_clean_start_v19', 'true');
+    localStorage.setItem('wc_db_clean_start_v21', 'true');
   }
 
   if (!localStorage.getItem('wc_fixtures')) {

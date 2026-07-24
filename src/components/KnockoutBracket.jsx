@@ -571,13 +571,65 @@ export default function KnockoutBracket({ fixtures = [] }) {
           <div>
             <h3 className="text-sm font-black text-slate-850 dark:text-slate-100 uppercase tracking-widest">Road to the Championship Final</h3>
             <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase -mt-0.5">
-              Round of 32 Knockout Bracket Layout (ACCORDING TO CURRENT STANDINGS)
+              Round of 32 Knockout Bracket Layout & Official Tournament Results
             </p>
           </div>
         </div>
         {/* Interaction badge */}
         <div className="flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 w-fit text-amber-600 dark:text-amber-400">
           <span className="text-[9px] font-bold uppercase tracking-widest">Drag to pan • Scroll/Pinch to zoom</span>
+        </div>
+      </div>
+
+      {/* Tournament Podium Showcase */}
+      <div className="mb-6 p-4 sm:p-5 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-purple-500/10 backdrop-blur-md shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center space-x-3">
+          <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 flex items-center justify-center shadow-lg animate-bounce-slow">
+            <Trophy className="h-6 w-6" />
+          </div>
+          <div>
+            <span className="text-[10px] font-black text-amber-600 dark:text-amber-400 uppercase tracking-widest block">Tournament Champions</span>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              {getCountryFlag('ESP', 'w-7 h-5 shadow-sm')}
+              <span>Spain</span>
+              <span className="text-amber-500 text-base">🏆</span>
+            </h3>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-3 sm:gap-6 text-xs font-bold text-slate-700 dark:text-slate-300 overflow-x-auto">
+          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-base">🥇</span>
+            <div>
+              <div className="text-[9px] text-slate-400 uppercase font-black">Winner</div>
+              <div className="flex items-center space-x-1">
+                {getCountryFlag('ESP', 'w-4 h-3')}
+                <span className="font-extrabold text-slate-900 dark:text-slate-100">Spain</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-base">🥈</span>
+            <div>
+              <div className="text-[9px] text-slate-400 uppercase font-black">Runner-Up</div>
+              <div className="flex items-center space-x-1">
+                {getCountryFlag('ARG', 'w-4 h-3')}
+                <span className="font-extrabold text-slate-900 dark:text-slate-100">Argentina</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-base">🥉</span>
+            <div>
+              <div className="text-[9px] text-slate-400 uppercase font-black">3rd Place</div>
+              <div className="flex items-center space-x-1">
+                {getCountryFlag('ENG', 'w-4 h-3')}
+                <span className="font-extrabold text-slate-900 dark:text-slate-100">England</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
